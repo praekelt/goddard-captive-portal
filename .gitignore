@@ -1,0 +1,5 @@
+.DS_Store
+.localized
+*.log
+
+node_modules/

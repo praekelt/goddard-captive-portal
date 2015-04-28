@@ -1,0 +1,43 @@
+extends ./base.jade
+
+block title
+  title UKSA
+
+block content
+
+  div(class="jumbotron")
+
+    div(class="container")
+
+      h1 UKSA Inmarsat
+      p Nulla assentior concludaturque in per, facer paulo docendi mel te, ad eos ceteros deserunt. Pri facer saepe id, has at rebum movet, et inani labitur mea. Mnesarchum persequeris vix eu, sit omnes perpetua ex, graece audire vivendum no nam. Quo doming euripidis et.
+
+  div(class="container")
+
+    div(class="row")
+
+      each app in apps
+
+        div(class="col-md-4")
+
+          h2= app.name
+          p= app.description
+          p: a(class="btn btn-default", href="#", role="button") View Site &raquo;
+
+      div(class="col-md-4")
+
+        h2 Wikipedia for Schools
+        p This selection of articles from Wikipedia matches the UK National Curriculum and can be used by school children around the world. 6000 articles, 26 million words and 50,000 images make Wikipedia for Schools bigger than Harry Potter, the Lord of the Rings and the Chronicles of Narnia put together!
+        p: a(class="btn btn-default", href="#", role="button") View Site &raquo;
+
+      div(class="col-md-4")
+
+        h2 TED Talks
+        p TED (Technology, Entertainment, Design) is a global set of conferences run by the private non-profit Sapling Foundation, under the slogan "Ideas Worth Spreading".
+        p: a(class="btn btn-default", href="#", role="button") View site &raquo;
+
+    hr
+
+    footer
+
+      p &copy; UKSA 2015
