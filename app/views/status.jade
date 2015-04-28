@@ -28,7 +28,7 @@ block content
 
           tr(class="node-name")
             td Node Name
-            td: code= node.name
+            td: code= node.name || 'unnamed'
 
           tr(class="node-serial")
             td Node Serial
@@ -114,22 +114,20 @@ block content
 
           tr(class="node-wireless")
             td Wireless
-            td: code= status.node.wireless
+            td: code= JSON.stringify(status.node.wireless)
 
           tr(class="node-router")
             td Router
-            td: code= status.node.router
+            td: code= JSON.stringify(status.node.router)
 
           tr(class="node-relays")
             td Relays
-            td: code= status.node.relays
+            td: code= JSON.stringify(status.node.relays)
 
           tr(class="node-bgan-faults")
             td BGAN Faults
-            if status.bgan.faults > 0
-              td(class="danger"): code= status.bgan.faults
-            else
-              td(class="success"): code= status.bgan.faults
+            td(class=status.bgan.faults > 0 ? "danger" : "success")
+              code= status.bgan.faults
 
           tr(class="node-bgan-latlon")
             td BGAN Lat/Lon
@@ -137,21 +135,16 @@ block content
 
           tr(class="node-bgan-status")
             td BGAN Status
-            td: code= status.bgan.status
+            td(class=status.bgan.status == "allowed" ? "success" : "warning")
+              code= status.bgan.status
 
           tr(class="node-bgan-ethernet")
             td BGAN Ethernet
-            if status.bgan.ethernet
-              td(class="success") Active
-            else
-              td(class="danger") Inactive
+            td(class=status.bgan.ethernet ? "success" : "danger"): code= status.bgan.ethernet
 
           tr(class="node-bgan-usb")
             td BGAN USB
-            if status.bgan.usb
-              td(class="success") Active
-            else
-              td(class="danger") Inactive
+            td(class=status.bgan.usb ? "success" : "danger"): code= status.bgan.usb
 
           tr(class="node-bgan-signal")
             td BGAN Signal
@@ -173,6 +166,10 @@ block content
           tr(class="node-bgan-imei")
             td BGAN IMEI
             td: code= status.bgan.imei
+
+          tr(class="node-bgan-ip")
+            td BGAN IP Address
+            td: code= status.bgan.ip
 
           tr(class="node-bgan-satelliteid")
             td BGAN Satellite ID
