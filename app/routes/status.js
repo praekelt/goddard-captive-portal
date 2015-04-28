@@ -50,6 +50,12 @@ var node = {
   publickey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaldXUZ4h7HiJWb/9YDzb93Soj4TFkEYj/B8W8DFkbS6Db3Uenji3N4VRypLecuW1whU5eZjEWP4GGLNPwwfimstB/6QEhQjcCtqfPHoVo4upME5cLcKZendWeezJnw1kUwDacrSOTiooAKjdxuz8bLnrHvjkMuDr3r1AYuc8IdUTDf8WyJKTqptq7sG4s/bzXfYMztWTA0dkBxZcpiVz9cCxOMrfOxwby4apJBwa4Zau8iMTwxHmGYE4TMp/jMamgSCLWH4uWxUjTdPjg0szH8Y29QT6vpcu2IbKAOy/h/OSjDq066USo/Y0WP1mUoLll4JZXyZXsSAhXxH+ELbUP goddard-hub\n"
 };
 
+var build = {
+  build: 'busy',
+  process: 'Updating Foobar baz',
+  timestamp: 1430228964196
+};
+
 module.exports = function(app) {
   app.get(
     process.env.NODE_STATUS_ROUTE || '/status',
@@ -63,7 +69,7 @@ module.exports = function(app) {
         }
       }
 
-      res.render('status', {status: status, node: node});
+      res.render('status', {status: status, node: node, build: build});
 
     }
   );

@@ -8,7 +8,19 @@ block content
 
   div(id="status-container", class="container")
 
-    p(class="timestamp") Last update: #{new Date(status.timestamp).toISOString()}
+    if build.build == "busy"
+      div(class="panel panel-danger")
+        div(class="panel-heading")
+          h3(class="panel-title")= build.process
+        div(class="panel-body")
+          div Do not power down the node until the build process has completed.
+          div: strong Last updated at #{new Date(build.timestamp).toISOString()}
+    else
+      div(class="panel panel-success")
+        div(class="panel-heading")
+          h3(class="panel-title") READY
+        div(class="panel-body")
+          div: strong Last updated at #{new Date().toISOString()}
 
     div(class="table-responsive")
 
@@ -160,3 +172,5 @@ block content
             td: code= status.bgan.satellite_id
 
     pre(class="pre-scrollable node-pubkey") #{node.publickey}
+
+    p(class="timestamp") Metrics last updated at: #{new Date(status.timestamp).toISOString()}

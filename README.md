@@ -1,5 +1,5 @@
 
-# captive-portal
+# goddard-captive-portal
 
 to begin the development server, run `npm start`.
 
@@ -8,6 +8,7 @@ to begin the development server, run `npm start`.
 - `NODE_PORT` the port to which we will bind the http server
 - `NODE_APPS_JSON` path to the applications json file (defaults to `http://goddard/apps.json`)
 - `NODE_STATUS_JSON` path to the status json file (defaults to `http://goddard/status.json`)
+- `NODE_BUILD_JSON` path to the status json file (defaults to `http://goddard/build.json`)
 - `NODE_APPS_ROUTE` the path to attach the applications page
 - `NODE_STATUS_ROUTE` the path to attach the status page
 
