@@ -6,6 +6,4 @@ node_js:
   - '0.10'
 env:
   - NODE_PORT=3000
-before_script: npm start
-script:
-  - npm test
+before_script: npm start &
