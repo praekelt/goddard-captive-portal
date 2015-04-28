@@ -61,29 +61,38 @@ block content
           tr(class="node-load")
             td One Minute Load Average
             if load[0] >= status.node.cpus
-              td(class="danger"): code= load[0]
+              td(class="danger")
+                code= load[0] + ' (' + load[0] / status.node.cpus * 100 + '%)'
             else if load[0] >= status.node.cpus / 2
-              td(class="warning"): code= load[0]
+              td(class="warning")
+                code= load[0] + ' (' + load[0] / status.node.cpus * 100 + '%)'
             else
-              td(class="success"): code= load[0]
+              td(class="success")
+                code= load[0] + ' (' + load[0] / status.node.cpus * 100 + '%)'
 
           tr(class="node-load")
             td Five Minute Load Average
-            if load[0] >= status.node.cpus
-              td(class="danger"): code= load[1]
-            else if load[0] >= status.node.cpus / 2
-              td(class="warning"): code= load[1]
+            if load[1] >= status.node.cpus
+              td(class="danger")
+                code= load[1] + ' (' + load[1] / status.node.cpus * 100 + '%)'
+            else if load[1] >= status.node.cpus / 2
+              td(class="warning")
+                code= load[1] + ' (' + load[1] / status.node.cpus * 100 + '%)'
             else
-              td(class="success"): code= load[1]
+              td(class="success")
+                code= load[1] + ' (' + load[1] / status.node.cpus * 100 + '%)'
 
           tr(class="node-load")
             td Fifteen Minute Load Average
-            if load[0] >= status.node.cpus
-              td(class="danger"): code= load[2]
-            else if load[0] >= status.node.cpus / 2
-              td(class="warning"): code= load[2]
+            if load[2] >= status.node.cpus
+              td(class="danger")
+                code= load[2] + ' (' + load[2] / status.node.cpus * 100 + '%)'
+            else if load[2] >= status.node.cpus / 2
+              td(class="warning")
+                code= load[2] + ' (' + load[2] / status.node.cpus * 100 + '%)'
             else
-              td(class="success"): code= load[2]
+              td(class="success")
+                code= load[2] + ' (' + load[2] / status.node.cpus * 100 + '%)'
 
           tr(class="node-uptime")
             td Uptime

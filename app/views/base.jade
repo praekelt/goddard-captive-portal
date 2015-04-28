@@ -4,8 +4,8 @@ html(lang="en")
 
   head
 
-    link(rel="stylesheet", href="css/bootstrap.css")
-    link(rel="stylesheet", href="css/bootstrap-theme.css")
+    link(rel="stylesheet", href="css/bootstrap.min.css")
+    link(rel="stylesheet", href="css/bootstrap-theme.min.css")
     link(rel="stylesheet", href="css/app.css")
     link(rel="shortcut icon", href="img/favicon.ico")
 
@@ -32,13 +32,20 @@ html(lang="en")
 
         div(class="navbar-header")
 
-          button(type="button", class="navbar-toggle collapsed", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
+          button(
+            type="button",
+            class="navbar-toggle collapsed",
+            data-toggle="collapse",
+            data-target="#navbar",
+            aria-expanded="false",
+            aria-controls="navbar"
+          )
             span(class="sr-only") Toggle navigation
             span(class="icon-bar")
             span(class="icon-bar")
             span(class="icon-bar")
 
-          a(class="navbar-brand", rel="home", href="#", title="UKSA")
+          a(class="navbar-brand", rel="home", href="/", title="UKSA")
 
             img(class="", src="img/logo.jpg", alt="logo")
 
@@ -48,11 +55,11 @@ html(lang="en")
 
             li(class="active")
 
-              a(href="#") Home
+              a(href="/") Home
 
             li(class="")
 
-              a(href="#about") About
+              a(href="#") About
 
     block content
 
@@ -60,12 +67,15 @@ html(lang="en")
     script(src="js/bootstrap.min.js")
 
     script.
+      var brand = $('.navbar-brand');
+      var brandImg = $('.navbar-brand img');
+
       $(window).scroll(function() {
-        if ($('.navbar-brand').offset().top > 25) {
-          $('.navbar-brand').addClass('brand-collapse');
-          $('.navbar-brand img').attr('src', 'img/logo-min-box.jpg');
+        if (brand.offset().top > 25) {
+          brand.addClass('brand-collapse');
+          brandImg.attr('src', 'img/logo-min-box.jpg');
         } else {
-          $('.navbar-brand').removeClass('brand-collapse');
-          $('.navbar-brand img').attr('src', 'img/logo.jpg');
+          brand.removeClass('brand-collapse');
+          brandImg.attr('src', 'img/logo.jpg');
         }
       });

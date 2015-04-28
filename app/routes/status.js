@@ -12,7 +12,7 @@ var buildPath = process.env.NODE_BUILD_JSON || 'http://goddard/build.json';
 var status = {
   node: {
     cpus: 4,
-    load: "0 0.01 0.03",
+    load: "0 0.01 0.04",
     uptime: 3818.590008299,
     memory: {
       total: 8245186560,
@@ -84,7 +84,7 @@ function production(app) {
             }).on('error', function(err) {
               process.nextTick(function() {
                 callback(err, null);
-              })
+              });
             });
           });
         },
@@ -100,7 +100,7 @@ function production(app) {
             }).on('error', function(err) {
               process.nextTick(function() {
                 callback(err, null);
-              })
+              });
             });
           });
         },
@@ -116,7 +116,7 @@ function production(app) {
             }).on('error', function(err) {
               process.nextTick(function() {
                 callback(err, null);
-              })
+              });
             });
           });
         }
