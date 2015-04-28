@@ -1,6 +1,8 @@
 
 # goddard-captive-portal
 
+[![Build Status](https://travis-ci.org/praekelt/goddard-captive-portal.svg)](https://travis-ci.org/praekelt/goddard-captive-portal)
+
 to begin the development server, run `npm start`.
 
 ##### configuration
