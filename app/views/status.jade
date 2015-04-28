@@ -12,17 +12,13 @@ block content
     br
     br
 
-    p(class="timestamp") Last update: #{status.timestamp}
+    p(class="timestamp") Last update: #{new Date(status.timestamp).toISOString()}
 
     div(class="table-responsive")
 
       table(class="table table-hover table-condensed table-bordered")
 
         - var load = status.node.load.split(' ')
-        - var raidHealthy = true
-        - each raid in status.node.disk.raid
-          if raid != 'ACTIVE'
-            raidHealthy = false
 
         tbody
 
@@ -87,12 +83,11 @@ block content
 
           tr(class="node-uptime")
             td Uptime
-            td: code= status.node.uptime
+            td: code #{(status.node.uptime / 60).toFixed(2)} minutes
 
           tr(class="node-totalram")
             td Total RAM
-            td
-              code #{(status.node.memory.total / 1024 / 1024 / 1024).toFixed(2)} Gb
+            td: code #{(status.node.memory.total / 1024 / 1024 / 1024).toFixed(2)} Gb
 
           tr(class="node-freeram")
             td Free RAM
@@ -101,17 +96,20 @@ block content
 
           tr(class="node-totalmem")
             td Total Memory
-            td
-              code #{(status.node.disk.total / 1024).toFixed(2)} Gb
+            td: code #{(status.node.disk.total / 1024).toFixed(2)} Gb
 
           tr(class="node-freemem")
             td Free Memory
-            td(class=status.node.disk.free < status.node.disk.total ? "success" : "warning")
-              code #{(status.node.disk.free / 1024).toFixed(2)} Gb
+            if status.node.disk.free <= status.node.disk.total / 2
+              td(class="warning"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb
+            else if status.node.disk.free <= status.node.disk.total
+              td(class="success"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb
+            else
+              td(class="danger"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb
 
           tr(class="node-raid")
             td RAID Status
-            td(class=raidHealthy ? "success" : "warning")
+            td(class=status.node.disk.raid_healthy ? "success" : "warning")
               code= JSON.stringify(status.node.disk.raid)
 
           tr(class="node-wireless")
@@ -161,7 +159,12 @@ block content
 
           tr(class="node-bgan-temp")
             td BGAN Temperature
-            td: code= status.bgan.temp
+            if status.bgan.temp >= 60
+              td(class="danger"): code=status.bgan.temp
+            else if status.bgan.temp >= 45
+              td(class="warning"): code=status.bgan.temp
+            else
+              td(class="success"): code=status.bgan.temp
 
           tr(class="node-bgan-imsi")
             td BGAN IMSI

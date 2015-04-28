@@ -55,6 +55,16 @@ module.exports = function(app) {
     process.env.NODE_STATUS_ROUTE || '/status',
     function(req, res) {
 
+      status.node.disk.raid_healthy = true;
+
+      var raids = status.node.disk.raid;
+
+      for (var raid in raids) {
+        if (raids[raid] !== 'ACTIVE') {
+          status.node.disk.raid_healthy = false;
+        }
+      }
+
       res.render('status', {status: status, node: node});
 
     }
