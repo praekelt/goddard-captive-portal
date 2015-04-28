@@ -1,4 +1,14 @@
 
+var http = require('http');
+
+var async = require('async'); // i feel so ashamed :(
+
+var statusPath = process.env.NODE_STATUS_JSON || 'http://goddard/status.json';
+
+var nodePath = process.env.NODE_NODE_JSON || 'http://goddard/node.json';
+
+var buildPath = process.env.NODE_BUILD_JSON || 'http://goddard/build.json';
+
 var status = {
   node: {
     cpus: 4,
@@ -56,7 +66,86 @@ var build = {
   timestamp: 1430228964196
 };
 
-module.exports = function(app) {
+function production(app) {
+  app.get(
+    process.env.NODE_STATUS_ROUTE || '/status',
+    function(req, res) {
+
+      async.parallel({
+        status: function(callback) {
+          http.get(statusPath, function(httpres) {
+            var response = '';
+            httpres.on('data', function(data) {
+              response += data;
+            }).on('end', function() {
+              process.nextTick(function() {
+                callback(null, JSON.parse(response));
+              });
+            }).on('error', function(err) {
+              process.nextTick(function() {
+                callback(err, null);
+              })
+            });
+          });
+        },
+        node: function(callback) {
+          http.get(nodePath, function(httpres) {
+            var response = '';
+            httpres.on('data', function(data) {
+              response += data;
+            }).on('end', function() {
+              process.nextTick(function() {
+                callback(null, JSON.parse(response));
+              });
+            }).on('error', function(err) {
+              process.nextTick(function() {
+                callback(err, null);
+              })
+            });
+          });
+        },
+        build: function(callback) {
+          http.get(buildPath, function(httpres) {
+            var response = '';
+            httpres.on('data', function(data) {
+              response += data;
+            }).on('end', function() {
+              process.nextTick(function() {
+                callback(null, JSON.parse(response));
+              });
+            }).on('error', function(err) {
+              process.nextTick(function() {
+                callback(err, null);
+              })
+            });
+          });
+        }
+      }, function(err, results) {
+        if (err) {
+          res.status(500);
+          res.end();
+        } else {
+
+          var raids = results.status.node.disk.raid;
+          results.status.node.disk.raid_healthy = true;
+          for (var raid in raids) {
+            if (raids[raid] !== 'ACTIVE') {
+              results.status.node.disk.raid_healthy = false;
+            }
+          }
+
+          res.render('status', {
+            status: results.status,
+            node: results.node,
+            build: results.build
+          });
+        }
+      });
+    }
+  );
+}
+
+function development(app) {
   app.get(
     process.env.NODE_STATUS_ROUTE || '/status',
     function(req, res) {
@@ -69,8 +158,17 @@ module.exports = function(app) {
         }
       }
 
-      res.render('status', {status: status, node: node, build: build});
-
+      res.render('status', {
+        status: status,
+        node: node,
+        build: build
+      });
     }
   );
-};
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = production;
+} else {
+  module.exports = development;
+}

@@ -1,4 +1,6 @@
 
+var http = require('http');
+
 var path = process.env.NODE_APPS_JSON || 'http://goddard/apps.json';
 
 var apps = [
@@ -9,13 +11,41 @@ var apps = [
     id: 111 }
 ];
 
-module.exports = function(app) {
+function production(app) {
   app.all(
     process.env.NODE_APPS_ROUTE || '/',
     function(req, res) {
 
-      res.render('apps', {apps: apps});
+      var apps = '';
 
+      http.get(path, function(res) {
+        res.on('data', function(data) {
+          apps += data;
+        }).on('end', function() {
+          process.nextTick(function() {
+            var parsed = JSON.parse(apps);
+
+            process.nextTick(function() {
+              res.render('apps', {apps: parsed});
+            });
+          });
+        });
+      });
     }
   );
-};
+}
+
+function development(app) {
+  app.all(
+    process.env.NODE_APPS_ROUTE || '/',
+    function(req, res) {
+      res.render('apps', {apps: apps});
+    }
+  );
+}
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports = production;
+} else {
+  module.exports = development;
+}
