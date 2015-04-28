@@ -46,10 +46,6 @@ block content
             td Node Server
             td: code= node.server
 
-          tr(class="node-publickey")
-            td Node Public Key
-            td= node.publickey
-
           tr(class="node-cpus")
             td CPUs
             td= status.node.cpus
@@ -85,27 +81,19 @@ block content
             td Uptime
             td: code #{(status.node.uptime / 60).toFixed(2)} minutes
 
-          tr(class="node-totalram")
-            td Total RAM
-            td: code #{(status.node.memory.total / 1024 / 1024 / 1024).toFixed(2)} Gb
-
-          tr(class="node-freeram")
-            td Free RAM
+          tr(class="node-ram")
+            td Free/Total RAM
             td(class=status.node.memory.free < status.node.memory.total ? "success" : "warning")
-              code #{(status.node.memory.free / 1024 / 1024 / 1024).toFixed(2)} Gb
+              code #{(status.node.memory.free / 1024 / 1024 / 1024).toFixed(2)} Gb / #{(status.node.memory.total / 1024 / 1024 / 1024).toFixed(2)} Gb
 
           tr(class="node-totalmem")
-            td Total Memory
-            td: code #{(status.node.disk.total / 1024).toFixed(2)} Gb
-
-          tr(class="node-freemem")
-            td Free Memory
+            td Free/Total Memory
             if status.node.disk.free <= status.node.disk.total / 2
-              td(class="warning"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb
+              td(class="warning"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb / #{(status.node.disk.total / 1024).toFixed(2)} Gb
             else if status.node.disk.free <= status.node.disk.total
-              td(class="success"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb
+              td(class="success"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb / #{(status.node.disk.total / 1024).toFixed(2)} Gb
             else
-              td(class="danger"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb
+              td(class="danger"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb / #{(status.node.disk.total / 1024).toFixed(2)} Gb
 
           tr(class="node-raid")
             td RAID Status
@@ -174,3 +162,5 @@ block content
           tr(class="node-bgan-satelliteid")
             td BGAN Satellite ID
             td: code= status.bgan.satellite_id
+
+    pre(class="pre-scrollable node-pubkey") #{node.publickey}
