@@ -5,8 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "mocha",
-    "start": "./node_modules/.bin/nodemon index.js"
+    "test": "./node_modules/.bin/mocha",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

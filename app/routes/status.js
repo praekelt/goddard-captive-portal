@@ -1,13 +1,9 @@
 
 var http = require('http');
-
 var async = require('async'); // i feel so ashamed :(
-
-var statusPath = process.env.NODE_STATUS_JSON || 'http://goddard/status.json';
-
-var nodePath = process.env.NODE_NODE_JSON || 'http://goddard/node.json';
-
-var buildPath = process.env.NODE_BUILD_JSON || 'http://goddard/build.json';
+var statusPath = process.env.NODE_STATUS_JSON || 'http://goddard.com/status.json';
+var nodePath = process.env.NODE_NODE_JSON || 'http://goddard.com/node.json';
+var buildPath = process.env.NODE_BUILD_JSON || 'http://goddard.com/build.json';
 
 var status = {
   node: {
@@ -47,7 +43,6 @@ var status = {
   nodeid: "1",
   timestamp: 1430217361350
 };
-
 var node = {
   name: null,
   serial: "00002",
@@ -59,7 +54,6 @@ var node = {
   server: "goddard.io.co.za",
   publickey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaldXUZ4h7HiJWb/9YDzb93Soj4TFkEYj/B8W8DFkbS6Db3Uenji3N4VRypLecuW1whU5eZjEWP4GGLNPwwfimstB/6QEhQjcCtqfPHoVo4upME5cLcKZendWeezJnw1kUwDacrSOTiooAKjdxuz8bLnrHvjkMuDr3r1AYuc8IdUTDf8WyJKTqptq7sG4s/bzXfYMztWTA0dkBxZcpiVz9cCxOMrfOxwby4apJBwa4Zau8iMTwxHmGYE4TMp/jMamgSCLWH4uWxUjTdPjg0szH8Y29QT6vpcu2IbKAOy/h/OSjDq066USo/Y0WP1mUoLll4JZXyZXsSAhXxH+ELbUP goddard-hub\n"
 };
-
 var build = {
   build: 'busy',
   process: 'Updating Foobar baz',
@@ -70,77 +64,77 @@ function production(app) {
   app.get(
     process.env.NODE_STATUS_ROUTE || '/status',
     function(req, res) {
-
-      async.parallel({
-        status: function(callback) {
-          http.get(statusPath, function(httpres) {
-            var response = '';
-            httpres.on('data', function(data) {
-              response += data;
-            }).on('end', function() {
-              process.nextTick(function() {
-                callback(null, JSON.parse(response));
-              });
-            }).on('error', function(err) {
-              process.nextTick(function() {
-                callback(err, null);
-              });
-            });
-          });
-        },
-        node: function(callback) {
-          http.get(nodePath, function(httpres) {
-            var response = '';
-            httpres.on('data', function(data) {
-              response += data;
-            }).on('end', function() {
-              process.nextTick(function() {
-                callback(null, JSON.parse(response));
-              });
-            }).on('error', function(err) {
-              process.nextTick(function() {
-                callback(err, null);
+      async.parallel(
+        {
+          status: function(callback) {
+            http.get(statusPath, function(httpres) {
+              var response = '';
+              httpres.on('data', function(data) {
+                response += data;
+              }).on('end', function() {
+                process.nextTick(function() {
+                  callback(null, JSON.parse(response));
+                });
+              }).on('error', function(err) {
+                process.nextTick(function() {
+                  callback(err, null);
+                });
               });
             });
-          });
-        },
-        build: function(callback) {
-          http.get(buildPath, function(httpres) {
-            var response = '';
-            httpres.on('data', function(data) {
-              response += data;
-            }).on('end', function() {
-              process.nextTick(function() {
-                callback(null, JSON.parse(response));
-              });
-            }).on('error', function(err) {
-              process.nextTick(function() {
-                callback(err, null);
+          },
+          node: function(callback) {
+            http.get(nodePath, function(httpres) {
+              var response = '';
+              httpres.on('data', function(data) {
+                response += data;
+              }).on('end', function() {
+                process.nextTick(function() {
+                  callback(null, JSON.parse(response));
+                });
+              }).on('error', function(err) {
+                process.nextTick(function() {
+                  callback(err, null);
+                });
               });
             });
-          });
-        }
-      }, function(err, results) {
-        if (err) {
-          res.status(500);
-          res.end();
-        } else {
-
-          var raids = results.status.node.disk.raid;
-          results.status.node.disk.raid_healthy = true;
-          for (var raid in raids) {
-            if (raids[raid] !== 'ACTIVE') {
-              results.status.node.disk.raid_healthy = false;
-            }
+          },
+          build: function(callback) {
+            http.get(buildPath, function(httpres) {
+              var response = '';
+              httpres.on('data', function(data) {
+                response += data;
+              }).on('end', function() {
+                process.nextTick(function() {
+                  callback(null, JSON.parse(response));
+                });
+              }).on('error', function(err) {
+                process.nextTick(function() {
+                  callback(err, null);
+                });
+              });
+            });
           }
-
-          res.render('status', {
-            status: results.status,
-            node: results.node,
-            build: results.build
-          });
+        },
+        function(err, results) {
+          if (err) {
+            res.status(500);
+            res.end();
+          } else {
+            var raids = results.status.node.disk.raid;
+            results.status.node.disk.raid_healthy = true;
+            for (var raid in raids) {
+              if (raids[raid] !== 'ACTIVE') {
+                results.status.node.disk.raid_healthy = false;
+              }
+            }
+            res.render('status', {
+              status: results.status,
+              node: results.node,
+              build: results.build
+            });
+          }
         }
-      });
+      );
     }
   );
 }

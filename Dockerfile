@@ -3,5 +3,4 @@ FROM iodigital/ubuntu-node
 
 MAINTAINER Ant Cosentino <ant@io.co.za>
 
-ENV NODE_PORT 8080
-
+ENV NODE_PORT 80
