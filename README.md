@@ -2,6 +2,7 @@
 # goddard-captive-portal
 
 [![Build Status](https://travis-ci.org/praekelt/goddard-captive-portal.svg)](https://travis-ci.org/praekelt/goddard-captive-portal)
+[![Coverage Status](https://coveralls.io/repos/praekelt/goddard-captive-portal/badge.svg)](https://coveralls.io/r/praekelt/goddard-captive-portal)
 
 to begin the development server, run `npm start`.
 
