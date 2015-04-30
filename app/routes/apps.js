@@ -1,7 +1,7 @@
 
 var http = require('http');
 
-var path = process.env.NODE_APPS_JSON || 'http://goddard.com/apps.json';
+var path = process.env.NODE_APPS_JSON || 'http://data.goddard.com/apps.json';
 
 var apps = [
   { name: 'MAMA',
@@ -14,7 +14,7 @@ var apps = [
 function production(app) {
   app.all(
     process.env.NODE_APPS_ROUTE || '/',
-    function(req, res) {
+    function(req, ress) {
 
       if (req.method === 'POST' || req.method === 'post') {
         process.emit(
@@ -34,11 +34,12 @@ function production(app) {
         res.on('data', function(data) {
           apps += data;
         }).on('end', function() {
+          console.dir(apps);
           process.nextTick(function() {
             var parsed = JSON.parse(apps);
 
             process.nextTick(function() {
-              res.render('apps', {apps: parsed});
+              ress.render('apps', {apps: parsed});
             });
           });
         });
