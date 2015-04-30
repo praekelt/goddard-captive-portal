@@ -14,7 +14,7 @@ var apps = [
 function production(app) {
   app.all(
     process.env.NODE_APPS_ROUTE || '/',
-    function(req, ress) {
+    function(req, res) {
 
       if (req.method === 'POST' || req.method === 'post') {
         process.emit(
@@ -30,8 +30,8 @@ function production(app) {
 
       var apps = '';
 
-      http.get(path, function(res) {
-        res.on('data', function(data) {
+      http.get(path, function(httpres) {
+        httpres.on('data', function(data) {
           apps += data;
         }).on('end', function() {
           console.dir(apps);
@@ -39,7 +39,7 @@ function production(app) {
             var parsed = JSON.parse(apps);
 
             process.nextTick(function() {
-              ress.render('apps', {apps: parsed});
+              res.render('apps', {apps: parsed});
             });
           });
         });
