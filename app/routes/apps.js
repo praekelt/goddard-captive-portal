@@ -16,6 +16,18 @@ function production(app) {
     process.env.NODE_APPS_ROUTE || '/',
     function(req, res) {
 
+      if (req.method === 'POST' || req.method === 'post') {
+        process.emit(
+          'log:access',
+          [
+            Date.now(),
+            req.body.mac || 'unknown',
+            req.body.ip || 'unknown',
+            req.get('user-agent') || 'unknown'
+          ]
+        );
+      }
+
       var apps = '';
 
       http.get(path, function(res) {
@@ -39,6 +51,17 @@ function development(app) {
   app.all(
     process.env.NODE_APPS_ROUTE || '/',
     function(req, res) {
+      if (req.method === 'POST' || req.method === 'post') {
+        process.emit(
+          'log:access',
+          [
+            Date.now(),
+            req.body.mac,
+            req.body.ip,
+            req.get('user-agent')
+          ]
+        );
+      }
       res.render('apps', {apps: apps});
     }
   );

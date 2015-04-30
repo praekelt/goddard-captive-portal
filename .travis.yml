@@ -8,3 +8,4 @@ env:
   - NODE_PORT=3000
 before_script:
   - 'node index.js &'
+after_script: npm run post-coverage
