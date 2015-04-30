@@ -35,5 +35,6 @@ require('./app/routes')(app, function(app) {
       port,
       env
     );
+    module.exports = app;
   });
 });

@@ -3,7 +3,8 @@ var chai = require('chai'),
     chakram = require('chakram'),
     fs = require('fs'),
     path = require('path'),
-    accessLogPath = path.join(__dirname, '..', 'access.log');
+    accessLogPath = path.join(__dirname, '..', 'access.log'),
+    app = require('../index');
 
 describe('app', function() {
 
