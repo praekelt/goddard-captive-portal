@@ -46,7 +46,13 @@ describe('app', function() {
     it('should delete and then recreate access.log when DELETE /log is hit', function(done) {
 
       fs.watch(accessLogPath, function(event, filename) {
-        chai.expect(event).to.equal('rename');
+
+        if (process.platform === 'darwin') {
+          chai.expect(event).to.equal('rename');
+        } else {
+          chai.expect(event).to.equal('change');
+        }
+
         done();
       });
 
