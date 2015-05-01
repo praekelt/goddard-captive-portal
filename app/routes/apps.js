@@ -23,17 +23,21 @@ module.exports = function(app) {
       }
       http.get(path, function(httpres) {
         var apps = '';
-        httpres.on('data', function(data) {
-          apps += data;
-        }).on('end', function() {
-          process.nextTick(function() {
-            if (apps === '' || apps === '{}') res.render('apps', {apps: blank.apps});
-            else res.render('apps', {apps: JSON.parse(apps)});
+        if (httpres.statusCode === 404) {
+          res.render('apps', {apps: blank.apps});
+        } else {
+          httpres.on('data', function(data) {
+            apps += data;
+          }).on('end', function() {
+            process.nextTick(function() {
+              if (apps === '' || apps === '{}') res.render('apps', {apps: blank.apps});
+              else res.render('apps', {apps: JSON.parse(apps)});
+            });
+          }).on('error', function(err) {
+            console.error('apps.js http error', err);
+            res.status(500).end(err);
           });
-        }).on('error', function(err) {
-          console.error('apps.js http error', err);
-          res.status(500).end(err);
-        });
+        }
       });
     }
   );

@@ -38,9 +38,7 @@ if (env === 'dev') app.use(require('morgan')(env));
 
 require('./app/routes')(app, function(app) {
   app.listen(port, function() {
-    if (env === 'dev' || env === 'development') {
-      console.log("✔ server listening at localhost:%s in %s mode...", port, env);
-    }
+    console.log("✔ server listening at localhost:%s in %s mode...", port, env);
     module.exports = app;
   });
 });

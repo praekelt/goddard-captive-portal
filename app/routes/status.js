@@ -69,47 +69,65 @@ module.exports = function(app) {
       async.parallel({
         status: function(callback) {
           http.get(statusPath, function(httpres) {
-            var response = '';
-            httpres.on('data', function(data) {
-              response += data;
-            }).on('end', function() {
+            if (httpres.statusCode === 404) {
               process.nextTick(function() {
-                if (response === '' || response === '{}') callback(null, blank.status);
-                else callback(null, JSON.parse(response));
+                callback(null, blank.status);
               });
-            }).on('error', function(err) {
-              process.nextTick(function() { callback(err, null); });
-            });
+            } else {
+              var response = '';
+              httpres.on('data', function(data) {
+                response += data;
+              }).on('end', function() {
+                process.nextTick(function() {
+                  if (response === '' || response === '{}') callback(null, blank.status);
+                  else callback(null, JSON.parse(response));
+                });
+              }).on('error', function(err) {
+                process.nextTick(function() { callback(err, null); });
+              });
+            }
           });
         },
         node: function(callback) {
           http.get(nodePath, function(httpres) {
-            var response = '';
-            httpres.on('data', function(data) {
-              response += data;
-            }).on('end', function() {
+            if (httpres.statusCode === 404) {
               process.nextTick(function() {
-                if (response === '' || response === '{}') callback(null, blank.node);
-                else callback(null, JSON.parse(response));
+                callback(null, blank.node);
               });
-            }).on('error', function(err) {
-              process.nextTick(function() { callback(err, null); });
-            });
+            } else {
+              var response = '';
+              httpres.on('data', function(data) {
+                response += data;
+              }).on('end', function() {
+                process.nextTick(function() {
+                  if (response === '' || response === '{}') callback(null, blank.node);
+                  else callback(null, JSON.parse(response));
+                });
+              }).on('error', function(err) {
+                process.nextTick(function() { callback(err, null); });
+              });
+            }
           });
         },
         build: function(callback) {
           http.get(buildPath, function(httpres) {
-            var response = '';
-            httpres.on('data', function(data) {
-              response += data;
-            }).on('end', function() {
+            if (httpres.statusCode === 404) {
               process.nextTick(function() {
-                if (response === '' || response === '{}') callback(null, blank.build);
-                else callback(null, JSON.parse(response));
+                callback(null, blank.build);
               });
-            }).on('error', function(err) {
-              process.nextTick(function() { callback(err, null); });
-            });
+            } else {
+              var response = '';
+              httpres.on('data', function(data) {
+                response += data;
+              }).on('end', function() {
+                process.nextTick(function() {
+                  if (response === '' || response === '{}') callback(null, blank.build);
+                  else callback(null, JSON.parse(response));
+                });
+              }).on('error', function(err) {
+                process.nextTick(function() { callback(err, null); });
+              });
+            }
           });
         }
       }, function(err, results) {

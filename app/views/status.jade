@@ -13,7 +13,7 @@ block content
         div(class="panel-heading")
           h3(class="panel-title") JSON Error
         div(class="panel-body")
-          p= error
+          p= error.message
           
     if (build.build) == "busy"
       div(class="panel panel-danger")
