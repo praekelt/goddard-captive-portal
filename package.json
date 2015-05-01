@@ -9,7 +9,7 @@
     "test": "istanbul test _mocha -- -R spec",
     "posttest": "sudo killall node",
     "start": "node index.js",
-    "nodemon": "nodemon index.js",
+    "nodemon": "npm run pretest && nodemon index.js",
     "coverage": "npm run pretest && istanbul cover _mocha --report lcovonly -- test -R spec && npm run posttest && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {

@@ -8,10 +8,17 @@ block content
 
   div(id="status-container", class="container")
 
-    if build.build == "busy"
+    if (error)
       div(class="panel panel-danger")
         div(class="panel-heading")
-          h3(class="panel-title")= build.process
+          h3(class="panel-title") JSON Error
+        div(class="panel-body")
+          p= error
+          
+    if (build.build) == "busy"
+      div(class="panel panel-danger")
+        div(class="panel-heading")
+          h3(class="panel-title")= (build.process)
         div(class="panel-body")
           div Do not power down the node until the build process has completed.
           div: strong Last updated at #{new Date(build.timestamp).toISOString()}
@@ -26,163 +33,162 @@ block content
 
       table(class="table table-hover table-condensed table-bordered")
 
-        if status.node
+        - var load = status.node.load.split(' ')
 
-          - var load = status.node.load.split(' ')
+        tbody
 
-          tbody
+          tr(class="node-id")
+            td Node ID
+            td: code= status.nodeid
 
-            tr(class="node-id")
-              td Node ID
-              td: code= status.nodeid
+          tr(class="node-name")
+            td Node Name
+            td: code= status.node.name
 
-            tr(class="node-name")
-              td Node Name
-              td: code= node.name || 'unnamed'
+          tr(class="node-serial")
+            td Node Serial
+            td: code= node.serial
 
-            tr(class="node-serial")
-              td Node Serial
-              td: code= node.serial
+          tr(class="node-port-tunnel")
+            td Node Tunnel Port
+            td: code= node.port.tunnel
 
-            tr(class="node-port-tunnel")
-              td Node Tunnel Port
-              td: code= node.port.tunnel
+          tr(class="node-port-monitor")
+            td Node Monitor Port
+            td: code= node.port.monitor
 
-            tr(class="node-port-monitor")
-              td Node Monitor Port
-              td: code= node.port.monitor
+          tr(class="node-server")
+            td Node Server
+            td: code= node.server
 
-            tr(class="node-server")
-              td Node Server
-              td: code= node.server
+          tr(class="node-cpus")
+            td CPUs
+            td= status.node.cpus
 
-            tr(class="node-cpus")
-              td CPUs
-              td= status.node.cpus
+          tr(class="node-load")
+            td One Minute Load Average
+            if load[0] >= (status.node.cpus)
+              td(class="danger")
+                code= load[0] + ' (' + load[0] / (status.node.cpus) * 100 + '%)'
+            else if load[0] >= (status.node.cpus) / 2
+              td(class="warning")
+                code= load[0] + ' (' + load[0] / (status.node.cpus) * 100 + '%)'
+            else
+              td(class="success")
+                code= load[0] + ' (' + load[0] / (status.node.cpus) * 100 + '%)'
 
-            tr(class="node-load")
-              td One Minute Load Average
-              if load[0] >= status.node.cpus
-                td(class="danger")
-                  code= load[0] + ' (' + load[0] / status.node.cpus * 100 + '%)'
-              else if load[0] >= status.node.cpus / 2
-                td(class="warning")
-                  code= load[0] + ' (' + load[0] / status.node.cpus * 100 + '%)'
-              else
-                td(class="success")
-                  code= load[0] + ' (' + load[0] / status.node.cpus * 100 + '%)'
+          tr(class="node-load")
+            td Five Minute Load Average
+            if load[1] >= (status.node.cpus)
+              td(class="danger")
+                code= load[1] + ' (' + load[1] / (status.node.cpus) * 100 + '%)'
+            else if load[1] >= (status.node.cpus) / 2
+              td(class="warning")
+                code= load[1] + ' (' + load[1] / (status.node.cpus) * 100 + '%)'
+            else
+              td(class="success")
+                code= load[1] + ' (' + load[1] / (status.node.cpus) * 100 + '%)'
 
-            tr(class="node-load")
-              td Five Minute Load Average
-              if load[1] >= status.node.cpus
-                td(class="danger")
-                  code= load[1] + ' (' + load[1] / status.node.cpus * 100 + '%)'
-              else if load[1] >= status.node.cpus / 2
-                td(class="warning")
-                  code= load[1] + ' (' + load[1] / status.node.cpus * 100 + '%)'
-              else
-                td(class="success")
-                  code= load[1] + ' (' + load[1] / status.node.cpus * 100 + '%)'
+          tr(class="node-load")
+            td Fifteen Minute Load Average
+            if load[2] >= (status.node.cpus)
+              td(class="danger")
+                code= load[2] + ' (' + load[2] / (status.node.cpus) * 100 + '%)'
+            else if load[2] >= (status.node.cpus) / 2
+              td(class="warning")
+                code= load[2] + ' (' + load[2] / (status.node.cpus) * 100 + '%)'
+            else
+              td(class="success")
+                code= load[2] + ' (' + load[2] / (status.node.cpus) * 100 + '%)'
 
-            tr(class="node-load")
-              td Fifteen Minute Load Average
-              if load[2] >= status.node.cpus
-                td(class="danger")
-                  code= load[2] + ' (' + load[2] / status.node.cpus * 100 + '%)'
-              else if load[2] >= status.node.cpus / 2
-                td(class="warning")
-                  code= load[2] + ' (' + load[2] / status.node.cpus * 100 + '%)'
-              else
-                td(class="success")
-                  code= load[2] + ' (' + load[2] / status.node.cpus * 100 + '%)'
+          tr(class="node-uptime")
+            td Uptime
+            td: code #{((status.node.uptime) / 60).toFixed(2)} minutes
 
-            tr(class="node-uptime")
-              td Uptime
-              td: code #{(status.node.uptime / 60).toFixed(2)} minutes
+          tr(class="node-ram")
+            td Free/Total RAM
+            td(class=status.node.memory.free < status.node.memory.total ? "success" : "warning")
+              code #{((status.node.memory.free) / 1024 / 1024 / 1024).toFixed(2)} Gb / #{((status.node.memory.total) / 1024 / 1024 / 1024).toFixed(2)} Gb
 
-            tr(class="node-ram")
-              td Free/Total RAM
-              td(class=status.node.memory.free < status.node.memory.total ? "success" : "warning")
-                code #{(status.node.memory.free / 1024 / 1024 / 1024).toFixed(2)} Gb / #{(status.node.memory.total / 1024 / 1024 / 1024).toFixed(2)} Gb
+          tr(class="node-totalmem")
+            td Free/Total Memory
+            if status.node.disk.free <= status.node.disk.total / 2
+              td(class="warning"): code #{((status.node.disk.free) / 1024).toFixed(2)} Gb / #{((status.node.disk.total) / 1024).toFixed(2)} Gb
+            else if status.node.disk.free <= status.node.disk.total
+              td(class="success"): code #{((status.node.disk.free) / 1024).toFixed(2)} Gb / #{((status.node.disk.total) / 1024).toFixed(2)} Gb
+            else
+              td(class="danger"): code #{((status.node.disk.free) / 1024).toFixed(2)} Gb / #{((status.node.disk.total) / 1024).toFixed(2)} Gb
 
-            tr(class="node-totalmem")
-              td Free/Total Memory
-              if status.node.disk.free <= status.node.disk.total / 2
-                td(class="warning"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb / #{(status.node.disk.total / 1024).toFixed(2)} Gb
-              else if status.node.disk.free <= status.node.disk.total
-                td(class="success"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb / #{(status.node.disk.total / 1024).toFixed(2)} Gb
-              else
-                td(class="danger"): code #{(status.node.disk.free / 1024).toFixed(2)} Gb / #{(status.node.disk.total / 1024).toFixed(2)} Gb
+          tr(class="node-raid")
+            td RAID Status
+              code= JSON.stringify(status.node.disk.raid)
 
-            tr(class="node-raid")
-              td RAID Status
-              td(class=status.node.disk.raid_healthy ? "success" : "warning")
-                code= JSON.stringify(status.node.disk.raid)
+          tr(class="node-wireless")
+            td Wireless
+            td: code= JSON.stringify(status.node.wireless)
 
-            tr(class="node-wireless")
-              td Wireless
-              td: code= JSON.stringify(status.node.wireless)
+          tr(class="node-router")
+            td Router
+            td: code= JSON.stringify(status.node.router)
 
-            tr(class="node-router")
-              td Router
-              td: code= JSON.stringify(status.node.router)
+          tr(class="node-relays")
+            td Relays
+            td: code= JSON.stringify(status.node.relays)
 
-            tr(class="node-relays")
-              td Relays
-              td: code= JSON.stringify(status.node.relays)
+          tr(class="node-bgan-faults")
+            td BGAN Faults
+            td(class=(status.bgan.faults) > 0 ? "danger" : "success")
+              code= (status.bgan.faults)
 
-            tr(class="node-bgan-faults")
-              td BGAN Faults
-              td(class=status.bgan.faults > 0 ? "danger" : "success")
-                code= status.bgan.faults
+          tr(class="node-bgan-latlon")
+            td BGAN Lat/Lon
+            td: code #{(status.bgan.lat)}/#{(status.bgan.lng)}
 
-            tr(class="node-bgan-latlon")
-              td BGAN Lat/Lon
-              td: code #{status.bgan.lat}/#{status.bgan.lng}
+          tr(class="node-bgan-status")
+            td BGAN Status
+            td(class=(status.bgan.status) == "allowed" ? "success" : "warning")
+              code= (status.bgan.status)
 
-            tr(class="node-bgan-status")
-              td BGAN Status
-              td(class=status.bgan.status == "allowed" ? "success" : "warning")
-                code= status.bgan.status
+          tr(class="node-bgan-ethernet")
+            td BGAN Ethernet
+            td(class=(status.bgan.ethernet) ? "success" : "danger")
+              code= (status.bgan.ethernet)
 
-            tr(class="node-bgan-ethernet")
-              td BGAN Ethernet
-              td(class=status.bgan.ethernet ? "success" : "danger"): code= status.bgan.ethernet
+          tr(class="node-bgan-usb")
+            td BGAN USB
+            td(class=(status.bgan.usb) ? "success" : "danger")
+              code= (status.bgan.usb)
 
-            tr(class="node-bgan-usb")
-              td BGAN USB
-              td(class=status.bgan.usb ? "success" : "danger"): code= status.bgan.usb
+          tr(class="node-bgan-signal")
+            td BGAN Signal
+            td: code= (status.bgan.signal)
 
-            tr(class="node-bgan-signal")
-              td BGAN Signal
-              td: code= status.bgan.signal
+          tr(class="node-bgan-temp")
+            td BGAN Temperature
+            if (status.bgan.temp) >= 60
+              td(class="danger"): code= (status.bgan.temp)
+            else if (status.bgan.temp) >= 45
+              td(class="warning"): code= (status.bgan.temp)
+            else
+              td(class="success"): code= (status.bgan.temp)
 
-            tr(class="node-bgan-temp")
-              td BGAN Temperature
-              if status.bgan.temp >= 60
-                td(class="danger"): code=status.bgan.temp
-              else if status.bgan.temp >= 45
-                td(class="warning"): code=status.bgan.temp
-              else
-                td(class="success"): code=status.bgan.temp
+          tr(class="node-bgan-imsi")
+            td BGAN IMSI
+            td: code= (status.bgan.imsi)
 
-            tr(class="node-bgan-imsi")
-              td BGAN IMSI
-              td: code= status.bgan.imsi
+          tr(class="node-bgan-imei")
+            td BGAN IMEI
+            td: code= (status.bgan.imei)
 
-            tr(class="node-bgan-imei")
-              td BGAN IMEI
-              td: code= status.bgan.imei
+          tr(class="node-bgan-ip")
+            td BGAN IP Address
+            td: code= (status.bgan.ip)
 
-            tr(class="node-bgan-ip")
-              td BGAN IP Address
-              td: code= status.bgan.ip
+          tr(class="node-bgan-satelliteid")
+            td BGAN Satellite ID
+            td: code= (status.bgan.satellite_id)
 
-            tr(class="node-bgan-satelliteid")
-              td BGAN Satellite ID
-              td: code= status.bgan.satellite_id
-
-    pre(class="pre-scrollable node-pubkey") #{node.publickey}
+    pre(class="pre-scrollable node-pubkey") #{(node.publickey)}
 
     p(class="timestamp") Metrics last updated at: #{new Date(status.timestamp).toISOString()}
 

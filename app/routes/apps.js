@@ -24,7 +24,7 @@ module.exports = function(app) {
           apps += data;
         }).on('end', function() {
           process.nextTick(function() {
-            res.render('apps', {apps: JSON.parse(apps)});
+            res.render('apps', {apps: JSON.parse(apps || '{}')});
           });
         }).on('error', function(err) {
           console.error('apps.js http error', err);
