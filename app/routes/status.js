@@ -69,65 +69,50 @@ module.exports = function(app) {
       async.parallel({
         status: function(callback) {
           http.get(statusPath, function(httpres) {
-            if (httpres.statusCode === 404) {
+            var response = '';
+            httpres.on('data', function(data) {
+              response += data;
+            }).on('end', function() {
               process.nextTick(function() {
-                callback(null, blank.status);
+                if (httpres.statusCode > 200) callback(null, blank.status); 
+                else if (response === '' || response === '{}') callback(null, blank.status);
+                else callback(null, JSON.parse(response));
               });
-            } else {
-              var response = '';
-              httpres.on('data', function(data) {
-                response += data;
-              }).on('end', function() {
-                process.nextTick(function() {
-                  if (response === '' || response === '{}') callback(null, blank.status);
-                  else callback(null, JSON.parse(response));
-                });
-              }).on('error', function(err) {
-                process.nextTick(function() { callback(err, null); });
-              });
-            }
+            });
+          }).on('error', function(err) {
+            process.nextTick(function() { callback(err, null); });
           });
         },
         node: function(callback) {
           http.get(nodePath, function(httpres) {
-            if (httpres.statusCode === 404) {
+            var response = '';
+            httpres.on('data', function(data) {
+              response += data;
+            }).on('end', function() {
               process.nextTick(function() {
-                callback(null, blank.node);
+                if (httpres.statusCode > 200) callback(null, blank.node); 
+                else if (response === '' || response === '{}') callback(null, blank.node);
+                else callback(null, JSON.parse(response));
               });
-            } else {
-              var response = '';
-              httpres.on('data', function(data) {
-                response += data;
-              }).on('end', function() {
-                process.nextTick(function() {
-                  if (response === '' || response === '{}') callback(null, blank.node);
-                  else callback(null, JSON.parse(response));
-                });
-              }).on('error', function(err) {
-                process.nextTick(function() { callback(err, null); });
-              });
-            }
+            });
+          }).on('error', function(err) {
+            process.nextTick(function() { callback(err, null); });
           });
         },
         build: function(callback) {
           http.get(buildPath, function(httpres) {
-            if (httpres.statusCode === 404) {
+            var response = '';
+            httpres.on('data', function(data) {
+              response += data;
+            }).on('end', function() {
               process.nextTick(function() {
-                callback(null, blank.build);
+                if (httpres.statusCode > 200) callback(null, blank.build); 
+                else if (response === '' || response === '{}') callback(null, blank.build);
+                else callback(null, JSON.parse(response));
               });
-            } else {
-              var response = '';
-              httpres.on('data', function(data) {
-                response += data;
-              }).on('end', function() {
-                process.nextTick(function() {
-                  if (response === '' || response === '{}') callback(null, blank.build);
-                  else callback(null, JSON.parse(response));
-                });
-              }).on('error', function(err) {
-                process.nextTick(function() { callback(err, null); });
-              });
-            }
+            });
+          }).on('error', function(err) {
+            process.nextTick(function() { callback(err, null); });
           });
         }
       }, function(err, results) {

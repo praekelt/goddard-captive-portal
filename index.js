@@ -23,7 +23,7 @@ process.on('log:access', function(line) {
 }).on('log:delete', function() {
   access.end(function() {
     fs.unlink(paths.log, function(err) {
-      if (err) console.error(err);
+      if (err) console.error('HTTP DELETE couldnt unlink access.log:', err);
       access = fs.createWriteStream(paths.log);
     });
   });
