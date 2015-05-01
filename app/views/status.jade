@@ -32,8 +32,11 @@ block content
     div(class="table-responsive")
 
       table(class="table table-hover table-condensed table-bordered")
-
-        - var load = status.node.load.split(' ')
+        
+        if status
+          - var load = status.node.load.split(' ')
+        else
+          - var load = ["0", "0", "0"]
 
         tbody
 
