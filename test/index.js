@@ -1,24 +1,44 @@
 
+'use strict';
+
 var chai = require('chai'),
     chakram = require('chakram'),
     fs = require('fs'),
-    path = require('path'),
-    accessLogPath = path.join(__dirname, '..', 'access.log'),
-    app = require('../index');
+    logPath = require('path').join(__dirname, '../access.log'),
+    app;
 
 describe('app', function() {
 
+  before(function(done) {
+    
+    // delete `access.log` if it exists
+    // before we bootstrap the app
+    
+    fs.exists(logPath, function(exists) {
+      if (exists) {
+        fs.unlink(logPath, function(err) {
+          if (err) throw err;
+          app = require('../index');
+          done();
+        });
+      } else {
+        app = require('../index');
+        done();
+      }
+    });
+  });
+  
   describe('access.log', function() {
 
     it('should exist at application bootstrap', function(done) {
-      fs.exists(accessLogPath, function(exists) {
+      fs.exists(logPath, function(exists) {
         chai.expect(exists).to.be.ok;
         done();
       });
     });
 
     it('should be empty at application\'s first ever bootstrap', function(done) {
-      fs.readFile(accessLogPath, function(err, data) {
+      fs.readFile(logPath, function(err, data) {
         chai.expect(err).to.not.be.ok;
         chai.expect(data.toString()).to.equal('');
         done();
@@ -30,7 +50,7 @@ describe('app', function() {
         'http://localhost:3000/',
         'mac=AD%3A03%3ASD%3A4D%3A34%3A12&ip=192.168.23.23'
       ).then(function(response) {
-        fs.readFile(accessLogPath, function(err, data) {
+        fs.readFile(logPath, function(err, data) {
           chai.expect(err).to.not.be.ok;
           chai.expect(data.toString()).to.not.equal('');
           done();
@@ -46,7 +66,7 @@ describe('app', function() {
 
     it('should delete and then recreate access.log when DELETE /log is hit', function(done) {
 
-      fs.watch(accessLogPath, function(event, filename) {
+      fs.watch(logPath, function(event, filename) {
 
         if (process.platform === 'darwin') {
           chai.expect(event).to.equal('rename');
