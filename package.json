@@ -6,11 +6,11 @@
   "private": true,
   "scripts": {
     "pretest": "http-server test/fixtures -p 8080 -a 127.0.0.1 &",
-    "test": "NODE_ENV=test istanbul test _mocha -- -R spec",
+    "test": "istanbul test _mocha -- -R spec",
     "posttest": "sudo killall node",
     "start": "node index.js",
     "nodemon": "nodemon index.js",
-    "coverage": "NODE_ENV=test istanbul cover _mocha --report lcovonly -- test -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "coverage": "npm run pretest && istanbul cover _mocha --report lcovonly -- test -R spec && npm run posttest && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
