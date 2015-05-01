@@ -24,7 +24,8 @@ block content
 
             h2= app.name
             p= app.description
-            p: a(class="btn btn-default", href="http://" + app.domain, role="button") View Site &raquo;
+            p
+              a(class="btn btn-default", href=app.link, role="button") View Site &raquo;
 
       div(class="col-md-4")
 

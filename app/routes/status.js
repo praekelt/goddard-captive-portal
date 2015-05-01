@@ -74,7 +74,7 @@ module.exports = function(app) {
               response += data;
             }).on('end', function() {
               process.nextTick(function() {
-                if (response === '') callback(null, blank.status);
+                if (response === '' || response === '{}') callback(null, blank.status);
                 else callback(null, JSON.parse(response));
               });
             }).on('error', function(err) {
@@ -89,7 +89,7 @@ module.exports = function(app) {
               response += data;
             }).on('end', function() {
               process.nextTick(function() {
-                if (response === '') callback(null, blank.node);
+                if (response === '' || response === '{}') callback(null, blank.node);
                 else callback(null, JSON.parse(response));
               });
             }).on('error', function(err) {
@@ -104,7 +104,7 @@ module.exports = function(app) {
               response += data;
             }).on('end', function() {
               process.nextTick(function() {
-                if (response === '') callback(null, blank.build);
+                if (response === '' || response === '{}') callback(null, blank.build);
                 else callback(null, JSON.parse(response));
               });
             }).on('error', function(err) {

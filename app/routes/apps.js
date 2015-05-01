@@ -27,7 +27,7 @@ module.exports = function(app) {
             res.render('apps', {apps: JSON.parse(apps || '{}')});
           });
         }).on('error', function(err) {
-          console.error('apps.js http error', err);
+          res.status(500).end(err);
         });
       });
     }
