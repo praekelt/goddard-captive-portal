@@ -18,7 +18,7 @@ block content
 
       each app in apps
 
-        -if(app.internal == false)
+        if !app.internal
 
           div(class="col-md-4")
 
