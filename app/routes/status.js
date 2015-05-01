@@ -1,9 +1,9 @@
 
 var http = require('http'),
     async = require('async'),
-    statusPath = process.env.NODE_STATUS_JSON || 'http://data.goddard.com/status.json',
-    nodePath = process.env.NODE_NODE_JSON || 'http://data.goddard.com/node.json',
-    buildPath = process.env.NODE_BUILD_JSON || 'http://data.goddard.com/build.json';
+    statusPath = process.env.NODE_STATUS_JSON || 'http://data.goddard.com:8080/status.json',
+    nodePath = process.env.NODE_NODE_JSON || 'http://data.goddard.com:8080/node.json',
+    buildPath = process.env.NODE_BUILD_JSON || 'http://data.goddard.com:8080/build.json';
 
 module.exports = function(app) {
   app.get(

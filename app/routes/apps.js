@@ -1,7 +1,7 @@
 
 var http = require('http');
 
-var path = process.env.NODE_APPS_JSON || 'http://data.goddard.com/apps.json';
+var path = process.env.NODE_APPS_JSON || 'http://data.goddard.com:8080/apps.json';
 
 module.exports = function(app) {
   app.all(
