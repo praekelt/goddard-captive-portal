@@ -1,5 +1,5 @@
 
-FROM iodigital/ubuntu-node:v1
+FROM iodigital/ubuntu-node-goddard:v1
 
 MAINTAINER Ant Cosentino <ant@io.co.za>
 
