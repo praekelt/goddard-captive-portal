@@ -108,7 +108,15 @@ module.exports = function(app) {
               process.nextTick(function() {
                 if (httpres.statusCode > 200) callback(null, blank.build); 
                 else if (response === '' || response === '{}') callback(null, blank.build);
-                else callback(null, JSON.parse(response));
+                else {
+
+                  try {
+
+                    callback(null, JSON.parse(response));
+
+                   } catch(err) { callback(null, blank.build); }
+
+                }
               });
             });
           }).on('error', function(err) {
