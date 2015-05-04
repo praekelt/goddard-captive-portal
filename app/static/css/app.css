@@ -15,7 +15,7 @@
 body {
   padding-top: 50px;
   padding-bottom: 20px;
-  overflow-x:hidden;
+  overflow: hidden;
 }
 
 .navbar-brand img {
@@ -29,7 +29,7 @@ body {
 
 @media (max-width: 767px) {
 
-  body {
+/*  body {
     padding: 0px;
   }
 
@@ -37,31 +37,30 @@ body {
     padding: 0;
     margin: 0;
     padding-left: 10px;
-  }
+  }*/
 
-  .jumbotron {
+/*  .jumbotron {
     margin-left: 0px;
     padding-left: 0px;
     padding-bottom: 0px;
     margin-bottom: 0px;
-  }
+  }*/
 
-  .jumbotron .container {
+/*  .jumbotron .container {
     padding-top: 55px;
     margin-left: 0px;
     padding-bottom: 0px;
-  }
+  }*/
 
   #status-container {
     margin-top: 120px;
   }
   
-  .navbar-toggle {
+/*  .navbar-toggle {
     margin-right: 24px;
-  }
+  }*/
 }
 
 .brand-collapse img {
   height: 38px;
-  margin-top: -10;
 }
