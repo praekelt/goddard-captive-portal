@@ -12,10 +12,10 @@
 .app .app-description {}
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 50px;
-  padding-bottom: 20px;
-  overflow: hidden;
+body {}
+
+.wrapper {
+  margin: 60px 0;
 }
 
 .navbar-brand img {
@@ -23,42 +23,18 @@ body {
   margin-top: -8px;
 }
 
-#status-container {
+.panel-status {
   margin-top: 60px;
 }
 
 @media (max-width: 767px) {
-
-/*  body {
-    padding: 0px;
-  }
-
-  .container {
-    padding: 0;
-    margin: 0;
-    padding-left: 10px;
-  }*/
-
-/*  .jumbotron {
-    margin-left: 0px;
-    padding-left: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-  }*/
-
-/*  .jumbotron .container {
-    padding-top: 55px;
-    margin-left: 0px;
-    padding-bottom: 0px;
-  }*/
-
-  #status-container {
-    margin-top: 120px;
+  .panel-status {
+    margin-top: 60px;
   }
   
-/*  .navbar-toggle {
-    margin-right: 24px;
-  }*/
+  .wrapper {
+    margin-top: 60px;
+  }
 }
 
 .brand-collapse img {

@@ -4,37 +4,39 @@ block title
   title UKSA
 
 block content
-
-  div(class="jumbotron")
-
-    div(class="container")
-
-      h1 UKSA Inmarsat
-      p Nulla assentior concludaturque in per, facer paulo docendi mel te, ad eos ceteros deserunt. Pri facer saepe id, has at rebum movet, et inani labitur mea. Mnesarchum persequeris vix eu, sit omnes perpetua ex, graece audire vivendum no nam. Quo doming euripidis et.
-
-  div(class="container")
-
-    div(class="row")
-      
-      if error && !apps
-        div(class="col-md-4")
-          h2 JSON Error
-            p= error.message
-      else
-        each app in apps
   
-          if !app.internal
+  div(class="wrapper container-fluid")
+    
+    div(class="jumbotron")
   
-            div(class="col-md-4")
+      div(class="container-fluid")
   
-              h2= app.name
-              p= app.description
-              p
-                a(class="btn btn-default", href='http://' + app.domain, role="button") View Site &raquo;
-
-    hr
-
-    footer
-
-      p &copy; UKSA 2015
+        h1 UKSA Inmarsat
+        p Nulla assentior concludaturque in per, facer paulo docendi mel te, ad eos ceteros deserunt. Pri facer saepe id, has at rebum movet, et inani labitur mea. Mnesarchum persequeris vix eu, sit omnes perpetua ex, graece audire vivendum no nam. Quo doming euripidis et.
+  
+    div(class="container-fluid")
+  
+      div(class="row")
+        
+        if error && !apps
+          div(class="col-md-4")
+            h2 JSON Error
+              p= error.message
+        else
+          each app in apps
+    
+            if !app.internal
+    
+              div(class="col-md-4")
+    
+                h2= app.name
+                p= app.description
+                p
+                  a(class="btn btn-default", href='http://' + app.domain, role="button") View Site &raquo;
+  
+      hr
+  
+      footer
+  
+        p &copy; UKSA 2015
 
