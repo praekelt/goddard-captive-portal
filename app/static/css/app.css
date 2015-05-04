@@ -1,42 +1,13 @@
 
-.apps {}
-
-.apps .app {}
-
-.app .app-title {}
-
-.app .app-link {}
-
-.app .app-logo {}
-
-.app .app-description {}
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {}
-
-.wrapper {
-  margin: 60px 0;
-}
+.wrapper { margin: 60px 0; }
+.panel-status { margin-top: 60px; }
+.brand-collapse img { height: 38px; }
 
 .navbar-brand img {
   height: 90px;
   margin-top: -8px;
 }
 
-.panel-status {
-  margin-top: 60px;
-}
-
 @media (max-width: 767px) {
-  .panel-status {
-    margin-top: 60px;
-  }
-  
-  .wrapper {
-    margin-top: 60px;
-  }
-}
-
-.brand-collapse img {
-  height: 38px;
+  .panel-status, .wrapper { margin-top: 60px; }
 }
