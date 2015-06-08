@@ -18,64 +18,14 @@ html(lang="en")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
-    meta(name="description", content="")
-    meta(name="author", content="")
+    meta(name="description", content="Mama Connect Health Service")
 
     block title
-      title UKSA
+      title Mama Connect
 
   body
-
-    nav(class="navbar navbar-inverse navbar-fixed-top")
-
-      div(class="container-fluid")
-
-        div(class="navbar-header")
-
-          button(
-            type="button",
-            class="navbar-toggle collapsed",
-            data-toggle="collapse",
-            data-target="#navbar",
-            aria-expanded="false",
-            aria-controls="navbar"
-          )
-            span(class="sr-only") Toggle navigation
-            span(class="icon-bar")
-            span(class="icon-bar")
-            span(class="icon-bar")
-
-          a(class="navbar-brand", rel="home", href="/", title="UKSA")
-
-            img(class="", src="img/logo.jpg", alt="logo")
-
-        div(id="navbar" class="navbar-collapse collapse")
-
-          ul(class="nav navbar-nav")
-
-            li(class="active")
-
-              a(href="/") Home
-
-            li(class="")
-
-              a(href="#") About
 
     block content
 
     script(src="js/jquery-2.1.3.min.js")
     script(src="js/bootstrap.min.js")
-
-    script.
-      var brand = $('.navbar-brand');
-      var brandImg = $('.navbar-brand img');
-
-      $(window).scroll(function() {
-        if (brand.offset().top > 25) {
-          brand.addClass('brand-collapse');
-          brandImg.attr('src', 'img/logo-min-box.jpg');
-        } else {
-          brand.removeClass('brand-collapse');
-          brandImg.attr('src', 'img/logo.jpg');
-        }
-      });

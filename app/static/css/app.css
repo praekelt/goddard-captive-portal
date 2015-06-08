@@ -1,4 +1,14 @@
 
+body {
+  background-color: #222;
+  color: #cacaca;
+}
+
+body .status-page {
+  background-color: #fff;
+  color: #111;
+}
+
 .wrapper { margin: 60px 0; }
 .panel-status { margin-top: 60px; }
 .brand-collapse img { height: 38px; }
@@ -10,4 +20,103 @@
 
 @media (max-width: 767px) {
   .panel-status, .wrapper { margin-top: 60px; }
+}
+
+.firsts {
+  background-color: #ff2a55;
+}
+
+.seconds {
+  background-color: #e97028;
+}
+
+.thirds {
+  background-color: #56c177;
+}
+
+.mast-container {}
+
+.mast {
+  font-size: 60px;
+  border-bottom: 1px solid #555;
+  padding: 0 20px 15px 20px;
+  margin-bottom: 40px;
+}
+
+.mast .unlink {
+  text-transform: none;
+  line-height: 0.85;
+}
+
+.sub-mast {
+  padding: 0 20px;
+}
+
+.mast-copy {
+  padding: 0 20px;
+  margin-bottom: 40px;
+  font-size: 20px;
+}
+
+.link {
+  text-transform: uppercase;
+  display: block;
+  color: #fff;
+}
+
+.link:hover,
+.link:visited {
+  color: #fff;
+}
+
+.unlink,
+.unlink:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.app-link,
+.app-link:hover {
+  text-decoration: underline;
+}
+
+.footer-links {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-link,
+.footer-link:hover {
+  text-decoration: underline;
+}
+
+.app-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.app-item {
+  color: #eee;
+  display: block;
+  padding: 20px 20px 25px 20px;
+  margin: 10px 0;
+}
+
+.app-name {
+  display: block;
+  margin-top: 0;
+  font-size: 36px;
+}
+
+.app-desc {
+  display: block;
+}
+
+.app-link {
+  display: block;
+}
+
+.apps-footer {
+  padding: 0 20px;
+  margin: 40px 0;
 }

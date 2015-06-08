@@ -6,7 +6,31 @@ block title
 
 block content
 
-  div(class="wrapper container-fluid")
+  nav(class="navbar navbar-inverse navbar-fixed-top")
+    div(class="container-fluid")
+      div(class="navbar-header")
+        button(
+          type="button",
+          class="navbar-toggle collapsed",
+          data-toggle="collapse",
+          data-target="#navbar",
+          aria-expanded="false",
+          aria-controls="navbar"
+        )
+          span(class="sr-only") Toggle navigation
+          span(class="icon-bar")
+          span(class="icon-bar")
+          span(class="icon-bar")
+        a(class="navbar-brand", rel="home", href="/", title="UKSA")
+          img(class="", src="img/logo.jpg", alt="logo")
+      div(id="navbar" class="navbar-collapse collapse")
+        ul(class="nav navbar-nav")
+          li(class="active")
+            a(href="/") Home
+          li(class="")
+            a(href="#") About
+
+  div(class="status-page wrapper container-fluid")
 
     if (error)
       div(class="panel panel-danger panel-status")
@@ -14,7 +38,7 @@ block content
           h3(class="panel-title") JSON Error
         div(class="panel-body")
           p= error.message
-          
+
     if (build.build) == "busy"
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
@@ -32,7 +56,7 @@ block content
     div(class="table-responsive")
 
       table(class="table table-hover table-condensed table-bordered")
-        
+
         if status
           - var load = status.node.load.split(' ')
         else
@@ -194,4 +218,18 @@ block content
     pre(class="pre-scrollable node-pubkey") #{(node.publickey)}
 
     p(class="timestamp") Metrics last updated at: #{new Date(status.timestamp).toISOString()}
+
+    script.
+      var brand = $('.navbar-brand');
+      var brandImg = $('.navbar-brand img');
+
+      $(window).scroll(function() {
+        if (brand.offset().top > 25) {
+          brand.addClass('brand-collapse');
+          brandImg.attr('src', 'img/logo-min-box.jpg');
+        } else {
+          brand.removeClass('brand-collapse');
+          brandImg.attr('src', 'img/logo.jpg');
+        }
+      });
 

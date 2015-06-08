@@ -1,42 +1,57 @@
 extends ./base.jade
 
 block title
-  title UKSA
+  title Mama Connect
 
 block content
-  
-  div(class="wrapper container-fluid")
-    
-    div(class="jumbotron")
-  
-      div(class="container-fluid")
-  
-        h1 UKSA Inmarsat
-        p Nulla assentior concludaturque in per, facer paulo docendi mel te, ad eos ceteros deserunt. Pri facer saepe id, has at rebum movet, et inani labitur mea. Mnesarchum persequeris vix eu, sit omnes perpetua ex, graece audire vivendum no nam. Quo doming euripidis et.
-  
-    div(class="container-fluid")
-  
-      div(class="row")
-        
-        if error && !apps
-          div(class="col-md-4")
-            h2 JSON Error
-              p= error.message
-        else
-          each app in apps
-    
-            if !app.internal
-    
-              div(class="col-md-4")
-    
-                h2= app.name
-                p= app.description
-                p
-                  a(class="btn btn-default", href='http://' + app.domain, role="button") View Site &raquo;
-  
-      hr
-  
-      footer
-  
-        p &copy; UKSA 2015
 
+  div(class="mast-container")
+    h1(class="mast"): a(href="/", class="link unlink") Mama Connect
+    h4(class="sub-mast") Welcome!
+    p(class="mast-copy") This free clinic service offers you expert health information from early pregnancy to baby's first birthday. You can also log in to other great Health services.
+
+  if error && !apps
+    div(class="error-container")
+      h2 JSON Error
+        p= error.message
+
+  else
+
+    ul(class="app-list")
+
+      each app in apps
+
+        if !app.internal
+
+          li(class="app-item")
+
+            h2(class="app-name")= app.name
+            p(class="app-desc")= app.description
+            a(class="app-link link", href='http://' + app.domain, role="button") View Site
+
+  footer(class="apps-footer")
+
+    ul(class="footer-links")
+      li: a(href="/", class="link footer-link") Home
+      li: a(href="/", class="link footer-link") List Of Sites
+      li: a(href="/contact-us", class="link footer-link") Contact Us
+
+    p Copyright 2015 Mama Connect, All Rights Reserved
+
+  script.
+    (function() {
+      var x = 0, apps = document.querySelectorAll('.app-item');
+
+      for (var app in apps) {
+        if (app === 'length') break;
+
+        if (x === 0) {
+          apps[app].classList.add('firsts');
+        } else if (x === 1) {
+          apps[app].classList.add('seconds');
+        } else {
+          apps[app].classList.add('thirds');
+        }
+        x = x === 2 ? 0 : x + 1;
+      }
+    }).call(this);
