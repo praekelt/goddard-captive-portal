@@ -6,37 +6,51 @@ block title
 block content
 
   div(class="mast-container")
-    h1(class="mast"): a(href="/", class="link unlink") Mama Connect
+    h1(class="mast") Mama Connect
     h4(class="sub-mast") Welcome!
     p(class="mast-copy") This free clinic service offers you expert health information from early pregnancy to baby's first birthday. You can also log in to other great Health services.
 
-  if error && !apps
+  if error
     div(class="error-container")
       h2 JSON Error
         p= error.message
 
-  else
+  ul(class="app-list")
 
-    ul(class="app-list")
+    each app in apps
 
-      each app in apps
+      if !app.internal
 
-        if !app.internal
-
-          li(class="app-item")
-
+        li(class="app-item")
+          a(class="app-link link", href='http://' + app.domain, role="button")
             h2(class="app-name")= app.name
             p(class="app-desc")= app.description
-            a(class="app-link link", href='http://' + app.domain, role="button") View Site
+            p(class="uppercased") View Site
+
+    li(class="app-item whitelist-apps")
+
+      h1(class="whitelist-header") Free Websites
+
+      ul(class="whitelist-apps-list")
+
+        each app in whitelist
+
+          li(class="whitelist-app")
+            a(class="whitelist-app-link app-link link", href="http://" + app.domain, role="button")
+              h4(class="whitelist-app-name app-name")= app.name
+              p(class="whitelist-app-desc app-desc")= app.description
+              p(class="uppercased") View Site
+
 
   footer(class="apps-footer")
 
-    ul(class="footer-links")
-      li: a(href="/", class="link footer-link") Home
-      li: a(href="/", class="link footer-link") List Of Sites
-      li: a(href="/contact-us", class="link footer-link") Contact Us
+    //- ul(class="footer-links")
+    //-   li: a(href="/", class="link footer-link") Home
+    //-   li: a(href="/", class="link footer-link") List Of Sites
+    //-   li: a(href="/contact-us", class="link footer-link") Contact Us
 
-    p Copyright 2015 Mama Connect, All Rights Reserved
+    div
+      p Copyright 2015 Mama Connect <br>All Rights Reserved
 
   script.
     (function() {
