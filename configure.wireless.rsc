@@ -1,0 +1,1 @@
+/interface wireless set [ find default-name=uksa-ap ] ssid=MAMAConnect
