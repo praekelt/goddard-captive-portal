@@ -68,9 +68,7 @@ app.set('mikrotik.configure', function(cb){
       '/ip hotspot walled-garden add dst-host=nigeriahealthwatch.com server=hotspot1',
       '/ip hotspot walled-garden add dst-host=*.nigeriahealthwatch.com server=hotspot1',
       '/ip hotspot walled-garden add dst-host=health-orb.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.health-orb.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=babycenter.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.babycenter.com server=hotspot1'
+      '/ip hotspot walled-garden add dst-host=*.health-orb.org server=hotspot1'
 
     ]
 

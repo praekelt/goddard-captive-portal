@@ -30,11 +30,6 @@ var blank = {
       name: 'Health-Orb',
       description: 'Connecting Frontline Health Workers to resources and each other to expand their knowledge, organize content into courses, and share their learning with the community.',
       domain: 'health-orb.org'
-    },
-    {
-      name: 'Babycenter',
-      description: 'The #1 pregnancy and parenting mobile and web destination worldwide',
-      domain: 'www.babycenter.com'
     }
   ]
 };
