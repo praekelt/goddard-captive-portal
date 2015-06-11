@@ -88,10 +88,6 @@ app.set('mikrotik.configure', function(cb){
   // loop and perform the rest in the background
   async.each(endpoints, function(endpoint, endpointcallback){
 
-    // right so require and create a client we can use
-    var telnet = require('telnet-client');
-    var connection = new telnet();
-
     // open a connection
     var mikroApi = require('mikronode')
     var connection = new mikroApi(endpoint.host,'admin','rogerwilco')
