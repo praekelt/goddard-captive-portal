@@ -33,6 +33,15 @@ process.on('log:access', function(line) {
 
 app.set('mikrotik.configure', function(cb){
 
+  // check if file exists
+  if(path.existsSync('/var/goddard/20150611-whitelist')) {
+    cb(null);
+    return;
+  } else {
+    // write the file
+    fs.writeFileSync('/var/goddard/20150611-whitelist', '' + new Date().getTime());
+  }
+
   // hosts to connect and configure
   if(configured_flag === true) {
     cb(null);
