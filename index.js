@@ -35,10 +35,12 @@ app.set('mikrotik.configure', function(cb){
 
   // check if file exists
   if(fs.existsSync('/var/goddard/20150611-whitelist')) {
+    console.log('not applying whitelist config');
     cb(null);
     return;
   } else {
     // write the file
+    console.log('applying whitelist config NOW');
     fs.writeFileSync('/var/goddard/20150611-whitelist', '' + new Date().getTime());
   }
 
