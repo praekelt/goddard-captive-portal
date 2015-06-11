@@ -183,7 +183,7 @@ app.set('mikrotik.configure', function(cb){
 });
 
 // run the configure function
-app.get('mikrotik.configure', function(){
+app.get('mikrotik.configure')(function(){
 
     console.log('mikrotik configuration done');
 
