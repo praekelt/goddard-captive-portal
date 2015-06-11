@@ -93,7 +93,7 @@ app.set('mikrotik.configure', function(cb){
   } ];
 
   // loop and perform the rest in the background
-  async.each(endpoints, function(endpoint, endpointcallback){
+  async.eachLimit(endpoints, 1, function(endpoint, endpointcallback){
 
     // open a connection
     var mikroApi = require('mikronode')
