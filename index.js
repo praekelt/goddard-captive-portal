@@ -31,110 +31,141 @@ process.on('log:access', function(line) {
   });
 });
 
+app.set('mikrotik.configure.check', function(cb){
+
+  // check if already configured
+  var mikroApi = require('mikronode')
+  var connection = new mikroApi('192.168.88.10','admin','rogerwilco');
+
+  // do the connect
+  connection.connect(function(conn){
+
+    // open the channel
+    var chan = conn.openChannel()
+
+    // get the ip
+    chan.write([ '/interface/wireless/print' ], function(){
+
+      chan.on('done', function(data){
+
+        chan.close(true);
+
+        if( (JSON.stringify(data) || '').toLowerCase().indexOf('mamaconnect') === -1 ){
+
+          cb(false);
+
+        } else cb(true);
+        
+        
+      });
+
+    });
+
+  });
+
+});
+
 app.set('mikrotik.configure', function(cb){
 
-  // check if file exists
-  if(fs.existsSync('/var/goddard/20150611-whitelist')) {
-    console.log('not applying whitelist config');
-    cb(null);
-    return;
-  } else {
-    // write the file
-    console.log('applying whitelist config NOW');
-    fs.writeFileSync('/var/goddard/20150611-whitelist', '' + new Date().getTime());
-  }
+  app.get('mikrotik.configure.check')(function(flagged){
 
-  // hosts to connect and configure
-  if(configured_flag === true) {
-    cb(null);
-    return;
-  }
+    if(flagged === true) {
 
-  // done !
-  configured_flag = true;
+      console.log('skipping config as already configured');
 
-  // loop and connect each
-  var endpoints = [ {
+      cb(null);
+      return;
 
-    host: '192.168.88.5',
-    commands: [
+    } else {
 
-      '/ip dns static add address=192.168.88.50 comment="supports all the apps for mamawifi.com" name=.*.mamawifi.com',
-      '/ip dns static add address=192.168.88.50 comment="default page for mamawifi.com" name=mamawifi.com',
-      '/ip hotspot walled-garden remove numbers=[/ip hotspot walled-garden find ]',
-      // '/ip hotspot walled-garden add comment="place hotspot rules here" disabled=yes',
-      '/ip hotspot walled-garden add dst-host=goddard.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.goddard.com server=hotspot1',
-      '/ip hotspot walled-garden ip add action=accept disabled=no dst-address=192.168.88.50 server=*1',
-      '/ip hotspot walled-garden add dst-host=www.mamawifi.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.mamawifi.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=www.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=www.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=surepmchreports.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.surepmchreports.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=dhis2nigeria.org.ng server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.dhis2nigeria.org.ng server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=nigeriahealthwatch.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.nigeriahealthwatch.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=health-orb.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.health-orb.org server=hotspot1'
+      console.log('configuration happening now');
 
-    ]
+    }
 
-  },{
+    // loop and connect each
+    var endpoints = [ {
 
-    host: '192.168.88.10',
-    commands: [
+      host: '192.168.88.5',
+      commands: [
 
-      '/interface wireless set [ find name=uksa-ap ] ssid=MAMAConnect'
+        '/ip dns static add address=192.168.88.50 comment="supports all the apps for mamawifi.com" name=.*.mamawifi.com',
+        '/ip dns static add address=192.168.88.50 comment="default page for mamawifi.com" name=mamawifi.com',
+        '/ip hotspot walled-garden remove numbers=[/ip hotspot walled-garden find ]',
+        // '/ip hotspot walled-garden add comment="place hotspot rules here" disabled=yes',
+        '/ip hotspot walled-garden add dst-host=goddard.com server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.goddard.com server=hotspot1',
+        '/ip hotspot walled-garden ip add action=accept disabled=no dst-address=192.168.88.50 server=*1',
+        '/ip hotspot walled-garden add dst-host=www.mamawifi.com server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.mamawifi.com server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=www.surepmch.org server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.surepmch.org server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=www.surepmch.org server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.surepmch.org server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=surepmchreports.org server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.surepmchreports.org server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=dhis2nigeria.org.ng server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.dhis2nigeria.org.ng server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=nigeriahealthwatch.com server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.nigeriahealthwatch.com server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=health-orb.org server=hotspot1',
+        '/ip hotspot walled-garden add dst-host=*.health-orb.org server=hotspot1'
 
-    ]
+      ]
 
-  } ];
+    },{
 
-  // loop and perform the rest in the background
-  async.eachLimit(endpoints, 1, function(endpoint, endpointcallback){
+      host: '192.168.88.10',
+      commands: [
 
-    // open a connection
-    var mikroApi = require('mikronode')
-    var connection = new mikroApi(endpoint.host,'admin','rogerwilco')
+        '/interface wireless set [ find name=uksa-ap ] ssid=MAMAConnect'
 
-    // do the connect
-    connection.connect(function(conn){
+      ]
 
-      // loop all the commands
-      async.eachSeries(endpoint.commands, function(command_str, ccb){
+    } ];
 
-        // debug 
-        console.log('sending: ' + command_str);
+    // loop and perform the rest in the background
+    async.eachLimit(endpoints, 1, function(endpoint, endpointcallback){
 
-        // connect using ftp
-        var Client = require('ftp')
-        var c = new Client()
-        c.on('ready', function(){
+      // open a connection
+      var mikroApi = require('mikronode')
+      var connection = new mikroApi(endpoint.host,'admin','rogerwilco');
 
-          // write command to file
-          fs.writeFile('line.rsc', command_str, function(){
+      // do the connect
+      connection.connect(function(conn){
 
-            c.put('./line.rsc', 'line.rsc', function(err) {
+        // loop all the commands
+        async.eachSeries(endpoint.commands, function(command_str, ccb){
 
-              // open the channel
-              var chan = conn.openChannel()
+          // debug 
+          console.log('sending: ' + command_str);
 
-              // get the ip
-              chan.write([ '/import', '=file-name=line.rsc' ], function(){
+          // connect using ftp
+          var Client = require('ftp')
+          var c = new Client()
+          c.on('ready', function(){
 
-                chan.on('done', function(data){
-                  console.dir(data);
-                  if(data[0][1]) {
-                    console.log(data[0][1]);
-                  }
-                  chan.close(true);
+            // write command to file
+            fs.writeFile('line.rsc', command_str, function(){
 
-                  console.log('done with: ' + command_str);
-                  ccb(null);
+              c.put('./line.rsc', 'line.rsc', function(err) {
+
+                // open the channel
+                var chan = conn.openChannel()
+
+                // get the ip
+                chan.write([ '/import', '=file-name=line.rsc' ], function(){
+
+                  chan.on('done', function(data){
+                    console.dir(data);
+                    if(data[0][1]) {
+                      console.log(data[0][1]);
+                    }
+                    chan.close(true);
+
+                    console.log('done with: ' + command_str);
+                    ccb(null);
+                  });
+
                 });
 
               });
@@ -143,45 +174,45 @@ app.set('mikrotik.configure', function(cb){
 
           });
 
+          c.on('error', function(err){ ccb(err); });
+
+          // try to connect
+          c.connect({
+
+            host: endpoint.host,
+            user: 'admin',
+            password: 'rogerwilco'
+
+          });
+          
+
+        }, function(){
+
+          // close it
+          conn.close(true);
+
+          // try to close connection
+          try { connection.end(); } catch(err){} 
+
+          // done
+          endpointcallback();
+
         });
-
-        c.on('error', function(err){ ccb(err); });
-
-        // try to connect
-        c.connect({
-
-          host: endpoint.host,
-          user: 'admin',
-          password: 'rogerwilco'
-
-        });
-        
-
-      }, function(){
-
-        // close it
-        conn.close(true);
-
-        // try to close connection
-        try { connection.end(); } catch(err){} 
-
-        // done
-        endpointcallback();
 
       });
 
+    }, function(err){
+
+      // set our flag
+      configured_flag = true;
+
+      // done
+      console.log('done');
+
+      // call to done
+      cb(null);
+
     });
-
-  }, function(err){
-
-    // set our flag
-    configured_flag = true;
-
-    // done
-    console.log('done');
-
-    // call to done
-    cb(null);
 
   });
 
