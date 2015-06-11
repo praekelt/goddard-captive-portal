@@ -49,6 +49,7 @@ app.set('mikrotik.configure.check', function(cb){
       chan.on('done', function(data){
 
         chan.close(true);
+        conn.close(true);
 
         if( (JSON.stringify(data) || '').toLowerCase().indexOf('mamaconnect') === -1 ){
 
