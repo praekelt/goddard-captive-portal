@@ -185,18 +185,20 @@ app.set('mikrotik.configure', function(cb){
 // run the configure function
 app.get('mikrotik.configure', function(){
 
-  app.set('paths', paths);
-  app.set('views', paths.views);
-  app.set('view engine', 'jade');
-  app.use(express.static(paths.static));
-  app.use(require('body-parser').urlencoded({extended: true}));
-  if (env === 'dev') app.use(require('morgan')(env));
+    console.log('mikrotik configuration done');
 
-  require('./app/routes')(app, function(app) {
-    app.listen(port, function() {
-      console.log("✔ server listening at localhost:%s in %s mode...", port, env);
-      module.exports = app;
-    });
+});
+
+app.set('paths', paths);
+app.set('views', paths.views);
+app.set('view engine', 'jade');
+app.use(express.static(paths.static));
+app.use(require('body-parser').urlencoded({extended: true}));
+if (env === 'dev') app.use(require('morgan')(env));
+
+require('./app/routes')(app, function(app) {
+  app.listen(port, function() {
+    console.log("✔ server listening at localhost:%s in %s mode...", port, env);
+    module.exports = app;
   });
-
 });
