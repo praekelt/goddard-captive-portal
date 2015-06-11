@@ -34,7 +34,7 @@ process.on('log:access', function(line) {
 app.set('mikrotik.configure', function(cb){
 
   // check if file exists
-  if(path.existsSync('/var/goddard/20150611-whitelist')) {
+  if(fs.existsSync('/var/goddard/20150611-whitelist')) {
     cb(null);
     return;
   } else {
