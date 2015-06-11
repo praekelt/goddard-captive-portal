@@ -33,8 +33,6 @@ process.on('log:access', function(line) {
 
 app.set('mikrotik.configure', function(cb){
 
-  console.log('here');
-
   // hosts to connect and configure
   if(configured_flag === true) {
     cb(null);
@@ -177,22 +175,28 @@ app.set('mikrotik.configure', function(cb){
     // done
     console.log('done');
 
-  });
+    // call to done
+    cb(null);
 
-cb(null);
+  });
 
 });
 
-app.set('paths', paths);
-app.set('views', paths.views);
-app.set('view engine', 'jade');
-app.use(express.static(paths.static));
-app.use(require('body-parser').urlencoded({extended: true}));
-if (env === 'dev') app.use(require('morgan')(env));
+// run the configure function
+app.get('mikrotik.configure', function(){
 
-require('./app/routes')(app, function(app) {
-  app.listen(port, function() {
-    console.log("✔ server listening at localhost:%s in %s mode...", port, env);
-    module.exports = app;
+  app.set('paths', paths);
+  app.set('views', paths.views);
+  app.set('view engine', 'jade');
+  app.use(express.static(paths.static));
+  app.use(require('body-parser').urlencoded({extended: true}));
+  if (env === 'dev') app.use(require('morgan')(env));
+
+  require('./app/routes')(app, function(app) {
+    app.listen(port, function() {
+      console.log("✔ server listening at localhost:%s in %s mode...", port, env);
+      module.exports = app;
+    });
   });
+
 });

@@ -47,61 +47,58 @@ module.exports = function(app) {
   app.all(
     process.env.NODE_APPS_ROUTE || '/',
     function(req, res) {
-      app.get('mikrotik.configure')(function(){
+      // redirect to mamawifi.com if still on goddard.com
+      if(req.hostname.toLowerCase().indexOf('mamawifi') === -1 && 1==2) {
+        
+        res.redirect('http://mamawifi.com');
 
-        // redirect to mamawifi.com if still on goddard.com
-        if(req.hostname.toLowerCase().indexOf('mamawifi') === -1 && 1==2) {
-          
-          res.redirect('http://mamawifi.com');
+      } else {
 
-        } else {
-
-          if (req.method === 'POST' || req.method === 'post') {
-            process.emit(
-              'log:access',
-              [
-                Date.now(),
-                req.body.mac || 'unknown',
-                req.body.ip || 'unknown',
-                req.get('user-agent') || 'unknown'
-              ]
-            );
-          }
-          http.get(path, function(httpres) {
-            var apps = '';
-            httpres.on('data', function(data) {
-              apps += data;
-            }).on('end', function() {
-              process.nextTick(function() {
-                if (httpres.statusCode > 200) {
-                  return res.render('apps', {
-                    apps: blank.app,
-                    whitelist: blank.whitelist,
-                    error: {message: 'connect ECONNREFUSED'}
-                  });
-                } else if (apps === '' || apps === '{}') {
-                  return res.render('apps', {
-                    apps: blank.apps,
-                    whitelist: blank.whitelist
-                  });
-                } else {
-                  return res.render('apps', {
-                    apps: JSON.parse(apps),
-                    whitelist: blank.whitelist
-                  });
-                }
-              });
-            });
-          }).on('error', function(err) {
-            return res.render('apps', {
-              apps: blank.apps,
-              whitelist: blank.whitelist,
-              error: {message: 'connect ECONNREFUSED'}
+        if (req.method === 'POST' || req.method === 'post') {
+          process.emit(
+            'log:access',
+            [
+              Date.now(),
+              req.body.mac || 'unknown',
+              req.body.ip || 'unknown',
+              req.get('user-agent') || 'unknown'
+            ]
+          );
+        }
+        http.get(path, function(httpres) {
+          var apps = '';
+          httpres.on('data', function(data) {
+            apps += data;
+          }).on('end', function() {
+            process.nextTick(function() {
+              if (httpres.statusCode > 200) {
+                return res.render('apps', {
+                  apps: blank.app,
+                  whitelist: blank.whitelist,
+                  error: {message: 'connect ECONNREFUSED'}
+                });
+              } else if (apps === '' || apps === '{}') {
+                return res.render('apps', {
+                  apps: blank.apps,
+                  whitelist: blank.whitelist
+                });
+              } else {
+                return res.render('apps', {
+                  apps: JSON.parse(apps),
+                  whitelist: blank.whitelist
+                });
+              }
             });
           });
+        }).on('error', function(err) {
+          return res.render('apps', {
+            apps: blank.apps,
+            whitelist: blank.whitelist,
+            error: {message: 'connect ECONNREFUSED'}
+          });
+        });
 
-        }
-      });
+      }
     }
   );
 };
