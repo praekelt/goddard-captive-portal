@@ -10,8 +10,9 @@ body .status-page {
 }
 
 .wrapper { margin: 60px 0; }
-.panel-status { margin-top: 60px; }
+.panel-status { margin-top: 0; }
 .brand-collapse img { height: 38px; }
+.top-header-spacing { margin-top: 45px;display: block;clear:both;}
 
 .navbar-brand img {
   height: 90px;
@@ -19,7 +20,8 @@ body .status-page {
 }
 
 @media (max-width: 767px) {
-  .panel-status, .wrapper { margin-top: 60px; }
+  .panel-status, .wrapper { margin-top: 0; }
+  .top-header-spacing { margin-top: 110px; display: block; }
 }
 
 .uppercased {
