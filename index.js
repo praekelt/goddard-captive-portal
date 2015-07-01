@@ -220,15 +220,11 @@ app.set('mikrotik.configure', function(cb){
 });
 
 // check if not testing
-if(process.env != 'testing') {
-
+if (process.env.NODE_ENV !== 'testing') {
   // run the configure function
-  app.get('mikrotik.configure')(function(){
-
-      console.log('mikrotik configuration done');
-
+  app.get('mikrotik.configure')(function() {
+    console.log('mikrotik configuration done');
   });
-  
 }
 
 app.set('paths', paths);

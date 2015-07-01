@@ -8,5 +8,5 @@ addons:
   hosts:
     - data.goddard.com
 env:
-  - NODE_PORT=4321 NODE_ENV=test
+  - NODE_PORT=4321 NODE_ENV=testing
 after_script: npm run coverage
