@@ -87,6 +87,16 @@ describe('app', function() {
 
     describe('/', function() {
 
+      describe('redirects', function() {
+
+        it('should redirect to mamawifi.com', function() {
+          var request = chakram.post('http://localhost:3000?hostname=goddard.com');
+          chakram.expect(request).to.have.status(302);
+          return chakram.wait();
+        });
+
+      });
+
       describe('allowed methods', function() {
 
         it('should respond to get', function() {
