@@ -43,7 +43,7 @@ module.exports = function(app) {
     process.env.NODE_APPS_ROUTE || '/',
     function(req, res) {
       // redirect to mamawifi.com if still on goddard.com
-      if(req.hostname.toLowerCase().indexOf('mamawifi') === -1) {
+      if((req.query.hostname || req.hostname).toLowerCase().indexOf('mamawifi') === -1) {
 
         if (req.method === 'POST' || req.method === 'post') {
           process.emit(
@@ -56,6 +56,8 @@ module.exports = function(app) {
             ]
           );
         }
+
+        console.log('redirect');
         
         res.redirect('http://mamawifi.com');
 
