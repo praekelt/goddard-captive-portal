@@ -153,7 +153,7 @@ module.exports = function(app) {
         });
       } else {
         return res.render('status', {
-          status: results.status,
+          status: JSON.stringify(results.status) == '{}' ? blank.status : results.status,
           node: results.node,
           wifiavailable: results.wificheck,
           build: results.build
