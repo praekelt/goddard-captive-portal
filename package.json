@@ -5,12 +5,11 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "pretest": "http-server test/fixtures -p 8080 -a 127.0.0.1 &",
+    "fixtures": "http-server test/fixtures -p 8080 -a 127.0.0.1 &",
     "test": "istanbul test _mocha -- -R spec",
-    "posttest": "sudo killall node",
     "start": "node index.js",
-    "nodemon": "npm run pretest && nodemon index.js",
-    "coverage": "npm run pretest && istanbul cover _mocha --report lcovonly -- test -R spec && npm run posttest && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "nodemon": "npm run fixtures && nodemon index.js",
+    "coverage": "istanbul cover _mocha --report lcovonly -- test -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
