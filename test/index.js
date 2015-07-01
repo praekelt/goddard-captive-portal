@@ -26,6 +26,10 @@ fixtures.get('/node.json', function(req, res) {
   fs.createReadStream(__dirname + '/fixtures/node.json').pipe(res);
 });
 
+fixtures.get('/wireless.html', function(req, res) {
+  fs.createReadStream(__dirname + '/fixtures/wireless.html').pipe(res);
+});
+
 before(function(done) {
   fixtures.listen(8080, done);
 });

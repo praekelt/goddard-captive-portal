@@ -3,7 +3,8 @@ var http = require('http'),
     async = require('async'),
     statusPath = process.env.NODE_STATUS_JSON || 'http://127.0.0.1:8080/status.json',
     nodePath = process.env.NODE_NODE_JSON || 'http://127.0.0.1:8080/node.json',
-    buildPath = process.env.NODE_BUILD_JSON || 'http://127.0.0.1:8080/build.json';
+    buildPath = process.env.NODE_BUILD_JSON || 'http://127.0.0.1:8080/build.json',
+    wifiStatusPath = process.env.NODE_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html';
 
 var blank = {
   build: {
@@ -66,14 +67,22 @@ module.exports = function(app) {
   app.get(process.env.NODE_STATUS_ROUTE || '/status', function(req, res) {
     async.parallel({
       wificheck: function(callback) {
-        http.get('http://192.168.88.10', function(httpres) {
+        http.get(wifiStatusPath, function(httpres) {
           httpres.on('data', function(data) {
           }).on('end', function() {
             callback(null, httpres.statusCode >= 200 && httpres.statusCode < 400);
           });
+
+          httpres.on('socket', function (socket) {
+            socket.setTimeout(1500);  
+            socket.on('timeout', function() {
+              httpres.abort();
+            });
+          });
         }).on('error', function(err) {
           callback(null, false);
         });
+        
       },
       status: function(callback) {
         http.get(statusPath, function(httpres) {
