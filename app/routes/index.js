@@ -5,5 +5,5 @@ module.exports = function(app, callback) {
   require('./apps')(app);
   require('./logs')(app);
 
-  process.nextTick(function() { callback(app); });
+  return callback(app);
 };
