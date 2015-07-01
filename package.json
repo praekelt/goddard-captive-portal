@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "fixtures": "http-server test/fixtures -p 8080 -a 127.0.0.1 &",
-    "test": "istanbul test _mocha -- -R spec",
+    "test": "NODE_ENV=testing istanbul test _mocha -- -R spec",
     "start": "node index.js",
     "nodemon": "npm run fixtures && nodemon index.js",
     "coverage": "istanbul cover _mocha --report lcovonly -- test -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"

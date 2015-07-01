@@ -65,16 +65,16 @@ var blank = {
 module.exports = function(app) {
   app.get(process.env.NODE_STATUS_ROUTE || '/status', function(req, res) {
     async.parallel({
-      // wificheck: function(callback) {
-      //   http.get('http://192.168.88.10', function(httpres) {
-      //     httpres.on('data', function(data) {
-      //     }).on('end', function() {
-      //       callback(null, httpres.statusCode >= 200 && httpres.statusCode < 400);
-      //     });
-      //   }).on('error', function(err) {
-      //     callback(null, false);
-      //   });
-      // },
+      wificheck: function(callback) {
+        http.get('http://192.168.88.10', function(httpres) {
+          httpres.on('data', function(data) {
+          }).on('end', function() {
+            callback(null, httpres.statusCode >= 200 && httpres.statusCode < 400);
+          });
+        }).on('error', function(err) {
+          callback(null, false);
+        });
+      },
       status: function(callback) {
         http.get(statusPath, function(httpres) {
           var response = '';
