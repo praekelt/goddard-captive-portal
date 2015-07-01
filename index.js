@@ -56,8 +56,8 @@ app.set('mikrotik.configure.check', function(cb){
           cb(false);
 
         } else cb(true);
-        
-        
+
+
       });
 
     });
@@ -137,7 +137,7 @@ app.set('mikrotik.configure', function(cb){
         // loop all the commands
         async.eachSeries(endpoint.commands, function(command_str, ccb){
 
-          // debug 
+          // debug
           console.log('sending: ' + command_str);
 
           // connect using ftp
@@ -185,7 +185,7 @@ app.set('mikrotik.configure', function(cb){
             password: 'rogerwilco'
 
           });
-          
+
 
         }, function(){
 
@@ -193,7 +193,7 @@ app.set('mikrotik.configure', function(cb){
           conn.close(true);
 
           // try to close connection
-          try { connection.end(); } catch(err){} 
+          try { connection.end(); } catch(err){}
 
           // done
           endpointcallback();
@@ -219,12 +219,13 @@ app.set('mikrotik.configure', function(cb){
 
 });
 
-// run the configure function
-app.get('mikrotik.configure')(function(){
-
+// check if not testing
+if (process.env.NODE_ENV !== 'testing') {
+  // run the configure function
+  app.get('mikrotik.configure')(function() {
     console.log('mikrotik configuration done');
-
-});
+  });
+}
 
 app.set('paths', paths);
 app.set('views', paths.views);
