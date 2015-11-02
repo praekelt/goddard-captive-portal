@@ -16,6 +16,7 @@
     "url": "https://github.com/praekelt/goddard-captive-portal"
   },
   "author": "Ant Cosentino <ant@io.co.za>",
+  "contributors": ["Johann du Toit <johann@io.co.za>"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/praekelt/goddard-captive-portal/issues"
