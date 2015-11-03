@@ -25,3 +25,4 @@ To begin the development server, run `npm run nodemon`. Otherwise for production
 ##### todo
 
 - fix up the scripts in package.json (background processes and whatnot...)
+- fix up the rewritemanifests function (uses a flag for side effects)
