@@ -21,3 +21,7 @@ To begin the development server, run `npm run nodemon`. Otherwise for production
 - `NODE_STATUS_ROUTE` **or** `/status` status page (responds to GET)
 - `NODE_APPS_ROUTE` **or** `/` applications page (responds to all methods)
 - `/log` access logs (responds to GET and DELETE)
+
+##### todo
+
+- fix up the scripts in package.json (background processes and whatnot...)
