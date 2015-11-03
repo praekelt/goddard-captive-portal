@@ -23,27 +23,34 @@ function rewriteManifest() {
 }
 
 function checkMediaAvailability() {
+  var requests = [];
   this.get('thenewapps.content.dontHaveCategories').forEach(function(category, i) {
     category.media.forEach(function(medium, k) {
-      http.request({
+      heads += 1;
+      requests.push(http.request({
         hostname: media.hostname,
         path: [media.path, category.uri, medium.uri].join('/'),
         method: 'head'
       }, function(res) {
         process.emit('head:response', i, k, res.headers['content-length']);
-      }).end();
+      }));
     });
   });
   this.get('thenewapps.content.haveCategories').forEach(function(category, i) {
     category.media.forEach(function(medium, k) {
-      http.request({
+      heads += 1;
+      requests.push(http.request({
         hostname: media.hostname,
         path: [media.path, category.uri, medium.uri].join('/'),
         method: 'head'
       }, function(res) {
         process.emit('head:response', i, k, res.headers['content-length']);
-      }).end();
+      }));
     });
+  });
+
+  requests.forEach(function(request) {
+    request.end();
   });
 }
 
