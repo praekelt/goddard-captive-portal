@@ -54,11 +54,8 @@ block content
 
   script.
     (function() {
-      var x = 0, apps = document.querySelectorAll('.app-item');
-
+      var x = 0, apps = [].slice.call(document.querySelectorAll('.app-item'));
       for (var app in apps) {
-        if (app === 'length') break;
-
         if (x === 0) {
           apps[app].classList.add('firsts');
         } else if (x === 1) {

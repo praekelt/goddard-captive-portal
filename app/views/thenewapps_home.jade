@@ -1,0 +1,14 @@
+extends ./base.jade
+
+block title
+  title Mama Connect
+
+block content
+
+  ul
+    each option in menu
+      li
+        a(href=option.uri)= option.name
+
+  p.
+    welcome to #{category.name}
