@@ -1,8 +1,8 @@
 
+'use strict';
+
 var http = require('http');
-
 var path = process.env.NODE_APPS_JSON || 'http://127.0.0.1:8080/apps.json';
-
 var blank = {
   apps: [],
   whitelist: [
@@ -34,15 +34,10 @@ var blank = {
   ]
 };
 
-/**
-* Checks if the new settings have already been applied.
-**/
-
 module.exports = function(app) {
   app.all(process.env.NODE_APPS_ROUTE || '/', function(req, res) {
     // redirect to mamawifi.com if still on goddard.com
     if ((req.query.hostname || req.hostname).toLowerCase().indexOf('mamawifi') === -1) {
-
       if (req.method === 'POST' || req.method === 'post') {
         process.emit('log:access', [
           Date.now(),
@@ -51,11 +46,8 @@ module.exports = function(app) {
           req.get('user-agent') || 'unknown'
         ]);
       }
-
       res.redirect('http://mamawifi.com');
-
     } else {
-
       http.get(path, function(httpres) {
         var apps = '';
         httpres.on('data', function(data) {
