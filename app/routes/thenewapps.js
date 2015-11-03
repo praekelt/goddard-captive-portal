@@ -12,12 +12,15 @@ var path = process.env.NODE_THENEWAPPS_JSON || 'http://127.0.0.1:8080/thenewapps
 var thenewapps = require(thenewappsPath);
 var route = process.env.NODE_THENEWAPPS_ROUTE || '/thenewapps';
 
-function rewriteManifest() {
+function rewriteManifest(init) {
   fs.unlink(thenewappsPath, function(err) {
     if (err) return console.log(err);
     fs.writeFile(thenewappsPath, JSON.stringify(thenewapps, null, '  '), function(err) {
       if (err) console.log(err);
-      else process.emit('init');
+      else {
+        if (!init) return;
+        process.emit('init');
+      }
     });
   });
 }
@@ -48,7 +51,7 @@ function checkMediaAvailability() {
   });
   async.parallel(headRequests, function(err, results) {
     if (err) console.log('error:', err);
-    else rewriteManifest();
+    else rewriteManifest(true);
   });
 }
 
@@ -117,14 +120,19 @@ function init(manifest) {
 }
 
 module.exports = function(app) {
-  process.on('init', function() {
+  process.on('beforeExit', function() {
+    console.log('committing manifest to disk before exit...');
+    rewriteManifest(false);
+  }).on('init', function() {
+    console.log('manifest was rewritten. reloading...');
     thenewapps = require(thenewappsPath);
     init.call(app, thenewapps);
   });
+
   //
   // queue this up to run every fifteen minutes
   setInterval(checkMediaAvailability.bind(app), 90000);
 
   // run it once, immediately
-  checkMediaAvailability();
+  checkMediaAvailability(true);
 };
