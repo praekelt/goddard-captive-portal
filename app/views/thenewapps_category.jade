@@ -14,3 +14,11 @@ block content
 
   p.
     welcome to #{category.name}
+
+  ul
+    each medium in category.media
+      li #{medium.name} (available #{medium.available})
+
+  ul
+    each site in category.sites
+      li #{site.name}
