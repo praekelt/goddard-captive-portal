@@ -1,4 +1,6 @@
 
+'use strict';
+
 var http = require('http'),
     async = require('async'),
     statusPath = process.env.NODE_STATUS_JSON || 'http://127.0.0.1:8080/status.json',
@@ -74,7 +76,7 @@ module.exports = function(app) {
           });
 
           httpres.on('socket', function (socket) {
-            socket.setTimeout(1500);  
+            socket.setTimeout(1500);
             socket.on('timeout', function() {
               httpres.abort();
             });
@@ -82,7 +84,7 @@ module.exports = function(app) {
         }).on('error', function(err) {
           callback(null, false);
         });
-        
+
       },
       status: function(callback) {
         http.get(statusPath, function(httpres) {
