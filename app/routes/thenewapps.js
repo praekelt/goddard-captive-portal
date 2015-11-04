@@ -31,6 +31,10 @@ function rewriteManifest(init) {
 }
 
 function checkMediaAvailability() {
+  if (process.env.NODE_ENV.indexOf('test') !== -1) {
+    process.emit('console:log', 'detected testing environment, skipping media availability check...');
+    return rewriteManifest(true);
+  }
   process.emit('console:log', 'running head requests on media resources');
   bench = process.hrtime();
   function head(done) {
@@ -65,9 +69,6 @@ function checkMediaAvailability() {
       });
     });
   });
-  if (process.env.NODE_ENV.indexOf('test') !== -1) {
-    return rewriteManifest(true);
-  }
   async.parallel(headRequests, function(err, results) {
     var finished = process.hrtime(bench);
     var nanoseconds = finished[0] * 1e9 + finished[1];
