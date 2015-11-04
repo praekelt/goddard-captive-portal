@@ -3,6 +3,7 @@
 
 var fs = require('fs'), url = require('url'), http = require('http'), async = require('async');
 
+
 //
 // arbitrary benching
 var bench;
@@ -118,13 +119,28 @@ function registerAllTopLevelCategories() {
 
 function registerChildCategory(category, parentUri) {
   var menu = this.get('thenewapps.content.menu');
-  this.all([parentUri, category.uri].join('/'), function(req, res) {
+  var uri = [parentUri, category.uri].join('/');
+  registerCategoryMedia.call(this, category.media || [], uri);
+  this.all(uri, function(req, res) {
     res.render('thenewapps_category', {
       menu: menu,
       parent: parentUri,
       category: category
     });
   });
+}
+
+function registerCategoryMedia(media, parentUri) {
+  var menu = this.get('thenewapps.content.menu');
+  media.forEach(function(medium, i) {
+    this.all([parentUri, 'video', i].join('/'), function(req, res) {
+      res.render('thenewapps_medium', {
+        menu: menu,
+        parent: parentUri,
+        medium: medium
+      });
+    });
+  }, this);
 }
 
 function init(manifest) {
