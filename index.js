@@ -20,7 +20,7 @@ process.on('log:access', function(line) {
       access = fs.createWriteStream(paths.log);
     });
   });
-});
+}).on('console:log', console.log.bind(console));
 
 var app = express();
 
