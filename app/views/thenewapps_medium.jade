@@ -12,9 +12,7 @@ block content
       li
         a(href=option.uri)= option.name
 
-  p welcome to #{category.name}
-
-  ul
-    each option in categories
-      li
-        a(href=category.uri + '/' + option.uri)= option.name
+  p.
+    welcome to #{medium.name}
+    this medium is #{medium.size}
+    this medium is #{medium.available ? '' : 'not'} available
