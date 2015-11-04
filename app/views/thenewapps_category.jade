@@ -19,7 +19,7 @@ block content
     ul
       each medium, i in category.media
         li
-          a(href="./video/#{i}") #{medium.name} (size: #{medium.size}, available: #{medium.available})
+          a(href="./#{category.uri}/video/#{i}") #{medium.name} (size: #{medium.size}, available: #{medium.available})
 
   section
     h6 sites
