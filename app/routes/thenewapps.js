@@ -45,8 +45,6 @@ function checkMediaAvailability() {
       path: [media.path, this.medium.uri].join('/'),
       method: 'head'
     }, function(res) {
-      // do head requests need to fetch the entire
-      // response to determine content-length, etc?
       var headResponse = '';
       res.on('data', function(data) {
         headResponse += data;
@@ -69,9 +67,6 @@ function checkMediaAvailability() {
           if (!media) return done();
           media[this.mI].available = parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
         }
-        // this.medium.available = parseInt(
-        //   res.headers['content-length'], 10
-        // ) >= this.size;
         done();
       }.bind(this));
     }.bind(this)).on('error', done.bind(done)).end();
