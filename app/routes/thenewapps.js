@@ -53,28 +53,27 @@ function checkMediaAvailability() {
       }).on('end', function() {
         // if (res.statusCode === 404) { // god, this is ugly ._.
         //   if (!this.ccI) {
-        //     if (!thenewapps.categories[this.cI].media) return done(null);
+        //     if (!thenewapps.categories[this.cI].media) return done();
         //     thenewapps.categories[this.cI].media.splice(this.mI, 1);
         //   } else {
         //     thenewapps.categories[this.cI].categories[this.ccI].media.splice(this.mI, 1);
         //   }
-        //   return done(null);
+        //   return done();
         // }
+        console.log(res.statusCode !== 404 ? headResponse : res.statusCode);
         if (this.ccI) {
-          var medium = thenewapps.categories[this.cI].categories[this.ccI].media[this.mI];
-          medium.available = parseInt(
-            res.headers['content-length'], 10
-          ) >= medium.size;
+          var media = thenewapps.categories[this.cI].categories[this.ccI].media;
+          if (!media.length) return done();
+          media[this.mI].available = parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
         } else {
-          var medium = thenewapps.categories[this.cI].media[this.mI];
-          medium.available = parseInt(
-            res.headers['content-length'], 10
-          ) >= medium.size;
+          var media = thenewapps.categories[this.cI].media;
+          if (!media.length) return done();
+          media[this.mI].available = parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
         }
         // this.medium.available = parseInt(
         //   res.headers['content-length'], 10
         // ) >= this.size;
-        done(null);
+        done();
       }.bind(this));
     }.bind(this)).on('error', done.bind(done)).end();
   }
