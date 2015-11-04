@@ -65,6 +65,9 @@ function checkMediaAvailability() {
       });
     });
   });
+  if (process.env.NODE_ENV.indexOf('test') !== -1) {
+    return rewriteManifest(true);
+  }
   async.parallel(headRequests, function(err, results) {
     var finished = process.hrtime(bench);
     var nanoseconds = finished[0] * 1e9 + finished[1];
