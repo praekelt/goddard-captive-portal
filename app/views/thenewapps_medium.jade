@@ -12,9 +12,9 @@ block content
       li
         a(href=option.uri)= option.name
 
-  p.
-    welcome to #{medium.name}
-    this medium is #{medium.size}
-    this medium is #{medium.available ? '' : 'not'} available
+  p welcome to #{medium.name}
+  p this medium is #{medium.size}
+  p this medium is #{medium.available ? '' : 'not'} available
 
   video(src='http://data.goddard.com/media/' + medium.uri, controls)
+  a(download, href='http://data.goddard.com/media/' + medium.uri) download this video
