@@ -11,7 +11,8 @@ var bench;
 
 //
 // this is the endpoint we're going to use for checking media availability
-var media = url.parse(process.env.NODE_HOST_MEDIA || 'http://127.0.0.1:8080/media');
+// 'http://data.goddard.com/media' 'http://127.0.0.1:8080/media'
+var media = url.parse(process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media');
 
 var thenewappsPath = __dirname + '/../../test/fixtures/thenewapps.json';
 var path = process.env.NODE_THENEWAPPS_JSON || 'http://127.0.0.1:8080/thenewapps.json';
@@ -41,7 +42,7 @@ function checkMediaAvailability() {
   function head(done) {
     return http.request({
       hostname: media.hostname,
-      path: [media.path, this.uri].join('/'),
+      path: [media.path, this.medium.uri].join('/'),
       method: 'head'
     }, function(res) {
       // do head requests need to fetch the entire
@@ -50,23 +51,30 @@ function checkMediaAvailability() {
       res.on('data', function(data) {
         headResponse += data;
       }).on('end', function() {
-        this.available = parseInt(
+        if (res.statusCode === 404) { // god, this is ugly ._.
+          if (!this.ccI) {
+            if (!thenewapps.categories[this.cI].media) return done(null);
+            thenewapps.categories[this.cI].media.splice(this.mI, 1);
+          } else {
+            thenewapps.categories[this.cI].categories[this.ccI].media.splice(this.mI, 1);
+          }
+          return done(null);
+        }
+        this.medium.available = parseInt(
           res.headers['content-length'], 10
         ) >= this.size;
-        done(null, this.available);
+        done(null);
       }.bind(this));
     }.bind(this)).on('error', done.bind(done)).end();
   }
   var headRequests = [];
-  thenewapps.categories.forEach(function(category) {
-    (category.media || []).forEach(function(medium) {
-      if (medium.available) return;
-      headRequests.push(head.bind(medium));
+  thenewapps.categories.forEach(function(category, cI) {
+    (category.media || []).forEach(function(medium, mI) {
+      headRequests.push(head.bind({medium: medium, cI: cI, ccI: null, mI: mI}));
     });
-    (category.categories || []).forEach(function(category) {
-      category.media.forEach(function(medium) {
-        if (medium.available) return;
-        headRequests.push(head.bind(medium));
+    (category.categories || []).forEach(function(category, ccI) {
+      category.media.forEach(function(medium, mI) {
+        headRequests.push(head.bind({medium: medium, cI: cI, ccI: ccI, mI: mI}));
       });
     });
   });
@@ -172,5 +180,5 @@ module.exports = function(app) {
   );
 
   // run it once, immediately
-  checkMediaAvailability(true);
+  checkMediaAvailability.call(app);
 };
