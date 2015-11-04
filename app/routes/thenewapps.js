@@ -60,10 +60,20 @@ function checkMediaAvailability() {
         //   }
         //   return done(null);
         // }
-        this.medium.available = parseInt(
-          res.headers['content-length'], 10
-        ) >= this.size;
-        if (this.medium.available) console.log(this.medium.name, this.medium.available);
+        if (this.ccI) {
+          var medium = thenewapps.categories[this.cI].categories[this.ccI].media[this.mI];
+          medium.available = parseInt(
+            res.headers['content-length'], 10
+          ) >= medium.size;
+        } else {
+          var medium = thenewapps.categories[this.cI].media[this.mI];
+          medium.available = parseInt(
+            res.headers['content-length'], 10
+          ) >= medium.size;
+        }
+        // this.medium.available = parseInt(
+        //   res.headers['content-length'], 10
+        // ) >= this.size;
         done(null);
       }.bind(this));
     }.bind(this)).on('error', done.bind(done)).end();
@@ -80,6 +90,7 @@ function checkMediaAvailability() {
     });
   });
   async.parallel(headRequests, function(err, results) {
+    if (err) console.log('error', err);
     var finished = process.hrtime(bench);
     var nanoseconds = finished[0] * 1e9 + finished[1];
     process.emit('console:log', 'requests took', nanoseconds, 'ns');
