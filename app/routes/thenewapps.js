@@ -39,6 +39,8 @@ function checkMediaAvailability() {
       path: [media.path, this.uri].join('/'),
       method: 'head'
     }, function(res) {
+      // do head requests need to fetch the entire
+      // response to determine content-length, etc?
       var headResponse = '';
       res.on('data', function(data) {
         headResponse += data;
