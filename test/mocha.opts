@@ -1,2 +1,4 @@
 --require assert
 --reporter spec
+--check-leaks
+--timeout 10000
