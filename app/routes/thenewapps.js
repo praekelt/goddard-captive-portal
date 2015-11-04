@@ -63,6 +63,7 @@ function checkMediaAvailability() {
         this.medium.available = parseInt(
           res.headers['content-length'], 10
         ) >= this.size;
+        if (this.medium.available) console.log(this.medium.name, this.medium.available);
         done(null);
       }.bind(this));
     }.bind(this)).on('error', done.bind(done)).end();
