@@ -14,10 +14,14 @@ block content
 
   p welcome to #{category.name}
 
-  ul
-    each medium in category.media
-      li #{medium.name} (available #{medium.available})
+  section
+    h6 media
+    ul
+      each medium in category.media
+        li #{medium.name} (size: #{medium.size}, available: #{medium.available})
 
-  ul
-    each site in category.sites
-      li #{site.name}
+  section
+    h6 sites
+    ul
+      each site in category.sites
+        li #{site.name}
