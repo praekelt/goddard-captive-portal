@@ -22,7 +22,7 @@ block content
           span(class="icon-bar")
           span(class="icon-bar")
         a(class="navbar-brand", rel="home", href="/", title="UKSA")
-          img(class="", src="img/logo.jpg", alt="logo")
+          img(class="", src="/static/img/logo.jpg", alt="logo")
       div(id="navbar" class="navbar-collapse collapse")
         ul(class="nav navbar-nav")
           li(class="active")
@@ -234,17 +234,20 @@ block content
 
     p(class="timestamp") Metrics last updated at: #{new Date(status.timestamp).toISOString()}
 
-    script.
+block scripts
+
+  script.
       var brand = $('.navbar-brand');
       var brandImg = $('.navbar-brand img');
 
       $(window).scroll(function() {
         if (brand.offset().top > 25) {
           brand.addClass('brand-collapse');
-          brandImg.attr('src', 'img/logo-min-box.jpg');
+          brandImg.attr('src', '/static/img/logo-min-box.jpg');
         } else {
+          console.log('top offset not greater than 25');
           brand.removeClass('brand-collapse');
-          brandImg.attr('src', 'img/logo.jpg');
+          brandImg.attr('src', '/static/img/logo.jpg');
         }
       });
 
