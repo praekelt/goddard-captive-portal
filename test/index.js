@@ -289,7 +289,6 @@ describe('app', function() {
           return chakram.wait();
         });
       });
-
     });
   });
 });
