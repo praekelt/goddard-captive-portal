@@ -28,7 +28,7 @@ env === 'dev' || env.indexOf('test') > -1 ? app.use(require('morgan')('dev')) : 
 app.set('paths', paths);
 app.set('views', paths.views);
 app.set('view engine', 'jade');
-app.use(express.static(paths.static));
+app.use('/static', express.static(paths.static));
 app.use(require('body-parser').urlencoded({extended: true}));
 
 // set up the mikrotik configure functions
