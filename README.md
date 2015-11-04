@@ -30,3 +30,7 @@ To begin the development server, run `npm run nodemon`. Otherwise for production
 
 - fix up the scripts in package.json (background processes and whatnot...)
 - fix up the rewritemanifests function (uses a flag for side effects)
+- write markup for video/home/category/listing pages
+- write css for video/home/category/listing pages
+- configure mikrotik whitelisting
+- set up nginx in host environment to serve media content
