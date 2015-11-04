@@ -51,15 +51,15 @@ function checkMediaAvailability() {
       res.on('data', function(data) {
         headResponse += data;
       }).on('end', function() {
-        if (res.statusCode === 404) { // god, this is ugly ._.
-          if (!this.ccI) {
-            if (!thenewapps.categories[this.cI].media) return done(null);
-            thenewapps.categories[this.cI].media.splice(this.mI, 1);
-          } else {
-            thenewapps.categories[this.cI].categories[this.ccI].media.splice(this.mI, 1);
-          }
-          return done(null);
-        }
+        // if (res.statusCode === 404) { // god, this is ugly ._.
+        //   if (!this.ccI) {
+        //     if (!thenewapps.categories[this.cI].media) return done(null);
+        //     thenewapps.categories[this.cI].media.splice(this.mI, 1);
+        //   } else {
+        //     thenewapps.categories[this.cI].categories[this.ccI].media.splice(this.mI, 1);
+        //   }
+        //   return done(null);
+        // }
         this.medium.available = parseInt(
           res.headers['content-length'], 10
         ) >= this.size;
