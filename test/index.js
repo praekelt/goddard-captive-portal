@@ -10,6 +10,10 @@ var chai = require('chai'),
 
 var fixtures = express();
 
+fixtures.get('/thenewapps.json', function(req, res) {
+  fs.createReadStream(__dirname + '/fixtures/thenewapps.json').pipe(res);
+});
+
 fixtures.get('/apps.json', function(req, res) {
   fs.createReadStream(__dirname + '/fixtures/apps.json').pipe(res);
 });
