@@ -1,6 +1,14 @@
 
 'use strict';
 
+// /ip hotspot walled-garden remove numbers=[/ip hotspot walled-garden find ]
+
+// /ip hotspot walled-garden find
+
+// /ip hotspot walled-garden add dst-host=goddard.com server=hotspot1
+
+// /ip hotspot walled-garden add dst-host=*.goddard.com server=hotspot1
+
 var mikroApi = require('mikronode');
 var endpoints = [
   {
