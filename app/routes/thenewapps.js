@@ -60,14 +60,13 @@ function checkMediaAvailability() {
         //   }
         //   return done();
         // }
-        console.log(res.statusCode !== 404 ? headResponse : res.statusCode);
         if (this.ccI) {
           var media = thenewapps.categories[this.cI].categories[this.ccI].media;
-          if (!media.length) return done();
+          if (!media) return done();
           media[this.mI].available = parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
         } else {
           var media = thenewapps.categories[this.cI].media;
-          if (!media.length) return done();
+          if (!media) return done();
           media[this.mI].available = parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
         }
         // this.medium.available = parseInt(
