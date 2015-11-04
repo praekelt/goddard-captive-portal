@@ -1,10 +1,7 @@
 
 'use strict';
 
-var fs = require('fs');
-var url = require('url');
-var http = require('http');
-var async = require('async');
+var fs = require('fs'), url = require('url'), http = require('http'), async = require('async');
 
 //
 // arbitrary benching
@@ -22,9 +19,9 @@ var route = process.env.NODE_THENEWAPPS_ROUTE || '/thenewapps';
 
 function rewriteManifest(init) {
   fs.unlink(thenewappsPath, function(err) {
-    if (err) return console.log(err);
+    if (err) return process.emit('console:log', 'error', err);
     fs.writeFile(thenewappsPath, JSON.stringify(thenewapps, null, '  '), function(err) {
-      if (err) console.log(err);
+      if (err) process.emit('console:log', 'error', err);
       else {
         if (!init) return;
         process.emit('init');
@@ -34,7 +31,7 @@ function rewriteManifest(init) {
 }
 
 function checkMediaAvailability() {
-  console.log('running head requests on media resources');
+  process.emit('console:log', 'running head requests on media resources');
   bench = process.hrtime();
   function head(done) {
     return http.request({
@@ -69,8 +66,8 @@ function checkMediaAvailability() {
   async.parallel(headRequests, function(err, results) {
     var finished = process.hrtime(bench);
     var nanoseconds = finished[0] * 1e9 + finished[1];
-    console.log('requests took', nanoseconds, 'ns');
-    if (err) console.log('head requests error:', err);
+    process.emit('console:log', 'requests took', nanoseconds, 'ns');
+    if (err) process.emit('console:log', 'error', err);
     else rewriteManifest(true);
   });
 }
@@ -138,9 +135,11 @@ function init(manifest) {
 
 module.exports = function(app) {
   process.on('init', function() {
-    console.log('manifest was rewritten. reloading...');
+    process.emit('console:log', 'manifest was rewritten. reloading...');
     thenewapps = require(thenewappsPath);
+    process.emit('console:log', 'reloaded...');
     init.call(app, thenewapps);
+    process.emit('console:log', 'mamaconnect content sytem initialised!');
   });
 
   //
