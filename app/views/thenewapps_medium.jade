@@ -16,3 +16,5 @@ block content
     welcome to #{medium.name}
     this medium is #{medium.size}
     this medium is #{medium.available ? '' : 'not'} available
+
+  video(src='http://data.goddard.com/media/' + medium.uri, controls)
