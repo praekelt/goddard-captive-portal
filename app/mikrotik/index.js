@@ -1,6 +1,7 @@
 
-var mikroApi = require('mikronode');
+'use strict';
 
+var mikroApi = require('mikronode');
 var endpoints = [
   {
     host: '192.168.88.5',
@@ -82,8 +83,10 @@ module.exports = function() {
             // can they chain?
             c.on('ready', function() {
               // write command to file
-              fs.writeFile('line.rsc', command_str, function() {
-                c.put('./line.rsc', 'line.rsc', function(err) {
+              fs.writeFile(__dirname + '/../../line.rsc', command_str, function() {
+              // fs.writeFile('line.rsc', command_str, function() {
+                c.put(__dirname + '/../../line.rsc', 'line.rsc', function(err) {
+                // c.put('./line.rsc', 'line.rsc', function(err) {
                   if (err) console.log('c.put error:', err);
                   // open the channel
                   var chan = conn.openChannel();
