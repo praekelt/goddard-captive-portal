@@ -16,11 +16,11 @@ block content
 
           li(class="category-list-item")
             img(class="w-20 category-list-thumbnail", src=site.thumbnail, alt="site thumbnail")
-            div(class="w-50")
+            div(class="w-40")
               if (site.name.length >= 23)
-                h6(class="category-list-item-heading") #{site.name.slice(0, 23)}&hellip;
+                h4(class="category-list-item-heading") #{site.name.slice(0, 23)}&hellip;
               else
-                h6(class="category-list-item-heading")= site.name
+                h4(class="category-list-item-heading")= site.name
               p(class="category-subtext") #{site.description.slice(0, 33)}&hellip;
               a(class="category-list-link", href=site.uri) + Visit this site
             img(class="w-20 right", src="", alt="cursor icon")
@@ -29,11 +29,11 @@ block content
 
           li(class="category-list-item")
             img(class="w-20 category-list-thumbnail", src=medium.thumbnail, alt="media thumbnail")
-            div(class="w-50")
+            div(class="w-40")
               if (medium.name.length >= 23)
-                h6(class="category-list-item-heading") #{medium.name.slice(0, 23)}&hellip;
+                h4(class="category-list-item-heading") #{medium.name.slice(0, 23)}&hellip;
               else
-                h6(class="category-list-item-heading") #{medium.name}
+                h4(class="category-list-item-heading") #{medium.name}
               p(class="category-subtext") #{medium.description.slice(0, 33)}&hellip;
               a(class="category-list-link", href="./#{category.uri}/video/#{i}") + Watch this video
             img(class="w-20 right", src="", alt="play video icon")
