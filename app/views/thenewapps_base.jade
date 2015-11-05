@@ -28,8 +28,40 @@ html(lang="en")
 
     - var riskyBusiness = "<div class=\"swatch-green w-33\"></div><div class=\"swatch-teal w-26\"></div><div class=\"swatch-purple w-5\"></div><div class=\"swatch-yellow w-26\"></div><div class=\"swatch-teal w-10\"></div>";
     - var alsoRiskyBusiness = "<div class=\"swatch-green w-33\"></div><div class=\"swatch-teal w-26\"></div><div class=\"swatch-purple w-5\"></div><div class=\"swatch-yellow w-26\"></div><div class=\"swatch-orange w-10\"></div>";
+    - var hamburgerAttrs = {'data-toggle': 'collapse','data-target': '#bs-collapse-menu'};
 
     section(class="swatch") !{riskyBusiness}
+
+    nav.navbar.navbar-default
+        .container-fluid
+            .navbar-header
+                button.navbar-toggle&attributes(hamburgerAttrs)
+                    span.sr-only Toggle navigation
+                    div.hamburger
+                        span.icon-bar
+                        span.icon-bar
+                        span.icon-bar
+                    span.menu-text menu
+                a.navbar-brand(href="#") mamaconnect
+
+            .collapse.navbar-collapse#bs-collapse-menu
+                ul.nav.navbar-nav
+                    li
+                        a(href="#") Start Page
+                    each item in menu
+                        //- TODO: Add conditional for active class
+                        -if (current === item.uri)
+                            li.active
+                                a(href=item.uri) #{item.name}
+                        -else
+                            li
+                                a(href=item.uri) #{item.name}
+
+    if (parent)
+        .back-to-start
+            a(href=parent)
+                span ← Back to start page
+
 
     block content
 
