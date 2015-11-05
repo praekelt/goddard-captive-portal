@@ -5,15 +5,9 @@ block title
 
 block content
 
-  //- menu (array of objects)
-  //- category (object)
-
-  p.select-a-topic Select a topic
-  ul.home-menu
+  p(class="select-a-topic") Select a topic
+  ul(class="home-menu")
     each option in menu
-      li
-        a(href=option.uri)
-          span.icon
-          span.title #{option.name}
-
-  //- p welcome to #{category.name}
+      li: a(href=option.uri)
+        span(class="icon")
+        span(class="title") #{option.name}
