@@ -161,7 +161,11 @@
 }
 /* Active link background */
 .navbar-default .navbar-nav>.active>a {
-
+  color: #000;
+  font-weight: bold;
+  background-image: none;
+  background-color: inherit;
+  box-shadow: none;
 }
 .navbar-default .navbar-collapse {
   border-width: 0;

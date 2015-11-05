@@ -46,11 +46,11 @@ html(lang="en")
 
             .collapse.navbar-collapse#bs-collapse-menu
                 ul.nav.navbar-nav
-                    li.active
+                    li
                         a(href="#") Start Page
                     each item in menu
                         //- TODO: Add conditional for active class
-                        -if (0)
+                        -if (current === item.uri)
                             li.active
                                 a(href=item.uri) #{item.name}
                         -else
@@ -60,7 +60,6 @@ html(lang="en")
     if (parent)
         .back-to-start
             a(href=parent)
-                //- i.glyphicon.glyphicon-arrow-left
                 span ← Back to start page
 
 
