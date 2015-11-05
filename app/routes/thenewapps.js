@@ -113,6 +113,7 @@ function registerAllParentCategories() {
       res.render('thenewapps_listing', {
         menu: menu,
         category: listing,
+        current: uri,
         parent: route,
         categories: listing.categories
       });
@@ -137,6 +138,7 @@ function registerChildCategory(category, parentUri) {
   this.all(uri, function(req, res) {
     res.render('thenewapps_category', {
       menu: menu,
+      current: uri,
       parent: parentUri,
       category: category
     });
