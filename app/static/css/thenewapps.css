@@ -88,3 +88,40 @@
   /*copyright colours*/
   /*text grey 555555*/
 /* end copyright */
+
+.navbar-default {
+  background: #FF9C1B;
+  /*border-color: #DD8618;*/
+  border-width: 0;
+  border-radius: 0;
+  color: #000;
+}
+.navbar-default .navbar-toggle {
+  border-width: 0;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #000;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #000;
+}
+/* Active link background */
+.navbar-default .navbar-nav>.active>a {
+
+}
+.navbar-default .navbar-collapse {
+  border-width: 0;
+}
+.navbar-toggle .icon-bar {
+  width: 16px;
+}
+.navbar-default .navbar-brand {
+  color: #000;
+}
+.menu-text, .hamburger {
+  float: right;
+}
+.menu-text {
+  margin-right: 5px;
+  line-height: 14px;
+}
