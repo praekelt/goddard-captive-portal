@@ -1,10 +1,6 @@
 /* begin base */
   /*base background colours*/
   /*background fill off-white F5F5F5*/
-  .lowercase  { text-transform: lowercase; }
-  .uppercase  { text-transform: uppercase; }
-  .capitalise { text-transform: capitalize; }
-  .row > * { display: inline-block; }
   * {
     margin: 0;
     padding: 0;
@@ -50,33 +46,11 @@
 /* end swatch */
 
 /* begin top bar */
-  .top {
-    background-color: #ff9800;
-    color: #fff;
-    height: 60px;
-  }
 
-  .masthead {
-    font-family: 'Raleway Semibold';
-  }
-
-  .nav-wrapper {
-    float: right;
-  }
 /* end top bar*/
 
 /* begin did you know */
-  .did-you-know > * {
-    margin: 0 auto;
-    text-align: center;
-    display: inline-block;
-    height: 100%;
-    width: 49%;
-  }
 
-  .did-you-know .fill-purple {
-    background-color: #B80087;
-  }
 /* end did you know */
 
 /* begin select a topic */
@@ -88,27 +62,6 @@
   /*breastfeeding fill green A186FF*/
   /*diseases fill orange FFA300*/
   /*information fill teal 00D8C5*/
-
-  .select-a-topic .uppercase {}
-
-  .select-a-topic .topics {
-    list-style-type: none;
-    text-align: center;
-    display: block;
-  }
-
-  .topic a {
-    display: block;
-  }
-
-  .topics .topic {
-    display: inline-block;
-    width: 32.666666667%;
-    vertical-align: top;
-    text-align: center;
-  }
-
-
 /* end select a topic */
 
 /* begin healthcare worker training */
@@ -129,13 +82,6 @@
   /*menu item fill cyan 00D8C5*/
   /*header right hand separator stroke 00D7C5*/
   /*menu item separator stroke 74E8DD*/
-  .footer-nav {
-    background-color: #00C3B0;
-  }
-
-  .footer-nav li {
-    background-color: #00D8C5;
-  }
 /* end menu */
 
 /* begin copyright */
