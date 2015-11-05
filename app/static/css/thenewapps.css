@@ -179,3 +179,12 @@
   margin-right: 5px;
   line-height: 14px;
 }
+
+.back-to-start {
+  background: #F3F4F6;
+  padding-left: 1em;
+  margin-bottom: 20px;
+}
+.back-to-start a {
+  color: #000;
+}

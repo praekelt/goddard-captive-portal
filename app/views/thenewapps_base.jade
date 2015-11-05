@@ -57,6 +57,12 @@ html(lang="en")
                             li
                                 a(href=item.uri) #{item.name}
 
+    if (parent)
+        .back-to-start
+            a(href=parent)
+                //- i.glyphicon.glyphicon-arrow-left
+                span ← Back to start page
+
 
     block content
 
