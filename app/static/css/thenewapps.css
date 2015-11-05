@@ -299,3 +299,8 @@
 .home-menu li:nth-child(6) a span.icon { background: #4FD2C2; }
 .home-menu li:nth-child(7) a {                color: #A63189; }
 .home-menu li:nth-child(7) a span.icon { background: #A63189; }
+
+.copyright {
+  padding: 20px 20px 10px;
+  font-size: 10px;
+}
