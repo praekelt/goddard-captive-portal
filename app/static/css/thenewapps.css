@@ -109,7 +109,10 @@
 }
 
 .category-list-thumbnail { height: 70px; }
-.category-list ul { list-style-type: none; }
+.category-list ul {
+  list-style-type: none;
+  margin: 0;
+}
 
 .category-list-item {
   height: 70px;
