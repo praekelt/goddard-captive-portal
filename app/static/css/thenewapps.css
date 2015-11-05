@@ -250,3 +250,42 @@
   background-color: #4FD2C2;
   color: #fff;
 }
+
+.home-menu {
+  text-align: center;
+}
+.home-menu li {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+}
+.home-menu li a span.icon {
+  margin: 30px auto 10px;
+  content: '';
+  display: block;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: red;
+}
+
+.select-a-topic {
+  text-align: center;
+  padding: 20px;
+  text-transform: uppercase;
+}
+
+.home-menu li:nth-child(1) a {                color: #4FD2C1; }
+.home-menu li:nth-child(1) a span.icon { background: #4FD2C1; }
+.home-menu li:nth-child(2) a {                color: #A63189; }
+.home-menu li:nth-child(2) a span.icon { background: #A63189; }
+.home-menu li:nth-child(3) a {                color: #9794FF; }
+.home-menu li:nth-child(3) a span.icon { background: #9794FF; }
+.home-menu li:nth-child(4) a {                color: #0B9C59; }
+.home-menu li:nth-child(4) a span.icon { background: #0B9C59; }
+.home-menu li:nth-child(5) a {                color: #FFA632; }
+.home-menu li:nth-child(5) a span.icon { background: #FFA632; }
+.home-menu li:nth-child(6) a {                color: #4FD2C2; }
+.home-menu li:nth-child(6) a span.icon { background: #4FD2C2; }
+.home-menu li:nth-child(7) a {                color: #A63189; }
+.home-menu li:nth-child(7) a span.icon { background: #A63189; }
