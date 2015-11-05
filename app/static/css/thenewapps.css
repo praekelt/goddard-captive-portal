@@ -297,8 +297,26 @@
 .home-menu li:nth-child(5) a span.icon { background: #FFA632; }
 .home-menu li:nth-child(6) a {                color: #4FD2C2; }
 .home-menu li:nth-child(6) a span.icon { background: #4FD2C2; }
-.home-menu li:nth-child(7) a {                color: #A63189; }
-.home-menu li:nth-child(7) a span.icon { background: #A63189; }
+
+.home-menu li:nth-child(7) {
+  width: 100%;
+  position: relative;
+}
+
+.home-menu li:nth-child(7) a span.icon {
+  background: #9E98EE;
+  width: 100%;
+  border-radius: 0;
+}
+.home-menu li:nth-child(7) a span.title {
+  position: absolute;
+  top: 50%;
+  line-height: 0;
+  color: #fff;
+  left: 0;
+  right: 0;
+  text-decoration: underline;
+}
 
 .copyright {
   padding: 20px 20px 10px;
