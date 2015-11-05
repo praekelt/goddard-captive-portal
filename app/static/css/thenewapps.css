@@ -258,9 +258,10 @@
   width: 50%;
   display: inline-block;
   vertical-align: top;
+  margin-bottom: 20px;
 }
 .home-menu li a span.icon {
-  margin: 30px auto 10px;
+  margin: 10px auto;
   content: '';
   display: block;
   width: 75px;
@@ -271,7 +272,6 @@
 
 .select-a-topic {
   text-align: center;
-  padding: 20px;
   text-transform: uppercase;
 }
 
