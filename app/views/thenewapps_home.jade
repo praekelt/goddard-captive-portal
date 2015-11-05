@@ -8,9 +8,12 @@ block content
   //- menu (array of objects)
   //- category (object)
 
-  ul
+  p.select-a-topic Select a topic
+  ul.home-menu
     each option in menu
       li
-        a(href=option.uri)= option.name
+        a(href=option.uri)
+          span.icon
+          span #{option.name}
 
-  p welcome to #{category.name}
+  //- p welcome to #{category.name}
