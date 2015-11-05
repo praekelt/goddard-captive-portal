@@ -164,6 +164,7 @@ function init(manifest) {
   registerAllTopLevelCategories.call(this);
   this.all(route, function(req, res) {
     res.render('thenewapps_home', {
+      current: route,
       category: {name: 'mamaconnect', uri: route},
       menu: this.get('thenewapps.content.menu')
     });
