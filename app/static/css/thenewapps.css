@@ -14,6 +14,14 @@
   }
 
   main {}
+
+  .w-50 { width: 50%; }
+  .w-40 { width: 40%; }
+  .w-33 { width: 33%; }
+  .w-26 { width: 26%; }
+  .w-20 { width: 20%; }
+  .w-10 { width: 10%; }
+  .w-5  { width: 5%;  }
 /* end base */
 
 /* begin swatch */
@@ -26,13 +34,6 @@
     display: inline-block;
     height: 5px;
   }
-
-  .w-50 { width: 50%; }
-  .w-33 { width: 33%; }
-  .w-26 { width: 26%; }
-  .w-20 { width: 20%; }
-  .w-10 { width: 10%; }
-  .w-5  { width: 5%;  }
 
   .swatch-green  { background-color: #008d54; }
   .swatch-teal   { background-color: #00e5a8; }
@@ -107,14 +108,17 @@
   vertical-align: middle;
 }
 
-.category-list-thumbnail { height: 70px; }
+.category-list-thumbnail {
+  height: 85px;
+  width: 85px;
+}
 .category-list ul {
   list-style-type: none;
   margin: 0;
 }
 
 .category-list-item {
-  height: 70px;
+  height: 85px;
   border-left: 4px solid #B60085;
   border-top: 1px solid #fff;
   background-color: #F3F4F6;
@@ -126,12 +130,12 @@
 }
 
 .category-list-item .w-50 {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 2.5%;
 }
 
 .category-list-item-heading {
-  margin-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
   font-family: 'Raleway Medium';
 }
 
@@ -160,15 +164,15 @@
   background-color: inherit;
 }
 .navbar-default .navbar-toggle .icon-bar {
-  background-color: #000;
+  background-color: #fff;
 }
-.navbar-default .navbar-nav>li>a {
-  color: #000;
+.navbar-default .navbar-nav > li > a {
+  color: #fff;
 }
 /* Active link background */
-.navbar-default .navbar-nav>.active>a {
-  color: #000;
-  font-weight: bold;
+.navbar-default .navbar-nav > .active > a {
+  color: #fff;
+  font-family: 'Raleway Bold';
   background-image: none;
   background-color: inherit;
   box-shadow: none;
@@ -180,7 +184,8 @@
   width: 16px;
 }
 .navbar-default .navbar-brand {
-  color: #000;
+  color: #fff;
+  font-family: 'Raleway Bold';
 }
 .navbar-default .navbar-brand:focus {
   outline: none;
@@ -190,8 +195,9 @@
   float: right;
 }
 .menu-text {
-  margin-right: 5px;
+  margin-right: 10px;
   line-height: 14px;
+  color: #fff;
 }
 
 .back-to-start {
@@ -200,7 +206,7 @@
   margin-bottom: 20px;
 }
 .back-to-start a {
-  color: #000;
+  color: #555;
 }
 
 .back-to-top {
