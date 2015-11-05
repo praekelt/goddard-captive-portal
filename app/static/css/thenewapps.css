@@ -255,10 +255,20 @@
   text-align: center;
 }
 .home-menu li {
-  width: 50%;
+  width: 100%;
   display: inline-block;
   vertical-align: top;
   margin-bottom: 20px;
+}
+@media (min-width: 320px) {
+  .home-menu li {
+    width: 50%;
+  }
+}
+@media (min-width: 640px) {
+  .home-menu li {
+    width: 33%;
+  }
 }
 .home-menu li a span.icon {
   margin: 10px auto;
