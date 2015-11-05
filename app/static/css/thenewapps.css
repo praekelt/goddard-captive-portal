@@ -150,6 +150,10 @@
   color: #A2A3A5;
 }
 
+.navbar {
+  margin-bottom: 0;
+}
+
 .navbar-default {
   background: #FF9C1B;
   /*border-color: #DD8618;*/
