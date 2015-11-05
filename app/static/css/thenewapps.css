@@ -187,6 +187,10 @@
   color: #fff;
   font-family: 'Raleway Bold';
 }
+.navbar-default .navbar-brand:focus {
+  outline: none;
+  color: inherit;
+}
 .menu-text, .hamburger {
   float: right;
 }
@@ -203,4 +207,37 @@
 }
 .back-to-start a {
   color: #555;
+}
+
+.back-to-top {
+  padding: 20px;
+  text-align: center;
+}
+.back-to-top a {
+  color: #000;
+}
+
+.bottom-menu .menu-title {
+  text-align: center;
+  background: #48BDAD;
+  padding: 20px;
+  color: #000;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.bottom-menu .nav-pills {
+  background: #93E3DA;
+}
+.bottom-menu .nav-pills>li>a {
+  border-radius: 0;
+  background: #4FD2C2;
+  color: #000;
+}
+.bottom-menu .nav-pills>li.active {
+  font-weight: bold;
+}
+.bottom-menu .nav-pills>li.active a:hover {
+  background: #4FD2C2;
+  color: #000;
 }

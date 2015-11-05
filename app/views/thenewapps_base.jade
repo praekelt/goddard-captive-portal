@@ -42,14 +42,13 @@ html(lang="en")
                         span.icon-bar
                         span.icon-bar
                     span.menu-text menu
-                a.navbar-brand(href="#") mamaconnect
+                a.navbar-brand(href="#")#top mamaconnect
 
             .collapse.navbar-collapse#bs-collapse-menu
                 ul.nav.navbar-nav
                     li
-                        a(href="#") Start Page
+                        a(href="/thenewapps") Start Page
                     each item in menu
-                        //- TODO: Add conditional for active class
                         -if (current === item.uri)
                             li.active
                                 a(href=item.uri) #{item.name}
@@ -64,6 +63,24 @@ html(lang="en")
 
 
     block content
+
+    .back-to-top
+        a(href="#top") ↑ Back to top of page
+
+    .bottom-menu
+        p.menu-title Menu
+        ul.nav.nav-pills.nav-stacked
+            li
+                a(href="/thenewapps") Start Page
+            each item in menu
+                -if (current === item.uri)
+                    li.active
+                        a(href=item.uri) #{item.name}
+                -else
+                    li
+                        a(href=item.uri) #{item.name}
+
+
 
     section(class="swatch") !{alsoRiskyBusiness}
 
