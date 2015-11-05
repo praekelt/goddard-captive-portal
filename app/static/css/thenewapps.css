@@ -14,12 +14,6 @@
   }
 
   main {}
-
-  a {}
-
-  * + * {
-    /*border: 1px solid crimson;*/
-  }
 /* end base */
 
 /* begin swatch */
@@ -33,8 +27,10 @@
     height: 5px;
   }
 
+  .w-50 { width: 50%; }
   .w-33 { width: 33%; }
   .w-26 { width: 26%; }
+  .w-20 { width: 20%; }
   .w-10 { width: 10%; }
   .w-5  { width: 5%;  }
 
@@ -88,6 +84,64 @@
   /*copyright colours*/
   /*text grey 555555*/
 /* end copyright */
+
+.right { float: right; }
+
+.category {}
+
+.category-header *,
+.category-list h4,
+.category-list p {
+  margin: 0;
+  padding: 0;
+}
+
+.category-header {
+  padding-top: 20px;
+  height: 65px;
+  background-color: #B80087;
+  color: white;
+  text-transform: uppercase;
+  font-family: 'Raleway Bold';
+  text-align: center;
+  vertical-align: middle;
+}
+
+.category-list-thumbnail { height: 70px; }
+.category-list ul { list-style-type: none; }
+
+.category-list-item {
+  height: 70px;
+  border-left: 4px solid #B60085;
+  border-top: 1px solid #fff;
+  background-color: #F3F4F6;
+}
+
+.category-list-item > * {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.category-list-item .w-50 {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.category-list-item-heading {
+  margin-bottom: 0;
+  font-family: 'Raleway Medium';
+}
+
+.category-list-link {
+  font-size: 75%;
+  color: #1E1C27;
+  text-decoration: underline;
+}
+
+.category-list-item .category-subtext {
+  font-size: 75%;
+  color: #A2A3A5;
+}
 
 .navbar-default {
   background: #FF9C1B;
