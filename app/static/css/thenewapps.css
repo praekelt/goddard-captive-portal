@@ -182,6 +182,10 @@
 .navbar-default .navbar-brand {
   color: #000;
 }
+.navbar-default .navbar-brand:focus {
+  outline: none;
+  color: inherit;
+}
 .menu-text, .hamburger {
   float: right;
 }
@@ -196,5 +200,13 @@
   margin-bottom: 20px;
 }
 .back-to-start a {
+  color: #000;
+}
+
+.back-to-top {
+  padding: 20px;
+  text-align: center;
+}
+.back-to-top a {
   color: #000;
 }
