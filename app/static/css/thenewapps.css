@@ -191,9 +191,10 @@
   color: #fff;
   font-family: 'Raleway Bold';
 }
-.navbar-default .navbar-brand:focus {
+.navbar-default .navbar-brand:focus,
+.navbar-default .navbar-brand:active {
   outline: none;
-  color: inherit;
+  color: #fff;
 }
 .menu-text, .hamburger {
   float: right;
