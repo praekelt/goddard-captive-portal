@@ -153,6 +153,9 @@
 .navbar-default .navbar-toggle {
   border-width: 0;
 }
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+  background-color: inherit;
+}
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #000;
 }
