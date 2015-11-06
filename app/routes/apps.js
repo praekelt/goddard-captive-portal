@@ -7,9 +7,9 @@ var fs = require('fs'),
     async = require('async');
 
 var media = url.parse(process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media');
-var path = process.env.NODE_THENEWAPPS_JSON || __dirname + '/../../test/fixtures/apps.json';
+var path = __dirname + '/../../test/fixtures/apps.json';
 var apps = require(path);
-var route = process.env.NODE_THENEWAPPS_ROUTE || '/';
+var route = process.env.NODE_APPS_ROUTE || '/';
 
 function rewriteManifest(init) {
   fs.unlink(path, function(err) {
