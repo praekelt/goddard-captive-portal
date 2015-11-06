@@ -32,14 +32,13 @@ app.use('/static', express.static(paths.static));
 app.use(require('body-parser').urlencoded({extended: true}));
 
 // set up the mikrotik configure functions
-require('./app/mikrotik').call(app);
-
-// check if not testing
-if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
-  app.get('mikrotik.configure')(
-    console.log.bind(console, 'mikrotik configuration done')
-  );
-}
+                                            // todo: add new miktotik config code
+// if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
+//   setInterval(
+//     require('./app/mikrotik')(),
+//     7200000
+//   );
+// }
 
 // load the routes
 require('./app/routes')(app);
