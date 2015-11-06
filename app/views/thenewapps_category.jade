@@ -23,7 +23,7 @@ block content
                 h5(class="category-list-item-heading")= site.name
               p(class="category-subtext") #{site.description.slice(0, 33)}&hellip;
               a(class="category-list-link", href=site.uri) + Visit this site
-            img(class="w-20 right", src="", alt="cursor icon")
+            img(class="w-20 right", src="/static/img/icons/icon_arrow.png", alt="cursor icon")
 
         each medium, i in category.media
 
@@ -36,4 +36,4 @@ block content
                 h5(class="category-list-item-heading") #{medium.name}
               p(class="category-subtext") #{medium.description.slice(0, 33)}&hellip;
               a(class="category-list-link", href="./#{category.uri}/video/#{i}") + Watch this video
-            img(class="w-20 right", src="", alt="play video icon")
+            img(class="w-20 right", src="/static/img/icons/icon_play.png", alt="play video icon")
