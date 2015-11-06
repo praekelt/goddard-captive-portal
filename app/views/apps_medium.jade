@@ -1,16 +1,9 @@
-extends ./thenewapps_base.jade
+extends ./apps_base.jade
 
 block title
   title Mama Connect
 
 block content
-
-  a(href=parent) ^ go up a level
-
-  ul
-    each option in menu
-      li
-        a(href=option.uri)= option.name
 
   p welcome to #{medium.name}
   p this medium is #{medium.size}
