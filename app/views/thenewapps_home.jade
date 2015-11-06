@@ -7,7 +7,7 @@ block content
 
   p(class="select-a-topic") Select a topic
   ul(class="home-menu")
-    each option in menu
+    each option in menu.slice(2)
       li: a(href=option.uri)
-        span(class="icon")
+        span(class="icon", style="background-image: url(#{option.thumbnail})")
         span(class="title") #{option.name}
