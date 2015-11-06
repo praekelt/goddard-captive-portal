@@ -191,6 +191,11 @@
   color: #fff;
   font-family: 'Raleway Bold';
 }
+
+.navbar-default .navbar-brand:hover {
+  color: #fff;
+}
+
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:active {
   outline: none;
