@@ -93,9 +93,20 @@ function checkMediaAvailability() {
 }
 
 function collate(manifest) {
-  this.set('thenewapps.content.menu', manifest.categories.map(function(category) {
-    return {name: category.name, uri: route + '/' + category.uri};
-  }));
+  this.set('thenewapps.content.menu', [{
+    name: 'Start Page',
+    uri: route
+  }, {
+    name: 'All Videos',
+    uri: route + '/all-videos'
+  }].concat(manifest.categories.map(function(category) {
+    return {
+      name: category.name,
+      uri: route + '/' + category.uri,
+      thumbnail: category.thumbnail
+    };
+  })));
+
   this.set('thenewapps.content.haveCategories', manifest.categories.filter(function(category) {
     return !!category.categories;
   }));
@@ -113,6 +124,7 @@ function registerAllParentCategories() {
       res.render('thenewapps_listing', {
         menu: menu,
         category: listing,
+        heading: listing.name,
         current: uri,
         parent: route,
         categories: listing.categories
@@ -169,6 +181,7 @@ function registerMediaListing() {
       menu: menu,
       current: uri,
       categories: topLevelCategoriesWithMedia,
+      heading: 'All Videos',
       parent: route
     });
   });
