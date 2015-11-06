@@ -3,6 +3,7 @@
     {
       "name": "General Information",
       "uri": "general-information",
+      "thumbnail": "/static/img/icons/icon_information.gif",
       "media": [],
       "sites": [
         {
@@ -22,6 +23,7 @@
     {
       "name": "Family Health",
       "uri": "family-health",
+      "thumbnail": "/static/img/icons/icon_family.gif",
       "media": [
         {
           "name": "Growing Up",
@@ -64,6 +66,7 @@
     {
       "name": "Maternal Health & Pregnancy",
       "uri": "maternal-health-and-pregnancy",
+      "thumbnail": "/static/img/icons/icon_pregnancy.gif",
       "media": [
         {
           "name": "Focused Antenatal Care",
@@ -118,6 +121,7 @@
     {
       "name": "Newborn Health",
       "uri": "newborn-health",
+      "thumbnail": "/static/img/icons/icon_newborn.gif",
       "media": [
         {
           "name": "Food for Life: What And When To Feed Your Child",
@@ -173,6 +177,7 @@
     {
       "name": "Breastfeeding",
       "uri": "breastfeeding",
+      "thumbnail": "/static/img/icons/icon_breastfeeding.gif",
       "media": [
         {
           "name": "Attaching Your Baby at the Breast",
@@ -259,6 +264,7 @@
     {
       "name": "Diseases & Warning Signs",
       "uri": "diseases-and-warning-signs",
+      "thumbnail": "/static/img/icons/icon_disease.gif",
       "media": [
         {
           "name": "Is Your Child Sick? – Full Length Version",
@@ -322,6 +328,7 @@
     {
       "name": "Healthcare Worker Training",
       "uri": "healthcare-worker-training",
+      "thumbnail": "/static/img/icons/healthcare_bg.jpg",
       "categories": [
         {
           "name": "Newborn & Child Health",
