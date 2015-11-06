@@ -1,140 +1,103 @@
 
-'use strict';
+'use strict'
 
-// /ip hotspot walled-garden remove numbers=[/ip hotspot walled-garden find ]
-
-// /ip hotspot walled-garden find
-
-// /ip hotspot walled-garden add dst-host=goddard.com server=hotspot1
-
-// /ip hotspot walled-garden add dst-host=*.goddard.com server=hotspot1
-
-var mikroApi = require('mikronode');
-var endpoints = [
-  {
-    host: '192.168.88.5',
-    commands: [
-      '/ip dns static add address=192.168.88.50 comment="supports all the apps for mamawifi.com" name=.*.mamawifi.com',
-      '/ip dns static add address=192.168.88.50 comment="default page for mamawifi.com" name=mamawifi.com',
-      '/ip hotspot walled-garden remove numbers=[/ip hotspot walled-garden find ]',
-      // '/ip hotspot walled-garden add comment="place hotspot rules here" disabled=yes',
-      '/ip hotspot walled-garden add dst-host=goddard.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.goddard.com server=hotspot1',
-      '/ip hotspot walled-garden ip add action=accept disabled=no dst-address=192.168.88.50 server=*1',
-      '/ip hotspot walled-garden add dst-host=www.mamawifi.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.mamawifi.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=www.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=www.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.surepmch.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=surepmchreports.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.surepmchreports.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=dhis2nigeria.org.ng server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.dhis2nigeria.org.ng server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=nigeriahealthwatch.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.nigeriahealthwatch.com server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=health-orb.org server=hotspot1',
-      '/ip hotspot walled-garden add dst-host=*.health-orb.org server=hotspot1'
-    ]
-  },
-  {
-    host: '192.168.88.10',
-    commands: ['/interface wireless set [ find name=uksa-ap ] ssid=MAMAConnect']
-  }
+var api = require('mikronode');
+var endpoint = {
+  host: '192.168.88.5',
+  username: 'admin',
+  password: 'rogerwilco'
+}, system_hosts = [
+  'goddard.com',
+  '*.goddard.com',
+  'www.mamawifi.com',
+  '*.mamawifi.com'
 ];
 
-module.exports = function() {
-  this.set('mikrotik.configure.configured_flag', false);
-  this.set('mikrotik.configure.check', function(cb) {
-    var connection = new mikroApi('192.168.88.10', 'admin', 'rogerwilco');
-    connection.connect(function(conn) {
-      var chan = conn.openChannel();
-      chan.write(['/interface/wireless/print'], function() {
-        chan.on('done', function(data) {
-          chan.close(true);
-          conn.close(true);
-          if((JSON.stringify(data) || '').toLowerCase().indexOf('mamaconnect') === -1 ) {
-            cb(false);
-          } else {
-            cb(true);
-          }
-        });
-      });
-    });
-  });
-  this.set('mikrotik.configure', function(cb) {
-    this.get('mikrotik.configure.check')(function(flagged) {
-      if (!flagged) console.log('configuration happening now');
-      else {
-        console.log('skipping config as already configured');
-        return cb();
+function construct_changes(current, desired) {
+  apply_changes(
+    desired.filter(function(host) {
+      return current.indexOf(host) === -1;
+    }).filter(function(host) {
+      return !!host;
+    }).map(function(host) {
+      return '/ip hotspot walled-garden add dst-host="' + host + '" server="hotspot1"';
+    }),
+    current.filter(function(host) {
+      return desired.indexOf(host) === -1;
+    }).filter(function(host) {
+      return !!host;
+    }).map(function(host) {
+      return '/ip hotspot walled-garden remove numbers=[/ip hotspot walled-garden find dst-host="' + host + '" ]';
+    })
+  );
+}
+
+function apply_changes(add, remove) {
+  if (add.length || remove.length) {
+    ftp_config_changes(add.concat(remove).join('\n'), function(err) {
+      if (err) {
+        console.log('error', err);
+        process.exit(99);
+      } else {
+        process.exit(0);
       }
-      // loop and perform the rest in the background
-      async.eachLimit(endpoints, 1, function(endpoint, endpointcallback) {
-        // construct a connection
-        var connection = new mikroApi(endpoint.host, 'admin', 'rogerwilco');
-        // do the connect
-        connection.connect(function(conn) {
+    });
+  } else {
+    process.exit(0);
+  }
+}
 
-          // loop all the commands
-          async.eachSeries(endpoint.commands, function(command_str, command_cb) {
-
-            // debug
-            console.log('sending: ' + command_str);
-
-            // connect using ftp
-            var Client = require('ftp');
-            var c = new Client();
-
-            // !!!
-            // are these real event emitters?
-            // can they chain?
-            c.on('ready', function() {
-              // write command to file
-              fs.writeFile(__dirname + '/../../line.rsc', command_str, function() {
-              // fs.writeFile('line.rsc', command_str, function() {
-                c.put(__dirname + '/../../line.rsc', 'line.rsc', function(err) {
-                // c.put('./line.rsc', 'line.rsc', function(err) {
-                  if (err) console.log('c.put error:', err);
-                  // open the channel
-                  var chan = conn.openChannel();
-                  // get the ip
-                  chan.write(['/import', '=file-name=line.rsc'], function() {
-                    chan.on('done', function(data) {
-                      console.dir(data);
-                      if (data[0][1]) console.log(data[0][1]);
-                      chan.close(true);
-                      console.log('done with:', command_str);
-                      command_cb();
-                    });
-                  });
-                });
-              });
-            }).on('error', command_cb.bind(command_cb));
-            c.connect({
-              host: endpoint.host,
-              user: 'admin',
-              password: 'rogerwilco'
+function ftp_config_changes(change_lines, done) {
+  console.log ('WALLED GARDEN CHANGE VIA FTP/IMPORT.');
+  console.log(change_lines);
+  var connection = new api(endpoint.host, endpoint.username, endpoint.password);
+  connection.connect(function(conn) {
+    var chan = conn.openChannel();
+    var Client = require('ftp');
+    var c = new Client();
+    c.on('ready', function() {
+      console.log("Connected to FTP.");
+      var fs = require('fs');
+      fs.writeFile(__dirname + '/../../changes.rsc', change_lines, function() {
+        c.put(__dirname + '/../../changes.rsc', 'changes.rsc', function(err) {
+          c.end();
+          if (err) console.log('c.put error:', err);
+          var chan = conn.openChannel();
+          chan.write(['/import', '=file-name=changes.rsc'], function() {
+            chan.on('done', function() {
+              console.log('Done with /import.');
+              chan.close();
+              conn.close(true);
+              console.log("END OF WALLED GARDEN CHANGE.");
+              done();
             });
-          }, function() {
-            // close it
-            conn.close(true);
-            try {
-              connection.end();
-            // } catch(err) {
-            } finally {
-              endpointcallback();
-            }
           });
         });
-      }, function(err) {
-        // set our flag
-        this.set('mikrotik.configure.configured_flag', true);
-        // done
-        console.log('done');
-        // call to done
-        cb();
-      }.bind(this));
-    }.bind(this));
-  }.bind(this));
+      });
+    }).on('error', function(err) {
+      done(err);
+    });
+    c.connect({
+      host: endpoint.host,
+      user: endpoint.username,
+      password: endpoint.password
+    });
+  });
+}
+
+module.exports = function(desired_dsthosts) {
+  var connection = new api(endpoint.host, endpoint.username, endpoint.password);
+  connection.connect(function(conn) {
+    var chan = conn.openChannel();
+    chan.on('done', function(data) {
+      chan.close();
+      conn.close(true);
+      construct_changes(
+        api.parseItems(data).map(function(item) {
+          return item['dst-host'];
+        }),
+        system_hosts.concat(desired_dsthosts)
+      );
+    }).write('/ip/hotspot/walled-garden/print');
+  });
 };
