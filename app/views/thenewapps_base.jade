@@ -44,8 +44,6 @@ html(lang="en")
 
         div(class="collapse navbar-collapse", id="bs-collapse-menu")
           ul(class="nav navbar-nav")
-            li(class=current === '/thenewapps' ? 'active' : '')
-              a(href="/thenewapps") Start Page
             each item in menu
               li(class=current === item.uri ? 'active' : '')
                 a(href=item.uri) #{item.name}
@@ -62,8 +60,6 @@ html(lang="en")
     div(class="bottom-menu")
       p(class="menu-title") Menu
       ul(class="nav nav-pills nav-stacked")
-        li(class=current === '/thenewapps' ? 'active' : '')
-          a(href="/thenewapps") Start Page
         each item in menu
           li(class=current === item.uri ? 'active' : '')
             a(href=item.uri) #{item.name}
