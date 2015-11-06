@@ -1,6 +1,46 @@
 
 'use strict';
 
+function getAndApplyWhitelist() {
+  var http = require('http');
+  http.get(process.env.NODE_NODE_JSON, function(res) {
+    var json = '';
+    res.on('data', function(data) {
+      json += data;
+    }).on('end', function() {
+      require('./app/mikrotik')(
+        JSON.parse(json).whitelist.map(function(host) {
+          return host.domain;
+        })
+      );
+    });
+  }).on('error', function(err) {
+    console.log('failed to set up whitelist on mikrotik', err);
+  });
+}
+
+function checkAppsJson(done) {
+  fs.exists(__dirname + '/test/fixtures/apps.json', function(exists) {
+    if (!exists) {
+      console.log('apps.json not found. fetching from host and writing to disk...');
+      var http = require('http');
+      http.get(process.env.NODE_APPS_JSON, function(res) {
+        var apps = '';
+        res.on('data', function(data) {
+          apps += data;
+        }).on('end', function() {
+          fs.writeFile(__dirname + '/test/fixtures/apps.json', apps, function(err) {
+            return done(err);
+          });
+        });
+      }).on('error', function(err) {
+        return done(err);
+      });
+    }
+    return done();
+  });
+}
+
 var env = process.env.NODE_ENV || 'dev';
 var path = require('path'), fs = require('fs'), os = require('os');
 var async = require('async'), express = require('express');
@@ -31,19 +71,38 @@ app.set('view engine', 'jade');
 app.use('/static', express.static(paths.static));
 app.use(require('body-parser').urlencoded({extended: true}));
 
-// set up the mikrotik configure functions
-                                            // todo: add new miktotik config code
-// if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
-//   setInterval(
-//     require('./app/mikrotik')(),
-//     7200000
-//   );
-// }
+if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
+  // set up the mikrotik configure functions to run every two hours
+  setInterval(function() {
+    var http = require('http');
+    http.get(process.env.NODE_NODE_JSON, function(res) {
+      var json = '';
+      res.on('data', function(data) {
+        json += data;
+      }).on('end', function() {
+        require('./app/mikrotik')(
+          JSON.parse(json).whitelist.map(function(host) {
+            return host.domain;
+          })
+        );
+      });
+    }).on('error', function(err) {
+      console.log('failed to set up whitelist on mikrotik', err);
+    });
+  }, 7200000);
+  // but run it once, immediately
+  getAndApplyWhitelist();
+}
 
-// load the routes
-require('./app/routes')(app);
-
-app.listen(port, function() {
-  console.log("✔ server listening at localhost:%s in %s mode...", port, env);
-  module.exports = app;
+checkAppsJson(function(err) {
+  if (err) {
+    console.log(err);
+    process.exit(1);
+  }
+  console.log('apps.json already present, continuing...');
+  require('./app/routes')(app);
+  app.listen(port, function() {
+    console.log("✔ server listening at localhost:%s in %s mode...", port, env);
+    module.exports = app;
+  });
 });
