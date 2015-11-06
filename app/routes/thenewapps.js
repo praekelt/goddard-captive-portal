@@ -158,10 +158,27 @@ function registerCategoryMedia(media, parentUri) {
   }, this);
 }
 
+function registerMediaListing() {
+  var menu = this.get('thenewapps.content.menu');
+  var uri = [route, 'all-videos'].join('/');
+  var topLevelCategoriesWithMedia = this.get('thenewapps.content.dontHaveCategories').filter(function(category) {
+    return category.media && category.media.length;
+  });
+  this.all(uri, function(req, res) {
+    res.render('thenewapps_listing', {
+      menu: menu,
+      current: uri,
+      categories: topLevelCategoriesWithMedia,
+      parent: route
+    });
+  });
+}
+
 function init(manifest) {
   collate.call(this, manifest);
   registerAllParentCategories.call(this);
   registerAllTopLevelCategories.call(this);
+  registerMediaListing.call(this);
   this.all(route, function(req, res) {
     res.render('thenewapps_home', {
       current: route,
