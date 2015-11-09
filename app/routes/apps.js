@@ -74,9 +74,6 @@ function checkMediaAvailability() {
     });
   });
   async.parallel(headRequests, function(err, results) {
-    if (err) console.log('error', err);
-    var nanoseconds = finished[0] * 1e9 + finished[1];
-    process.emit('console:log', 'requests took', nanoseconds, 'ns');
     if (err) process.emit('console:log', 'error', err);
     else rewriteManifest(true);
   });
