@@ -425,18 +425,67 @@ main {}
 .medium .medium-watch-more {
   display: inline-block;
   background-color: #8E73EC;
-  padding: 10px;
+  padding: 20px 10px;
+  width: 100%;
+  text-align: center;
 }
 
 .medium .medium-watch-more-link {
-  display: block;
   color: #fff;
   font-family: 'Raleway ExtraLight';
   text-align: center;
   text-decoration: underline;
-  margin: 10px;
 }
 .medium .medium-name {
   font-family: 'Raleway Bold';
   letter-spacing: 1px;
+}
+
+.listing .category:nth-child(n+1) .category-header {
+  background-color: #00D8C5;
+}
+.listing .category:nth-child(n+1) .category-list-item {
+  border-left-color: #00D8C5;
+}
+
+.listing .category:nth-child(n+2) .category-header {
+  background-color: #B80087;
+}
+.listing .category:nth-child(n+2) .category-list-item {
+  border-left-color: #B80087;
+}
+
+.listing .category:nth-child(n+3) .category-header {
+  background-color: #008A4E;
+}
+.listing .category:nth-child(n+3) .category-list-item {
+  border-left-color: #008A4E;
+}
+
+.listing .category:nth-child(n+4) .category-header {
+  background-color: #FFA300;
+}
+.listing .category:nth-child(n+4) .category-list-item {
+  border-left-color: #FFA300;
+}
+
+.listing .category:nth-child(n+5) .category-header {
+  background-color: #FFCF21;
+}
+.listing .category:nth-child(n+5) .category-list-item {
+  border-left-color: #FFCF21;
+}
+
+.listing .category:nth-child(n+6) .category-header {
+  background-color: #00C3B0;
+}
+.listing .category:nth-child(n+6) .category-list-item {
+  border-left-color: #00C3B0;
+}
+
+.listing .category:nth-child(n+7) .category-header {
+  background-color: #FF9800;
+}
+.listing .category:nth-child(n+7) .category-list-item {
+  border-left-color: #FF9800;
 }

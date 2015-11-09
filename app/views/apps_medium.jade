@@ -25,10 +25,10 @@ block content
       p(class="uppercase") Source: #[a(class="medium-source-link", href=medium.source) here]
       div(class="rounded-block")
         i(class="medium-download")
-        a(class="medium-download-link", src=medium.uri, download) Save this video to my phone
+        a(class="medium-download-link", href=medium.uri, download) Save this video to my phone
 
     div(class="medium-watch-more")
-      a(class="white link medium-watch-more-link", src=parent).
+      a(class="white link medium-watch-more-link", href=parent).
         Watch more videos about #{categoryName.toLowerCase()}&hellip;
 
     script.
