@@ -104,6 +104,12 @@ main {}
   font-family: 'Raleway Medium';
 }
 
+.category-list-item-meta {
+  width: 69%;
+  margin: 0 2%;
+  height: 100%;
+}
+
 .category-list-link {
   font-size: 75%;
   color: #1E1C27;
