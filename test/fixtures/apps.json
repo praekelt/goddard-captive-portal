@@ -11,6 +11,12 @@
           "uri": "http://data.goddard.com/apps/wikipedia-for-schools/index.html",
           "thumbnail": "?",
           "description": "?"
+        },
+        {
+          "name": "MAMA",
+          "uri": "http://data.goddard.com/apps/mama",
+          "thumbnail": "?",
+          "description": "?"
         }
       ]
     },
