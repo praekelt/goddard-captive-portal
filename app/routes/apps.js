@@ -115,6 +115,7 @@ function registerAllParentCategories() {
     this.all(uri, function(req, res) {
       res.render('apps_listing', {
         menu: menu,
+        notIndexPage: true,
         category: listing,
         heading: listing.name,
         current: uri,
@@ -138,7 +139,8 @@ function registerAllTopLevelCategories() {
         menu: menu,
         current: route + category.uri,
         parent: route,
-        category: category
+        category: category,
+        notIndexPage: true
       });
     });
     // registerChildCategory.call(this, category, route);
@@ -148,10 +150,11 @@ function registerAllTopLevelCategories() {
 function registerChildCategory(category, parentUri) {
   var menu = this.get('apps.content.menu');
   var uri = parentUri + '/' + category.uri;
-  registerCategoryMedia.call(this, category.media || [], uri);
+  registerCategoryMedia.call(this, category, uri);
   this.all(uri, function(req, res) {
     res.render('apps_category', {
       menu: menu,
+      notIndexPage: true,
       current: uri,
       parent: parentUri,
       category: category
@@ -159,14 +162,16 @@ function registerChildCategory(category, parentUri) {
   });
 }
 
-function registerCategoryMedia(media, parentUri) {
+function registerCategoryMedia(category, parentUri) {
   var menu = this.get('apps.content.menu');
-  media.forEach(function(medium, i) {
+  (category.media || []).forEach(function(medium, i) {
     this.all(parentUri + '/video/' + i, function(req, res) {
       res.render('apps_medium', {
         menu: menu,
         parent: parentUri,
-        medium: medium
+        medium: medium,
+        categoryName: category.name,
+        notIndexPage: true
       });
     });
   }, this);
@@ -183,7 +188,8 @@ function registerMediaListing() {
       current: '/all-videos',
       categories: topLevelCategoriesWithMedia,
       heading: 'All Videos',
-      parent: route
+      parent: route,
+      notIndexPage: true
     });
   });
 }
@@ -196,6 +202,7 @@ function init(manifest) {
   this.all(route, function(req, res) {
     res.render('apps_home', {
       current: route,
+      notIndexPage: false,
       category: {name: 'mamaconnect', uri: route},
       menu: this.get('apps.content.menu')
     });
