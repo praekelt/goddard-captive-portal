@@ -38,7 +38,20 @@ if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
   // but run it once, immediately
   boot.whitelist();
 } else {
-  boot.fixtures();
+  return boot.fixtures(function() {
+    boot.apps(function(err) {
+      if (err) {
+        console.log(err);
+        process.exit(1);
+      }
+      console.log('apps.json already present, continuing...');
+      require('./app/routes')(app);
+      app.listen(port, function() {
+        console.log("✔ server listening at localhost:%s in %s mode...", port, env);
+        module.exports = app;
+      });
+    });
+  });
 }
 
 boot.apps(function(err) {

@@ -9,7 +9,7 @@ exports.apps = function(done) {
   fs.exists(__dirname + '/../../test/fixtures/apps.json', function(exists) {
     if (!exists) {
       console.log('apps.json not found. fetching from host and writing to disk...');
-      http.get(process.env.NODE_APPS_JSON, function(res) {
+      http.get(process.env.NODE_APPS_JSON || 'localhost:8080/apps.json', function(res) {
         var apps = '';
         res.on('data', function(data) {
           apps += data;
