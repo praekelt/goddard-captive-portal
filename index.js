@@ -8,11 +8,13 @@ function getAndApplyWhitelist() {
     res.on('data', function(data) {
       json += data;
     }).on('end', function() {
-      require('./app/mikrotik')(
-        JSON.parse(json).whitelist.map(function(host) {
-          return host.domain;
-        })
-      );
+      console.log('got node json?', json);
+      process.exit(0);
+      // require('./app/mikrotik')(
+      //   JSON.parse(json).whitelist.map(function(host) {
+      //     return host.domain;
+      //   })
+      // );
     });
   }).on('error', function(err) {
     console.log('failed to set up whitelist on mikrotik', err);
