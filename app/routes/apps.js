@@ -49,6 +49,7 @@ function checkMediaAvailability() {
         //   }
         //   return done();
         // }
+        console.log(this.medium.uri, res.statusCode);
         if (this.ccI) {
           var media = apps.categories[this.cI].categories[this.ccI].media;
           if (!media) return done();
