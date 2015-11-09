@@ -128,7 +128,7 @@ function registerAllTopLevelCategories() {
   var dontHave = this.get('apps.content.dontHaveCategories');
   var menu = this.get('apps.content.menu');
   dontHave.forEach(function(category) {
-    registerCategoryMedia.call(this, category.media || [], route + category.uri);
+    registerCategoryMedia.call(this, category.media || [], route + category.uri, category.name);
     this.all(route + category.uri, function(req, res) {
       res.render('apps_category', {
         menu: menu,
@@ -138,14 +138,13 @@ function registerAllTopLevelCategories() {
         notIndexPage: true
       });
     });
-    // registerChildCategory.call(this, category, route);
   }, this);
 }
 
 function registerChildCategory(category, parentUri) {
   var menu = this.get('apps.content.menu');
   var uri = parentUri + '/' + category.uri;
-  registerCategoryMedia.call(this, category, uri);
+  registerCategoryMedia.call(this, category.media || [], uri, category.name);
   this.all(uri, function(req, res) {
     res.render('apps_category', {
       menu: menu,
@@ -157,15 +156,15 @@ function registerChildCategory(category, parentUri) {
   });
 }
 
-function registerCategoryMedia(category, parentUri) {
+function registerCategoryMedia(media, parentUri, categoryName) {
   var menu = this.get('apps.content.menu');
-  (category.media || []).forEach(function(medium, i) {
+  media.forEach(function(medium, i) {
     this.all(parentUri + '/video/' + i, function(req, res) {
       res.render('apps_medium', {
         menu: menu,
         parent: parentUri,
         medium: medium,
-        categoryName: category.name,
+        categoryName: categoryName,
         notIndexPage: true
       });
     });

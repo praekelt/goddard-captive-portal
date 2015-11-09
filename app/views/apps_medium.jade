@@ -28,8 +28,7 @@ block content
         a(class="medium-download-link", href=medium.uri, download) Save this video to my phone
 
     div(class="medium-watch-more")
-      a(class="white link medium-watch-more-link", href=parent).
-        Watch more videos about #{categoryName.toLowerCase()}&hellip;
+      a(class="medium-watch-more-link", href=parent) Watch more videos about #{categoryName.toLowerCase()}&hellip;
 
     script.
       document.getElementById('play-video').onclick = function(e) {
