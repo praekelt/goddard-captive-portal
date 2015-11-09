@@ -499,6 +499,46 @@ main {}
   border-left-color: #FF9800;
 }
 
+.did-you-know {
+  padding: 10px;
+  width: 100%;
+  display: inline-block;
+}
+
+.did-you-know-image {
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 160px;
+  height: 136px;
+  background-size: contain;
+  display: inline-block;
+  vertical-align: top;
+}
+.did-you-know-text {
+  padding: 7px;
+  background-color: #B80087;
+  color: #fff;
+  width: 136px;
+  height: 136px;
+  display: inline-block;
+}
+.did-you-know-heading {
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  font-family: 'Raleway Bold';
+}
+.did-you-know-question {
+  color: #fff;
+  margin: 0;
+  font-family: 'Raleway Medium';
+}
+.did-you-know-link {
+  color: #fff;
+  font-size: 80%;
+  text-decoration: underline;
+}
+
 *, * + * {
   color: black !important;
 }

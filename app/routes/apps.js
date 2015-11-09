@@ -197,6 +197,7 @@ function init(manifest) {
       return res.redirect('http://mamawifi.com');
     }
     res.render('apps_home', {
+      dyk: manifest.dyk[0],
       current: route,
       notIndexPage: false,
       category: {name: 'mamaconnect', uri: route},

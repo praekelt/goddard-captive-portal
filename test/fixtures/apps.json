@@ -1,4 +1,14 @@
 {
+  "dyk": [
+    {
+      "question": "When you're preganant your body needs more iron?",
+      "category": {
+        "uri": "/maternal-health-and-pregnancy",
+        "name": "Maternal Health and Pregnancy"
+      },
+      "image": "/static/img/bannerimage.jpg"
+    }
+  ],
   "categories": [
     {
       "name": "General Information",
