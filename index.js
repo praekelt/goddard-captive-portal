@@ -1,51 +1,7 @@
 
 'use strict';
 
-function getAndApplyWhitelist() {
-  var http = require('http');
-  http.get(process.env.NODE_NODE_JSON, function(res) {
-    var json = '';
-    res.on('data', function(data) {
-      json += data;
-    }).on('end', function() {
-      var node = JSON.parse(json);
-      if (!node.whitelist) {
-        console.log('did not find a whitelist in node.json, continuing...');
-        return;
-      }
-      require('./app/mikrotik')(
-        node.whitelist.map(function(host) {
-          return host.domain;
-        })
-      );
-    });
-  }).on('error', function(err) {
-    console.log('failed to set up whitelist on mikrotik', err);
-  });
-}
-
-function checkAppsJson(done) {
-  fs.exists(__dirname + '/test/fixtures/apps.json', function(exists) {
-    if (!exists) {
-      console.log('apps.json not found. fetching from host and writing to disk...');
-      var http = require('http');
-      http.get(process.env.NODE_APPS_JSON, function(res) {
-        var apps = '';
-        res.on('data', function(data) {
-          apps += data;
-        }).on('end', function() {
-          fs.writeFile(__dirname + '/test/fixtures/apps.json', apps, function(err) {
-            return done(err);
-          });
-        });
-      }).on('error', function(err) {
-        return done(err);
-      });
-    }
-    return done();
-  });
-}
-
+var boot = require('./app/boot');
 var env = process.env.NODE_ENV || 'dev';
 var path = require('path'), fs = require('fs'), os = require('os');
 var async = require('async'), express = require('express');
@@ -78,12 +34,12 @@ app.use(require('body-parser').urlencoded({extended: true}));
 
 if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
   // set up the mikrotik configure functions to run every two hours
-  setInterval(getAndApplyWhitelist, 7200000);
+  setInterval(boot.whitelist, 7200000);
   // but run it once, immediately
-  getAndApplyWhitelist();
+  boot.whitelist();
 }
 
-checkAppsJson(function(err) {
+boot.apps(function(err) {
   if (err) {
     console.log(err);
     process.exit(1);
