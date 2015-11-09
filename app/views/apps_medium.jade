@@ -5,9 +5,35 @@ block title
 
 block content
 
-  p welcome to #{medium.name}
-  p this medium is #{medium.size}
-  p this medium is #{medium.available ? '' : 'not'} available
+  section(class="listing medium")
+    header(class="listing-header")
+      h4(class="listing-heading") Watch Video
 
-  video(src='http://data.goddard.com/media/' + medium.uri, controls)
-  a(download, href='http://data.goddard.com/media/' + medium.uri) download this video
+    div(class="medium-video")
+      video(
+        id="medium-video",
+        src="http://data.goddard.com/media/#{medium.uri}",
+        poster=medium.thumbnail,
+        preload="metadata",
+        controls, autobuffer
+      )
+
+    section(class="medium-meta")
+      h4(id="play-video", class="medium-heavy-link") Play Video
+      h3(class="medium-name") #{medium.name}
+      p(class="medium-description") #{medium.description}
+      p(class="uppercase") Source: #[a(class="medium-source-link", href=medium.source) here]
+      div(class="rounded-block")
+        i(class="medium-download")
+        a(class="medium-download-link", src=medium.uri, download) Save this video to my phone
+
+    div(class="medium-watch-more")
+      a(class="white link medium-watch-more-link", src=parent).
+        Watch more videos about #{categoryName.toLowerCase()}&hellip;
+
+    script.
+      document.getElementById('play-video').onclick = function(e) {
+        var video = document.getElementById('medium-video');
+        location.assign('#medium-video');
+        return video.paused ? video.play() : undefined;
+      };

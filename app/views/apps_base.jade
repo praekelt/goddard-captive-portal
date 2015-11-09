@@ -48,7 +48,7 @@ html(lang="en")
               li(class=current === item.uri ? 'active' : '')
                 a(href=item.uri) #{item.name}
 
-    if (parent)
+    if (notIndexPage)
       div(class="back-to-start")
         a(href="/"): span ← Back to start page
 

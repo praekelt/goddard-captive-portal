@@ -26,7 +26,7 @@ block content
                       h5(class="category-list-item-heading")= site.name
                     p(class="category-subtext") #{site.description.slice(0, 33)}&hellip;
                     a(class="category-list-link", href=site.uri) + Visit this site
-                  img(class="w-20 right", src="/static/img/icons/icon_arrow.png", alt="cursor icon")
+                  div(class="w-20 right category-list-icon category-list-icon-arrow")
             each medium, k in category.media
               li(class="category-list-item")
                 img(class="w-20 category-list-thumbnail", src=medium.thumbnail, alt="media thumbnail")
@@ -40,4 +40,4 @@ block content
                     a(class="category-list-link", href=current + '/#{category.uri}/video/#{k}') + Watch this video
                   else
                     a(class="category-list-link", href="./#{category.uri}/video/#{k}") + Watch this video
-                img(class="w-20 right", src="/static/img/icons/icon_play.png", alt="play video icon")
+                div(class="w-20 right category-list-icon category-list-icon-play")
