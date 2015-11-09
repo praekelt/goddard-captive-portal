@@ -539,6 +539,13 @@ main {}
   text-decoration: underline;
 }
 
+.hcwt-banner {
+  display: inline-block;
+  width: 100%;
+  height: 120px;
+  border: 1px solid red;
+}
+
 *, * + * {
   color: black !important;
 }
