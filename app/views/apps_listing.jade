@@ -19,19 +19,19 @@ block content
               each site in category.sites
                 li(class="category-list-item")
                   img(class="w-20 category-list-thumbnail", src=site.thumbnail, alt="site thumbnail")
-                  div(class="category-list-item-meta")
+                  div(class="w-50")
                     h5(class="category-list-item-heading")= site.name
-                    p(class="category-subtext") #{site.description.slice(0, 66)}&hellip;
+                    p(class="category-subtext") #{site.description.slice(0, 70)}&hellip;
                     a(class="category-list-link", href=site.uri) + Visit this site
-                    div(class="w-20 right category-list-icon category-list-icon-arrow")
+                  div(class="w-20 right category-list-icon category-list-icon-arrow")
             each medium, k in category.media
               li(class="category-list-item")
                 img(class="w-20 category-list-thumbnail", src=medium.thumbnail, alt="media thumbnail")
                 div(class="w-50")
-                  if (medium.name.length >= 20)
-                    h5(class="category-list-item-heading") #{medium.name.slice(0, 20)}&hellip;
+                  if (medium.name.length >= 35)
+                    h5(class="category-list-item-heading") #{medium.name.slice(0, 35)}&hellip;
                   else
                     h5(class="category-list-item-heading") #{medium.name}
-                  p(class="category-subtext") #{medium.description.slice(0, 33)}&hellip;
+                  p(class="category-subtext") #{medium.description.slice(0, 50)}&hellip;
                   a(class="category-list-link", href=current + '/#{category.uri}/video/#{k}') + Watch this video
-                  div(class="w-20 right category-list-icon category-list-icon-play")
+                div(class="w-20 right category-list-icon category-list-icon-play")

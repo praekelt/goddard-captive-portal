@@ -73,8 +73,11 @@ main {}
 }
 
 .category-list-thumbnail {
-  height: 85px;
-  width: 85px;
+  width: 25%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 66%;
 }
 .category-list ul {
   list-style-type: none;
@@ -82,7 +85,7 @@ main {}
 }
 
 .category-list-item {
-  height: 85px;
+  height: 100px;
   border-left: 4px solid #B60085;
   border-top: 1px solid #fff;
   background-color: #F3F4F6;
