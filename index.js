@@ -37,6 +37,8 @@ if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
   setInterval(boot.whitelist, 7200000);
   // but run it once, immediately
   boot.whitelist();
+} else {
+  boot.fixtures();
 }
 
 boot.apps(function(err) {

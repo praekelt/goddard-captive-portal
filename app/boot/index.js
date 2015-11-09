@@ -3,6 +3,7 @@
 
 var fs = require('fs');
 var http = require('http');
+var express = require('express');
 
 exports.apps = function(done) {
   fs.exists(__dirname + '/../../test/fixtures/apps.json', function(exists) {
@@ -45,4 +46,30 @@ exports.whitelist = function() {
   }).on('error', function(err) {
     console.log('failed to set up whitelist on mikrotik', err);
   });
+};
+
+exports.fixtures = function(done) {
+  var fixtures = express();
+
+  fixtures.get('/apps.json', function(req, res) {
+    fs.createReadStream(__dirname + '/../../test/fixtures/apps.json').pipe(res);
+  });
+
+  fixtures.get('/status.json', function(req, res) {
+    fs.createReadStream(__dirname + '/../../test/fixtures/status.json').pipe(res);
+  });
+
+  fixtures.get('/build.json', function(req, res) {
+    fs.createReadStream(__dirname + '/../../test/fixtures/build.json').pipe(res);
+  });
+
+  fixtures.get('/node.json', function(req, res) {
+    fs.createReadStream(__dirname + '/../../test/fixtures/node.json').pipe(res);
+  });
+
+  fixtures.get('/wireless.html', function(req, res) {
+    fs.createReadStream(__dirname + '/../../test/fixtures/wireless.html').pipe(res);
+  })
+
+  fixtures.listen(8080, done);
 };
