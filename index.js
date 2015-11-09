@@ -73,23 +73,7 @@ app.use(require('body-parser').urlencoded({extended: true}));
 
 if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
   // set up the mikrotik configure functions to run every two hours
-  setInterval(function() {
-    var http = require('http');
-    http.get(process.env.NODE_NODE_JSON, function(res) {
-      var json = '';
-      res.on('data', function(data) {
-        json += data;
-      }).on('end', function() {
-        require('./app/mikrotik')(
-          JSON.parse(json).whitelist.map(function(host) {
-            return host.domain;
-          })
-        );
-      });
-    }).on('error', function(err) {
-      console.log('failed to set up whitelist on mikrotik', err);
-    });
-  }, 7200000);
+  setInterval(getAndApplyWhitelist, 7200000);
   // but run it once, immediately
   getAndApplyWhitelist();
 }
