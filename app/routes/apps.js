@@ -193,6 +193,9 @@ function init(manifest) {
   registerAllTopLevelCategories.call(this);
   registerMediaListing.call(this);
   this.all(route, function(req, res) {
+    if (req.hostname.indexOf('goddard') !== -1) {
+      return res.redirect('mamawifi.com');
+    }
     res.render('apps_home', {
       current: route,
       notIndexPage: false,
