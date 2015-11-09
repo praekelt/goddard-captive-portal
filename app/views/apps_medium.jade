@@ -14,7 +14,7 @@ block content
       video(
         id="medium-video",
         src="http://data.goddard.com/media/#{medium.uri}",
-        poster=medium.uri + '.png',
+        poster="http://data.goddard.com/media/#{medium.uri}.png",
         preload="metadata",
         controls, autobuffer
       )
@@ -26,7 +26,7 @@ block content
       p(class="uppercase") Source: #[a(class="medium-source-link", href=medium.source) here]
       div(class="rounded-block")
         i(class="medium-download")
-        a(class="medium-download-link", href=medium.uri, download) Save this video to my phone
+        a(class="medium-download-link", href="http://data.goddard.com/media/#{medium.uri}", download) Save this video to my phone
 
     div(class="medium-watch-more")
       a(class="medium-watch-more-link", href=parent) Watch more videos about #{categoryName.toLowerCase()}&hellip;
