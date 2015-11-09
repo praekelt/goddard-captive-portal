@@ -108,13 +108,29 @@ function registerAllParentCategories() {
   haveCategories.forEach(function(listing) {
     var uri = route + listing.uri;
     this.all(uri, function(req, res) {
+      res.render('apps_parenthome', {
+        menu: [{
+          name: 'Start Page', uri: route
+        }, {
+          name: 'All Videos', uri: route + 'healthcare-worker-training/all-videos'
+        }].concat(listing.categories.map(function(category) {
+          return {name: category.name, uri: category.uri};
+        })),
+        notIndexPage: true,
+        category: listing,
+        current: uri,
+        parent: route,
+        categories: listing.categories
+      });
+    });
+    this.all(uri + '/all-videos', function(req, res) {
       res.render('apps_listing', {
         menu: menu,
         notIndexPage: true,
         category: listing,
         heading: listing.name,
-        current: uri,
-        parent: route,
+        current: uri + '/all-videos',
+        parent: uri,
         categories: listing.categories
       });
     });
