@@ -8,13 +8,7 @@
       "sites": [
         {
           "name": "WIKI Schools",
-          "uri": "?",
-          "thumbnail": "?",
-          "description": "?"
-        },
-        {
-          "name": "Facts for Life",
-          "uri": "?",
+          "uri": "http://data.goddard.com/apps/wikipedia-for-schools/index.html",
           "thumbnail": "?",
           "description": "?"
         }
@@ -27,6 +21,7 @@
       "media": [
         {
           "name": "Growing Up",
+          "source": "http://medicalaidfilms.org/our-films/sexual-reproductive-health/?v=129781422",
           "available": false,
           "size": 22335209,
           "uri": "gem/family_health/Growing%20up.mp4",
@@ -36,6 +31,7 @@
         {
           "name": "How Babies Are Made",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/sexual-reproductive-health/?v=28679194",
           "size": 62011537,
           "uri": "gem/family_health/How%20Babies%20Are%20Made.mp4",
           "thumbnail": "?",
@@ -44,6 +40,7 @@
         {
           "name": "How To Plan Pregnancy",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/sexual-reproductive-health/?v=28681656",
           "size": 63448633,
           "uri": "gem/family_health/How%20to%20Plan%20Pregnancy.mp4",
           "thumbnail": "?",
@@ -71,6 +68,7 @@
         {
           "name": "Focused Antenatal Care",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/obstetric-neonatal-emergencies/?v=72407735",
           "size": 82033810,
           "uri": "gem/maternal_health_and_pregnancy/Focused%20Antenatal%20Care%20%28FANC%29%20Community%20Education-SD.mp4",
           "thumbnail": "?",
@@ -79,6 +77,7 @@
         {
           "name": "Food for Life: What Pregnant Women Should Eat",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/nutrition/?v=28555362",
           "size": 0,
           "uri": "gem/maternal_health_and_pregnancy/",
           "thumbnail": "?",
@@ -87,6 +86,7 @@
         {
           "name": "Respectful Maternity Care",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/obstetric-neonatal-emergencies/?v=124297959",
           "size": 31117227,
           "uri": "gem/maternal_health_and_pregnancy/Respectful%20Maternity%20Care.mp4",
           "thumbnail": "?",
@@ -95,6 +95,7 @@
         {
           "name": "Warning Signs in Newborns",
           "available": false,
+          "source": "http://globalhealthmedia.org/portfolio-items/warning-signs-in-newborns-for-mothers-and-caregivers/?portfolioID=5623",
           "size": 152199814,
           "uri": "gem/maternal_health_and_pregnancy/Newborn%20Care%20-%20Warning%20Signs%20in%20Newborns%2c%20for%20mother%20and%20caregivers-MX93HfqWZnE.mp4",
           "thumbnail": "?",
@@ -103,6 +104,7 @@
         {
           "name": "Warning Signs In Pregnancy",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/",
           "size": 30878468,
           "uri": "gem/maternal_health_and_pregnancy/Warning%20Signs%20in%20Pregnancy.mp4",
           "thumbnail": "?",
@@ -126,6 +128,7 @@
         {
           "name": "Food for Life: What And When To Feed Your Child",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/nutrition/?v=28509777",
           "size": 36709973,
           "uri": "gem/newborn_health/Food%20For%20Life%20-%20When%20and%20What%20to%20Feed%20Your%20Child%20%286%20months%20to%202%20years%29.mp4",
           "thumbnail": "?",
@@ -134,6 +137,7 @@
         {
           "name": "How To Care For A Newborn – Full Length Version",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=39256734",
           "size": 13141492,
           "uri": "gem/newborn_health/How%20to%20care%20for%20a%20newborn%20-%20full%20version.mp4",
           "thumbnail": "?",
@@ -142,6 +146,7 @@
         {
           "name": "The Cold Baby",
           "available": false,
+          "source": "http://globalhealthmedia.org/portfolio-items/the-cold-baby/?portfolioID=5623",
           "size": 68022059,
           "uri": "gem/newborn_health/Newborn%20Care%20Series%20-%20The%20Cold%20Baby-5YQmQu2dNPA.mp4",
           "thumbnail": "?",
@@ -150,6 +155,7 @@
         {
           "name": "The First Hours After Delivery",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=39194120",
           "size": 28872311,
           "uri": "gem/newborn_health/How%20to%20care%20for%20a%20newborn%20-%20The%20first%20hours%20after%20delivery.mp4",
           "thumbnail": "?",
@@ -158,6 +164,7 @@
         {
           "name": "The Hot Baby",
           "available": false,
+          "source": "http://globalhealthmedia.org/portfolio-items/the-hot-baby/?portfolioID=5623",
           "size": 74116299,
           "uri": "gem/newborn_health/Newborn%20Care%20Series%20-%20The%20Hot%20Baby-TWXHFzrVxdI.mp4",
           "thumbnail": "?",
@@ -166,6 +173,7 @@
         {
           "name": "What To Do When A Newborn Is Not Breathing",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=39256734",
           "size": 25809300,
           "uri": "gem/newborn_health/How%20to%20care%20for%20a%20newborn%20-%20What%20to%20do%20when%20a%20newborn%20is%20not%20breathing.mp4",
           "thumbnail": "?",
@@ -181,6 +189,7 @@
       "media": [
         {
           "name": "Attaching Your Baby at the Breast",
+          "source": "http://globalhealthmedia.org/portfolio-items/attaching-your-baby-at-the-breast/?portfolioID=5623",
           "available": false,
           "size": 107358050,
           "uri": "gem/breastfeeding/Attaching%20Your%20Baby%20at%20the%20Breast%20%e2%80%93%20Breastfeeding%20Series-wjt-Ashodw8.mp4",
@@ -189,6 +198,7 @@
         },
         {
           "name": "Breastfeeding in the first hours after birth",
+          "source": "http://globalhealthmedia.org/portfolio-items/breastfeeding-in-the-first-hours-after-birth/?portfolioID=5623",
           "available": false,
           "size": 92390145,
           "uri": "gem/breastfeeding/Breastfeeding%20in%20the%20First%20Hours%20After%20Birth%20%e2%80%93%20Breastfeeding%20Series-uMcgJR8ESRc.mp4",
@@ -198,6 +208,7 @@
         {
           "name": "Expressing and Storing Breastmilk",
           "available": false,
+          "source": "http://globalhealthmedia.org/portfolio-items/expressing-and-storing-breastmilk/?portfolioID=5623",
           "size": 86708053,
           "uri": "gem/breastfeeding/Expressing%20and%20Storing%20Breastmilk%20-%20Breastfeeding%20Series-oJPJov3kEOU.mp4",
           "thumbnail": "?",
@@ -206,6 +217,7 @@
         {
           "name": "Food for Life: Breastfeeding",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/nutrition/?v=28462382",
           "size": 39902235,
           "uri": "gem/breastfeeding/Food%20for%20life%20-%20Breastfeeding.mp4",
           "thumbnail": "?",
@@ -215,6 +227,7 @@
           "name": "How to Express Breastmilk",
           "available": false,
           "size": 63797149,
+          "source": "http://globalhealthmedia.org/portfolio-items/how-to-express-breastmilk/?portfolioID=5623",
           "uri": "gem/breastfeeding/How%20to%20Express%20Breastmilk%20%e2%80%93%20Breastfeeding%20Series-axQi5PqRZ0M.mkv",
           "thumbnail": "?",
           "description": "Expressing breastmilk can relieve breast fullness, soften the breasts, and make it easier for the milk to flow. It is also important to maintain a mother’s milk supply during separation and make milk available for someone else to feed the baby. This video shows how to hand express breastmilk."
@@ -223,6 +236,7 @@
           "name": "Increasing Your Milk Supply",
           "available": false,
           "size": 67392150,
+          "source": "http://globalhealthmedia.org/portfolio-items/increasing-your-milk-supply/?portfolioID=5623",
           "uri": "gem/breastfeeding/Increasing%20Your%20Milk%20Supply%20%e2%80%93%20Breastfeeding%20Series-M_NLHiasZok.mp4",
           "thumbnail": "?",
           "description": "Most mothers are able to provide their babies with all the milk they need. However, if a baby is not thriving as she should, this video shows a mother steps to improve her milk supply and the baby’s feeding."
@@ -231,6 +245,7 @@
           "name": "Is Your Baby Getting Enough Milk",
           "available": false,
           "size": 50654569,
+          "source": "http://globalhealthmedia.org/portfolio-items/is-your-baby-getting-enough-milk/?portfolioID=5623",
           "uri": "gem/breastfeeding/Is%20Your%20Baby%20Getting%20Enough%20Milk%20%e2%80%93%20Breastfeeding%20Series-LX1fl8NtTuw.mp4",
           "thumbnail": "?",
           "description": "A common concern of a new mother is whether her baby is getting enough milk. This video shows signs to tell whether the baby is feeding well."
@@ -239,6 +254,7 @@
           "name": "What To Do About Breast Pain",
           "available": false,
           "size": 81286937,
+          "source": "http://globalhealthmedia.org/portfolio-items/what-to-do-about-breast-pain/?portfolioID=5623",
           "uri": "gem/breastfeeding/What%20To%20Do%20About%20Breast%20Pain%20%e2%80%93%20Breastfeeding%20Series-XpGRuRAWqKM.mp4",
           "thumbnail": "?",
           "description": "Breast pain in a breastfeeding mother is commonly caused by one of three problems: engorgement, blocked ducts, or breast infections. This video shows how a mother can know which problem she has and what she can do to help herself."
@@ -247,6 +263,7 @@
           "name": "What To Do About Nipple Pain",
           "available": false,
           "size": 58987807,
+          "source": "http://globalhealthmedia.org/portfolio-items/what-to-do-about-nipple-pain/?portfolioID=5623",
           "uri": "gem/breastfeeding/What%20To%20Do%20About%20Nipple%20Pain%20%e2%80%93%20Breastfeeding%20Series-WVEABNhXr1A.mp4",
           "thumbnail": "?",
           "description": "Nipple pain in a breastfeeding mother is common but not normal. It often happens when mothers first start breastfeeding and is usually due to a baby not attaching deeply. This video shows how nipple pain happens and what a mother can do to help herself."
@@ -269,6 +286,7 @@
         {
           "name": "Is Your Child Sick? – Full Length Version",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=61332940",
           "size": 48978867,
           "uri": "gem/diseases_and_warning_signs/Is%20Your%20Child%20Sick.mp4",
           "thumbnail": "?",
@@ -277,6 +295,7 @@
         {
           "name": "Is Your Child Sick? Identifying The Signs Of Illness And Diarrhoea",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=61332941",
           "size": 24695987,
           "uri": "gem/diseases_and_warning_signs/Is%20Your%20Child%20Sick%20-%20Signs%20Of%20Illness%20and%20Diarrhoea.mp4",
           "thumbnail": "?",
@@ -285,6 +304,7 @@
         {
           "name": "Is Your Child Sick? Identifying The Signs Of Illness And Malaria",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=61333168",
           "size": 19444454,
           "uri": "gem/diseases_and_warning_signs/Is%20Your%20Child%20Sick%20-%20Signs%20of%20Illness%20and%20Malaria.mp4",
           "thumbnail": "?",
@@ -293,6 +313,7 @@
         {
           "name": "Is Your Child Sick? Identifying The Signs Of Illness And Pneumonia",
           "available": false,
+          "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=61332938",
           "size": 18297022,
           "uri": "gem/diseases_and_warning_signs/Is%20Your%20Child%20Sick%20-%20Signs%20Of%20Illness%20and%20Pneumonia.mp4",
           "thumbnail": "?",
@@ -302,6 +323,7 @@
           "name": "Jaundice",
           "available": false,
           "size": 60602726,
+          "source": "http://health-orb.org/resource/view/jaundice",
           "uri": "gem/diseases_and_warning_signs/jaundice_lap_eng.mov",
           "thumbnail": "?",
           "description": "This film shows how to check for jaundice, how to help normal jaundice clear, and how to recognize when jaundice needs urgent referral."
@@ -309,6 +331,7 @@
         {
           "name": "Skin Infection",
           "available": false,
+          "source": "http://globalhealthmedia.org/portfolio-items/skin-infection/?portfolioID=5623",
           "size": 82659599,
           "uri": "gem/diseases_and_warning_signs/Newborn%20Care%20Series%20-%20Skin%20Infection-9tykrHSJbhg.mp4",
           "thumbnail": "?",
@@ -317,6 +340,7 @@
         {
           "name": "Thrush",
           "available": false,
+          "source": "http://globalhealthmedia.org/portfolio-items/thrush/?portfolioID=5623",
           "size": 44682129,
           "uri": "gem/diseases_and_warning_signs/Newborn%20Care%20Series%20-%20Thrush-O4W7WW7xNkY.mp4",
           "thumbnail": "?",
@@ -337,6 +361,7 @@
             {
               "name": "Basic skills",
               "available": false,
+              "source": "http://health-orb.org/resource/view/basic-skills",
               "size": 62653365,
               "uri": "gem/newborn_and_child_birth/Newborn%20Care%20Series%20-%20Basic%20Skills-m6MBM0pylpA.mp4",
               "thumbnail": "?",
@@ -344,6 +369,7 @@
             },
             {
               "name": "Breast Engorgement",
+              "source": "http://health-orb.org/resource/view/breast-engorgement",
               "available": false,
               "size": 43662620,
               "uri": "gem/newborn_and_child_birth/Breast%20Engorgement%20-%20Breastfeeding%20Series-iq3kS8JxIpg.mp4",
@@ -352,6 +378,7 @@
             },
             {
               "name": "Breastfeeding Positions",
+              "source": "http://globalhealthmedia.org/portfolio-items/positions-for-breastfeeding/?portfolioID=5623",
               "available": false,
               "size": 86958983,
               "uri": "gem/newborn_and_child_birth/Positions%20for%20Breastfeeding%20%e2%80%93%20Breastfeeding%20Series-y9kKp3YnNYY.mp4",
@@ -360,6 +387,7 @@
             },
             {
               "name": "Danger Signs in Newborns, for health workers",
+              "source": "http://globalhealthmedia.org/portfolio-items/danger-signs-in-newborns-for-health-workers/?portfolioID=5623",
               "available": false,
               "size": 168341272,
               "uri": "gem/newborn_and_child_birth/Newborn%20Care%20-%20Danger%20Signs%20in%20Newborns%2c%20for%20health%20workers-ne06nPIKTmE.mp4",
@@ -369,6 +397,7 @@
             {
               "name": "Early Initiation of Breastfeeding",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/early-initiation-of-breastfeeding/?portfolioID=5623",
               "size": 112447026,
               "uri": "gem/newborn_and_child_birth/Early%20Initiation%20of%20Breastfeeding%20-%20Breastfeeding%20Series-hs7ai466toE.mp4",
               "thumbnail": "?",
@@ -377,6 +406,7 @@
             {
               "name": "Eye Infections",
               "available": false,
+              "source": "http://health-orb.org/resource/view/eye-infections",
               "size": 76721965,
               "uri": "gem/newborn_and_child_birth/Newborn%20Care%20-%20Eye%20Infections-art_hwu1mJU.f136.mp4",
               "thumbnail": "?",
@@ -385,6 +415,7 @@
             {
               "name": "Feeding with a Gastric Tube",
               "available": false,
+              "source": "http://health-orb.org/resource/view/feeding-with-a-gastric-tube",
               "size": 58992703,
               "uri": "gem/newborn_and_child_birth/",
               "thumbnail": "?",
@@ -393,6 +424,7 @@
             {
               "name": "Helping a Breastfeeding Mother",
               "available": false,
+              "source": "http://health-orb.org/resource/view/helping-a-breastfeeding-mother",
               "size": 119559342,
               "uri": "gem/newborn_and_child_birth/Helping%20a%20Breastfeeding%20Mother%20-%20Breastfeeding%20Series-4X4_RBHsIbs.mp4",
               "thumbnail": "?",
@@ -401,6 +433,7 @@
             {
               "name": "Referring a Sick Baby",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/referring-a-sick-baby/?portfolioID=5623",
               "size": 42298600,
               "uri": "gem/newborn_and_child_birth/referring_a_sick_baby_lap_eng.mov",
               "thumbnail": "?",
@@ -416,6 +449,7 @@
             {
               "name": "10 Steps To A Clean Delivery (cord cut using a knife)",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/obstetric-neonatal-emergencies/?v=28660577",
               "size": 0,
               "uri": "gem/labour_and_delivery/",
               "thumbnail": "?",
@@ -424,6 +458,7 @@
             {
               "name": "10 Steps To A Clean Delivery (cord cut using a new razor blade)",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/obstetric-neonatal-emergencies/?v=39329974",
               "size": 0,
               "uri": "gem/labour_and_delivery/",
               "thumbnail": "?",
@@ -431,6 +466,7 @@
             },
             {
               "name": "Breathing problems",
+              "source": "http://health-orb.org/resource/view/breathing-problems",
               "available": false,
               "size": 63737537,
               "uri": "gem/labour_and_delivery/Newborn%20Care%20Series%20-%20Breathing%20Problems-dvb04Hh7RkA.mp4",
@@ -441,6 +477,7 @@
               "name": "Care of the cord",
               "available": false,
               "size": 106799090,
+              "source": "http://health-orb.org/resource/view/care-of-the-cord",
               "uri": "gem/labour_and_delivery/Newborn%20Care%20-%20Care%20of%20the%20Cord-OaZE5SdspJY.mp4",
               "thumbnail": "?",
               "description": "This video shows how to care for the cord of the newborn."
@@ -448,6 +485,7 @@
             {
               "name": "Examining the Placenta",
               "available": false,
+              "source": "http://health-orb.org/resource/view/examining-the-placenta",
               "size": 65683773,
               "uri": "gem/labour_and_delivery/Examining%20the%20Placenta%20-%20Childbirth%20Series-DnmHj51UTO4.mp4",
               "thumbnail": "?",
@@ -456,6 +494,7 @@
             {
               "name": "Giving Good Care During Labor",
               "available": false,
+              "source": "http://health-orb.org/resource/view/giving-good-care-during-labor",
               "size": 157334494,
               "uri": "gem/labour_and_delivery/Giving%20Good%20Care%20During%20Labor%20-%20Childbirth%20Series-i3Y0bRGp3Ls.mp4",
               "thumbnail": "?",
@@ -464,6 +503,7 @@
             {
               "name": "Management Of Postpartum Haemorrhage (low resource)",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/obstetric-neonatal-emergencies/?v=28657601",
               "size": 23719535,
               "uri": "gem/labour_and_delivery/Management%20of%20Postpartum%20Haemorrhage%20II.mp4",
               "thumbnail": "?",
@@ -473,12 +513,14 @@
               "name": "Management Of Postpartum Haemorrhage (no resource)",
               "available": false,
               "size": 23553594,
+              "source": "http://medicalaidfilms.org/our-films/obstetric-neonatal-emergencies/?v=28630558",
               "uri": "gem/labour_and_delivery/Management%20of%20Postpartum%20Haemorrhage.mp4",
               "thumbnail": "?",
               "description": "This animation teaches how to prevent and manage PPH in settings where it would take the woman more than 4 hours to reach skilled obstetric care. It demonstrates the use of Misoprostol as well as internal bimanual compression. This film is aimed at training Traditional Birth Attendants and community health workers in the management of PPH when delivery is not in a health centre and the nearest referral centre and access to skilled care is more than 3 hours away. this films should be used with caution and always taught by a health worker due to invasive procedures within the film."
             },
             {
               "name": "Managing the Second Stage of Labor",
+              "source": "http://globalhealthmedia.org/portfolio-items/managing-the-second-stage-of-labor/?portfolioID=5623",
               "available": false,
               "size": 91400190,
               "uri": "gem/labour_and_delivery/managing_the_second_stage_of_labor_lap_eng.mov",
@@ -487,6 +529,7 @@
             },
             {
               "name": "Managing the Third Stage of Labor",
+              "source": "http://globalhealthmedia.org/portfolio-items/managing-the-third-stage-of-labor/?portfolioID=5623",
               "available": false,
               "size": 78894481,
               "uri": "gem/labour_and_delivery/managing_the_third_stage_of_labor_lap_eng.mov",
@@ -496,6 +539,7 @@
             {
               "name": "Preparing the birth room",
               "available": false,
+              "source": "http://health-orb.org/resource/view/preparing-the-birth-room",
               "size": 63269345,
               "uri": "gem/labour_and_delivery/Childbirth%20Series%20-%20Preparing%20the%20Birth%20Room-WZz8Yysq5mo.mp4",
               "thumbnail": "?",
@@ -504,6 +548,7 @@
             {
               "name": "Preventing Infection at Birth",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/preventing-infection-at-birth/?portfolioID=5623",
               "size": 28606978,
               "uri": "gem/labour_and_delivery/preventing_infection_at_birth_smt_eng.mov",
               "thumbnail": "?",
@@ -512,6 +557,7 @@
             {
               "name": "The Birth: Labor, Delivery & Early Postpartum",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/the-birth/?portfolioID=5623",
               "size": 56242061,
               "uri": "gem/labour_and_delivery/The%20Birth%20-%20Labor%2c%20Delivery%20%26%20Early%20Postpartum-VHcej771Afg.mp4",
               "thumbnail": "?",
@@ -520,6 +566,7 @@
             {
               "name": "The Position of the Baby",
               "available": false,
+              "source": "http://health-orb.org/resource/view/the-position-of-the-baby",
               "size": 109709481,
               "uri": "gem/labour_and_delivery/The%20Position%20of%20the%20Baby%20-%20Childbirth%20Series--8gJlc298p8.mp4",
               "thumbnail": "?",
@@ -528,6 +575,7 @@
             {
               "name": "The Vaginal Exam in Labor",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/the-vaginal-exam-in-labor/?portfolioID=5623",
               "size": 32252300,
               "uri": "gem/labour_and_delivery/the_vaginal_exam_in_labor_smt_eng.mov",
               "thumbnail": "?",
@@ -537,6 +585,7 @@
               "name": "Umbilical Infections",
               "available": false,
               "size": 66888168,
+              "source": "http://health-orb.org/resource/view/umbilical-infections",
               "uri": "gem/labour_and_delivery/Newborn%20Care%20Series%20-%20Umbilical%20Infections-9nkRuF04Y8c.mp4",
               "thumbnail": "?",
               "description": "This film shows how to evaluate the baby with an umbilical infection, how to differentiate a mild infection from a severe one, and how to treat the mild case and refer all severe cases to a higher-level facility."
@@ -550,6 +599,7 @@
           "media": [
             {
               "name": "Administration Of Parenteral Antibiotics",
+              "source": "http://medicalaidfilms.org/our-films/obstetric-care/?v=72406691",
               "available": false,
               "size": 32401128,
               "uri": "gem/medical_dosage_and_delivery/Administration%20Of%20Parenteral%20Antibiotics.mp4",
@@ -558,6 +608,7 @@
             },
             {
               "name": "Giving an Intradermal Injection",
+              "source": "http://health-orb.org/resource/view/giving-an-intradermal-injection",
               "available": false,
               "size": 33432270,
               "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20Series%20-%20Giving%20an%20Intradermal%20Injection-F2cvT7zbLLw.mkv",
@@ -567,6 +618,7 @@
             {
               "name": "Preparing Injectable Medicines",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/newborn-care-preparing-injectable-medecines/?portfolioID=5623",
               "size": 144671070,
               "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20-%20Preparing%20Injectable%20Medicines-O6lGylNJz5c.mp4",
               "thumbnail": "?",
@@ -574,6 +626,7 @@
             },
             {
               "name": "Preparing oral medicines",
+              "source": "http://globalhealthmedia.org/portfolio-items/newborn-care-preparing-oral-medecines/?portfolioID=5623",
               "available": false,
               "size": 132260989,
               "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20-%20Preparing%20Oral%20Medicines-TvFr3hqo76w.mp4",
@@ -582,6 +635,7 @@
             },
             {
               "name": "Chlorhexidine for Umbilical Cord Care",
+              "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=135684121",
               "available": false,
               "size": 14914005,
               "uri": "gem/medical_dosage_and_delivery/Chlorhexidine%20for%20Umbilical%20Cord%20Care.mp4",
@@ -598,6 +652,7 @@
             {
               "name": "Ebola Contact Tracing",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/ebola/",
               "size": 9667527,
               "uri": "gem/diseases/Ebola%20Contact%20Tracing.mp4",
               "thumbnail": "?",
@@ -606,6 +661,7 @@
             {
               "name": "How To Conduct VIA And VILI Screening Tests",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/cervical-cancer/?v=81485387",
               "size": 49542839,
               "uri": "gem/diseases/How%20To%20Conduct%20VIA%20and%20VILI%20Screening%20Tests.mp4",
               "thumbnail": "?",
@@ -621,6 +677,7 @@
             {
               "name": "How To Use A Partograph",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/obstetric-care/?v=72407734",
               "size": 49902428,
               "uri": "gem/medical_procedures/How%20to%20use%20a%20partograph.mp4",
               "thumbnail": "?",
@@ -629,6 +686,7 @@
             {
               "name": "How To Use The Ultrasound Probe",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/obstetric-care/?v=28673620",
               "size": 39148905,
               "uri": "gem/medical_procedures/How%20to%20use%20an%20ultrasound%20probe.mp4",
               "thumbnail": "?",
@@ -636,6 +694,7 @@
             },
             {
               "name": "Inserting a Gastric Tube",
+              "source": "http://health-orb.org/resource/view/inserting-a-gastric-tube",
               "available": false,
               "size": 58992703,
               "uri": "gem/medical_procedures/Newborn%20Care%20Series%20-%20Inserting%20a%20Gastric%20Tube-oz1yr_CaHFY.mp4",
@@ -645,6 +704,7 @@
             {
               "name": "Inserting an IV Line",
               "available": false,
+              "source": "http://health-orb.org/resource/view/inserting-an-iv-line",
               "size": 71584283,
               "uri": "gem/medical_procedures/Newborn%20Care%20Series%20-%20Inserting%20an%20IV-v3Udt0p6jVo.mp4",
               "thumbnail": "?",
@@ -653,6 +713,7 @@
             {
               "name": "Manual Removal Of The Placenta",
               "available": false,
+              "source": "http://medicalaidfilms.org/our-films/obstetric-care/?v=72407733",
               "size": 48929051,
               "uri": "gem/medical_procedures/Manual%20Removal%20of%20the%20Placenta.mp4",
               "thumbnail": "?",
@@ -660,6 +721,7 @@
             },
             {
               "name": "Newborn Physical Exam",
+              "source": "https://youtu.be/8foaEYKfDRo?list=PLXeu9kWMOoFLMXFrdo67Xx06HiCa3Q6Vv",
               "available": false,
               "size": 66427227,
               "uri": "gem/medical_procedures/Newborn%20Care%20Series%20-%20Newborn%20Physical%20Exam-8foaEYKfDRo.f136.mp4",
@@ -669,6 +731,7 @@
             {
               "name": "Setting Up an IV Line",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/setting-up-an-iv-line/?portfolioID=5623",
               "size": 36455479,
               "uri": "gem/medical_procedures/Newborn%20Care%20Series%20-%20Setting%20Up%20an%20IV%20Line-rb5pz-0Q5II.mp4",
               "thumbnail": "?",
@@ -677,6 +740,7 @@
             {
               "name": "Taking a Heel Blood Sample",
               "available": false,
+              "source": "http://globalhealthmedia.org/portfolio-items/taking-a-heel-blood-sample/?portfolioID=5623",
               "size": 28791756,
               "uri": "gem/medical_procedures/Newborn%20Care%20Series%20-%20Taking%20a%20Heel%20Blood%20Sample-MieKJa5YJd4.mp4",
               "thumbnail": "?",
@@ -686,6 +750,7 @@
               "name": "Taking a Venous Blood Sample",
               "available": false,
               "size": 80948237,
+              "source": "http://globalhealthmedia.org/portfolio-items/taking-a-venous-blood-sample/?portfolioID=5623",
               "uri": "gem/medical_procedures/Newborn%20Care%20-%20Taking%20a%20Venous%20Blood%20Sample-5FfVjiou_YE.mp4",
               "thumbnail": "?",
               "description": "This film shows how to take a small sample of blood for lab tests from the side of the heel of a baby."
