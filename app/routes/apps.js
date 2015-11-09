@@ -177,11 +177,10 @@ function registerMediaListing() {
     return category.media && category.media.length;
   });
   this.all('/all-videos', function(req, res) {
-    res.render('apps_listing', {
+    res.render('apps_allvideos', {
       menu: menu,
       current: '/all-videos',
       categories: topLevelCategoriesWithMedia,
-      heading: 'All Videos',
       parent: route,
       notIndexPage: true
     });

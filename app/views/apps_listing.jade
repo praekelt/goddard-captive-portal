@@ -15,7 +15,7 @@ block content
           h3(class="category-heading") #{category.name}
         section(class="category-list")
           ul
-            if (category.sites && heading !== 'All Videos')
+            if (category.sites)
               each site in category.sites
                 li(class="category-list-item")
                   img(class="w-20 category-list-thumbnail", src=site.thumbnail, alt="site thumbnail")
@@ -23,20 +23,15 @@ block content
                     h5(class="category-list-item-heading")= site.name
                     p(class="category-subtext") #{site.description.slice(0, 66)}&hellip;
                     a(class="category-list-link", href=site.uri) + Visit this site
-                  if (heading !== 'All Videos')
                     div(class="w-20 right category-list-icon category-list-icon-arrow")
             each medium, k in category.media
               li(class="category-list-item")
                 img(class="w-20 category-list-thumbnail", src=medium.thumbnail, alt="media thumbnail")
-                div(class=heading !== 'All Videos' ? 'w-50' : 'category-list-item-meta')
-                  if (medium.name.length >= 20 && heading !== 'All Videos')
+                div(class="w-50")
+                  if (medium.name.length >= 20)
                     h5(class="category-list-item-heading") #{medium.name.slice(0, 20)}&hellip;
                   else
                     h5(class="category-list-item-heading") #{medium.name}
                   p(class="category-subtext") #{medium.description.slice(0, 33)}&hellip;
-                  if (current === '/healthcare-worker-training')
-                    a(class="category-list-link", href=current + '/#{category.uri}/video/#{k}') + Watch this video
-                  else
-                    a(class="category-list-link", href="./#{category.uri}/video/#{k}") + Watch this video
-                if (heading !== 'All Videos')
+                  a(class="category-list-link", href=current + '/#{category.uri}/video/#{k}') + Watch this video
                   div(class="w-20 right category-list-icon category-list-icon-play")
