@@ -525,16 +525,23 @@ main {}
   text-transform: uppercase;
   margin: 0;
   font-family: 'Raleway Bold';
+  position: absolute;
+  top: 15px;
 }
 .did-you-know-question {
   color: #fff;
   margin: 0;
   font-family: 'Raleway Medium';
+  position: absolute;
+  top: 40px;
+  font-size: 95%;
 }
 .did-you-know-link {
   color: #fff;
   font-size: 80%;
   text-decoration: underline;
+  position: absolute;
+  bottom: 15px;
 }
 
 .hcwt-banner {
