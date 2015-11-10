@@ -8,31 +8,31 @@ var chai = require('chai'),
     express = require('express'),
     app;
 
-var fixtures = express();
+// var fixtures = express();
 
-fixtures.get('/apps.json', function(req, res) {
-  fs.createReadStream(__dirname + '/fixtures/apps.json').pipe(res);
-});
+// fixtures.get('/apps.json', function(req, res) {
+//   fs.createReadStream(__dirname + '/fixtures/apps.json').pipe(res);
+// });
 
-fixtures.get('/status.json', function(req, res) {
-  fs.createReadStream(__dirname + '/fixtures/status.json').pipe(res);
-});
+// fixtures.get('/status.json', function(req, res) {
+//   fs.createReadStream(__dirname + '/fixtures/status.json').pipe(res);
+// });
 
-fixtures.get('/build.json', function(req, res) {
-  fs.createReadStream(__dirname + '/fixtures/build.json').pipe(res);
-});
+// fixtures.get('/build.json', function(req, res) {
+//   fs.createReadStream(__dirname + '/fixtures/build.json').pipe(res);
+// });
 
-fixtures.get('/node.json', function(req, res) {
-  fs.createReadStream(__dirname + '/fixtures/node.json').pipe(res);
-});
+// fixtures.get('/node.json', function(req, res) {
+//   fs.createReadStream(__dirname + '/fixtures/node.json').pipe(res);
+// });
 
-fixtures.get('/wireless.html', function(req, res) {
-  fs.createReadStream(__dirname + '/fixtures/wireless.html').pipe(res);
-});
+// fixtures.get('/wireless.html', function(req, res) {
+//   fs.createReadStream(__dirname + '/fixtures/wireless.html').pipe(res);
+// });
 
-before(function(done) {
-  fixtures.listen(8080, done);
-});
+// before(function(done) {
+//   fixtures.listen(8080, done);
+// });
 
 describe('app', function() {
 
