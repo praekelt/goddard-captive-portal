@@ -35,15 +35,8 @@ function construct_changes(current, desired) {
 function apply_changes(add, remove) {
   if (add.length || remove.length) {
     ftp_config_changes(add.concat(remove).join('\n'), function(err) {
-      if (err) {
-        console.log('error', err);
-        process.exit(99);
-      } else {
-        process.exit(0);
-      }
+      if (err) console.log('error', err);
     });
-  } else {
-    process.exit(0);
   }
 }
 
