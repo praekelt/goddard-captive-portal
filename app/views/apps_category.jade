@@ -24,7 +24,7 @@ block content
         each medium, i in category.media
 
           li(class="category-list-item")
-            img(class="w-20 category-list-thumbnail", src="/static/img/allthumbs/#{medium.thumbnail + '.png'}")
+            img(class="w-20 category-list-thumbnail", src="http://data.goddard.com/media/#{medium.uri + '.png'}")
             div(class="w-50")
               h5(class="category-list-item-heading") #{medium.name}
               p(class="category-subtext") #{medium.description.slice(0, 60)}&hellip;

@@ -9,7 +9,7 @@ exports.apps = function(done) {
   fs.exists(__dirname + '/../../test/fixtures/apps.json', function(exists) {
     if (!exists) {
       console.log('apps.json not found. fetching from host and writing to disk...');
-      http.get(process.env.NODE_APPS_JSON || 'http://localhost:8080/apps.json', function(res) {
+      http.get(process.env.NODE_APPS_JSON || 'http://localhost:1337/apps.json', function(res) {
         var apps = '';
         res.on('data', function(data) {
           apps += data;
@@ -71,5 +71,5 @@ exports.fixtures = function(done) {
     fs.createReadStream(__dirname + '/../../test/fixtures/wireless.html').pipe(res);
   })
 
-  fixtures.listen(8080, done);
+  fixtures.listen(1337, done);
 };
