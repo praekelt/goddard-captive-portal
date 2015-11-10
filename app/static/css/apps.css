@@ -74,10 +74,6 @@ main {}
 
 .category-list-thumbnail {
   width: 25%;
-  height: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 .category-list ul {
   list-style-type: none;
@@ -85,7 +81,8 @@ main {}
 }
 
 .category-list-item {
-  height: 100px;
+  height: fit-content;
+  margin-bottom: 5px;
   border-left: 4px solid #B60085;
   border-top: 1px solid #fff;
   background-color: #F3F4F6;
@@ -93,7 +90,7 @@ main {}
 
 .category-list-item > * {
   display: inline-block;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 .category-list-item .w-50 {
@@ -500,26 +497,22 @@ main {}
 }
 
 .did-you-know {
-  padding: 10px;
   width: 100%;
   display: inline-block;
+  padding: 5px;
 }
 
 .did-you-know-image {
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 160px;
-  height: 136px;
-  background-size: contain;
+  width: 50%;
   display: inline-block;
   vertical-align: top;
 }
 .did-you-know-text {
-  padding: 7px;
-  background-color: #B80087;
-  color: #fff;
-  width: 136px;
-  height: 136px;
+  padding: 10px;
+  background-color: #E06EC2;
+  color: #E06EC2 !important;
+  width: 50%;
+  text-shadow: 0 0 1px #9f9f9f;
   display: inline-block;
 }
 .did-you-know-heading {
@@ -543,7 +536,7 @@ main {}
   display: inline-block;
   width: 100%;
   height: 120px;
-  border: 1px solid red;
+  border: 1px solid #555;
 }
 
 *, * + * {
