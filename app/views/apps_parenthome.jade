@@ -9,6 +9,6 @@ block content
   p(class="select-a-topic") Select a topic:
   ul(class="home-menu")
     each category in categories
-      li: a(href=category.uri)
+      li: a(href="/healthcare-worker-training/#{category.uri}")
         span(class="icon", style="background-image: url(#{category.thumbnail})")
         span(class="title") #{category.name}
