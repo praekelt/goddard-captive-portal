@@ -38,7 +38,7 @@ if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
   // but run it once, immediately
   boot.whitelist();
 } else {
-  return boot.fixtures(function() {
+  // return boot.fixtures(function() {
     boot.apps(function(err) {
       if (err) {
         console.log(err);
@@ -51,7 +51,7 @@ if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
         module.exports = app;
       });
     });
-  });
+  // });
 }
 
 boot.apps(function(err) {
