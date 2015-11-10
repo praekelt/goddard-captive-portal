@@ -5,10 +5,11 @@ block title
 
 block content
 
+  p(class="select-a-topic") Healthcare Worker Training
   a(class="hcwt-banner", href="/healthcare-worker-training/all-videos")
   p(class="select-a-topic") Select a topic:
   ul(class="home-menu")
     each category in categories
-      li: a(href=category.uri)
+      li: a(href="healthcare-worker-training/#{category.uri}")
         span(class="icon", style="background-image: url(#{category.thumbnail})")
         span(class="title") #{category.name}

@@ -15,19 +15,20 @@ block content
         each site in category.sites
 
           li(class="category-list-item")
-            div(class="w-20 category-list-thumbnail", style="background-image: url(#{site.thumbnail});")
+            img(class="w-20 category-list-thumbnail", src=site.thumbnail)
             div(class="w-50")
               h5(class="category-list-item-heading")= site.name
               p(class="category-subtext") #{site.description.slice(0, 60)}&hellip;
               a(class="category-list-link", href=site.uri) + Visit this site
-            div(class="w-20 right category-list-icon category-list-icon-arrow")
-
+            img(style="width: 20%;", src="/static/img/icons/icon_arrow.png")
         each medium, i in category.media
 
           li(class="category-list-item")
-            div(class="w-20 category-list-thumbnail", style="background-image: url(http://data.goddard.com/media/#{medium.uri + '.png'});")
+            img(class="w-20 category-list-thumbnail", src="/static/img/allthumbs/#{medium.thumbnail + '.png'}")
             div(class="w-50")
               h5(class="category-list-item-heading") #{medium.name}
               p(class="category-subtext") #{medium.description.slice(0, 60)}&hellip;
               a(class="category-list-link", href="./#{category.uri}/video/#{i}") + Watch this video
-            div(class="w-20 right category-list-icon category-list-icon-play")
+            //-div(class="w-20 right category-list-icon category-list-icon-play")
+            img(style="width: 20%;", src="/static/img/icons/icon_play.png")
+

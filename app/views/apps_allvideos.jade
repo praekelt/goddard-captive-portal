@@ -17,7 +17,7 @@ block content
           ul
             each medium, k in category.media
               li(class="category-list-item")
-                img(class="w-20 category-list-thumbnail", src="http://data.goddard.com/media/#{medium.uri}.png", alt="media thumbnail")
+                img(class="w-20 category-list-thumbnail", src="/static/img/allthumbs/#{medium.thumbnail}.png", alt="media thumbnail")
                 div(class="category-list-item-meta")
                   h5(class="category-list-item-heading") #{medium.name}
                   p(class="category-subtext") #{medium.description.slice(0, 70)}&hellip;
