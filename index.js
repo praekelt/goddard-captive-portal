@@ -32,7 +32,7 @@ app.set('view engine', 'jade');
 app.use('/static', express.static(paths.static));
 app.use(require('body-parser').urlencoded({extended: true}));
 
-if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
+if (process.env.NODE_ENV.indexOf('prod') !== -1) {
   // set up the mikrotik configure functions to run every two hours
   setInterval(boot.whitelist, 7200000);
   // but run it once, immediately
