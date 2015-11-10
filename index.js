@@ -37,8 +37,10 @@ if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
   setInterval(boot.whitelist, 7200000);
   // but run it once, immediately
   boot.whitelist();
-} else {
-  // return boot.fixtures(function() {
+}
+
+if ((process.env.NODE_ENV.indexOf('test') > -1)) {
+  boot.fixtures(function() {
     boot.apps(function(err) {
       if (err) {
         console.log(err);
@@ -51,18 +53,19 @@ if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
         module.exports = app;
       });
     });
-  // });
+  });
+} else {
+  boot.apps(function(err) {
+    if (err) {
+      console.log(err);
+      process.exit(1);
+    }
+    console.log('apps.json already present, continuing...');
+    require('./app/routes')(app);
+    app.listen(port, function() {
+      console.log("✔ server listening at localhost:%s in %s mode...", port, env);
+      module.exports = app;
+    });
+  });
 }
 
-boot.apps(function(err) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-  console.log('apps.json already present, continuing...');
-  require('./app/routes')(app);
-  app.listen(port, function() {
-    console.log("✔ server listening at localhost:%s in %s mode...", port, env);
-    module.exports = app;
-  });
-});
