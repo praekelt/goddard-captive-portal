@@ -61,7 +61,7 @@ describe('app', function() {
 
       describe('allowed methods', function() {
         it('should respond to get', function () {
-          var request = chakram.get('http://localhost:4321/status');
+          var request = chakram.get('http://localhost:3000/status');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
@@ -70,25 +70,25 @@ describe('app', function() {
       describe('disallowed methods', function() {
 
         it('should not respond to post', function() {
-          var request = chakram.post('http://localhost:4321/status');
+          var request = chakram.post('http://localhost:3000/status');
           chakram.expect(request).to.have.status(404);
           return chakram.wait();
         });
 
         it('should not respond to put', function() {
-          var request = chakram.put('http://localhost:4321/status');
+          var request = chakram.put('http://localhost:3000/status');
           chakram.expect(request).to.have.status(404);
           return chakram.wait();
         });
 
         it('should not respond to patch', function() {
-          var request = chakram.patch('http://localhost:4321/status');
+          var request = chakram.patch('http://localhost:3000/status');
           chakram.expect(request).to.have.status(404);
           return chakram.wait();
         });
 
         it('should not respond to delete', function() {
-          var request = chakram.delete('http://localhost:4321/status');
+          var request = chakram.delete('http://localhost:3000/status');
           chakram.expect(request).to.have.status(404);
           return chakram.wait();
         });
@@ -98,37 +98,37 @@ describe('app', function() {
     describe('/', function() {
       describe('allowed methods', function() {
         it('should respond to get', function() {
-          var request = chakram.get('http://localhost:4321/');
+          var request = chakram.get('http://localhost:3000/');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
         it('should respond to post', function() {
-          var request = chakram.post('http://localhost:4321/');
+          var request = chakram.post('http://localhost:3000/');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
         it('should respond to put', function() {
-          var request = chakram.put('http://localhost:4321/');
+          var request = chakram.put('http://localhost:3000/');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
         it('should respond to patch', function() {
-          var request = chakram.patch('http://localhost:4321/');
+          var request = chakram.patch('http://localhost:3000/');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
         it('should respond to options', function() {
-          var request = chakram.options('http://localhost:4321/');
+          var request = chakram.options('http://localhost:3000/');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
         it('should respond to head', function() {
-          var request = chakram.head('http://localhost:4321/');
+          var request = chakram.head('http://localhost:3000/');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
         it('should respond to delete', function() {
-          var request = chakram.delete('http://localhost:4321/');
+          var request = chakram.delete('http://localhost:3000/');
           chakram.expect(request).to.have.status(200);
           return chakram.wait();
         });
