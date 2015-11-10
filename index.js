@@ -39,7 +39,7 @@ if (!(process.env.NODE_ENV.indexOf('test') > -1)) {
   boot.whitelist();
 }
 
-if ((process.env.NODE_ENV.indexOf('test') > -1)) {
+if (process.env.NODE_TEST_FIXTURES) {
   boot.fixtures(function() {
     boot.apps(function(err) {
       if (err) {
