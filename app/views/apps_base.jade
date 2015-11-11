@@ -45,7 +45,7 @@ html(lang="en")
         div(class="collapse navbar-collapse", id="bs-collapse-menu")
           ul(class="nav navbar-nav")
             each item in menu
-              li(class=current === item.uri ? 'active' : '')
+              li(class=currentCategory === item.uri ? 'active' : '')
                 a(href=item.uri) #{item.name}
 
     if (notIndexPage)
@@ -61,7 +61,7 @@ html(lang="en")
       p(class="menu-title") Menu
       ul(class="nav nav-pills nav-stacked")
         each item in menu
-          li(class=current === item.uri ? 'active' : '')
+          li(class=currentCategory === item.uri ? 'active' : '')
             a(href=item.uri) #{item.name}
 
     section(class="swatch") !{bottomSwatch}
