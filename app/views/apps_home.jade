@@ -8,8 +8,8 @@ block content
   section(class="did-you-know")
     img(class="did-you-know-image", src=dyk.image)
     div(class="did-you-know-text")
-      h5(class="did-you-know-heading") Did you know
-      p(class="did-you-know-question") #{dyk.question}
+      h6(class="did-you-know-heading") Did you know
+      h5(class="did-you-know-question")= dyk.question
       a(class="did-you-know-link", href=dyk.category.uri) Watch videos about #{dyk.category.name.toLowerCase()} here
   p(class="select-a-topic") Select a topic
   ul(class="home-menu")

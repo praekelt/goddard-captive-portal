@@ -12,7 +12,7 @@ block content
     img(class="did-you-know-image", src=hcwt.image)
     div(class="did-you-know-text")
       h6(class="did-you-know-heading") Did you know
-      h5(class="did-you-know-question") #{hcwt.question}
+      h5(class="did-you-know-question")= hcwt.question
       a(class="did-you-know-link", href=hcwt.category.uri) Watch videos about #{hcwt.category.name.toLowerCase()} here
   p(class="select-a-topic") Select a topic:
   ul(class="home-menu")
