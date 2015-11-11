@@ -111,35 +111,48 @@ function registerAllParentCategories() {
   var menu = this.get('apps.content.menu');
   haveCategories.forEach(function(listing) {
     var uri = route + listing.uri;
+    var childCategoryMenu = [
+
+
+
+      // do we want this to point to the home page or the top level of this category?
+      {name: 'Start Page', uri: route /* <-- homepage, category --> `uri` */},
+
+
+
+      {name: 'All Videos', uri: uri + '/all-videos'}
+    ].concat(
+      listing.categories.map(function(category) {
+        return {name: category.name, uri: uri + '/' + category.uri};
+      })
+    );
+
     this.all(uri, function(req, res) {
       res.render('apps_parenthome', {
-        menu: [{
-          name: 'Start Page', uri: route
-        }, {
-          name: 'All Videos', uri: route + 'healthcare-worker-training/all-videos'
-        }].concat(listing.categories.map(function(category) {
-          return {name: category.name, uri: 'healthcare-worker-training/' + category.uri};
-        })),
+        menu: childCategoryMenu,
         notIndexPage: true,
         category: listing,
         current: uri,
         parent: route,
         categories: listing.categories,
-        hcwt: apps.hcwt[0]
+        hcwt: apps.hcwt[0],
+        currentCategory: uri
       });
     });
     this.all(uri + '/all-videos', function(req, res) {
       res.render('apps_listing', {
-        menu: menu,
+        menu: childCategoryMenu,
         notIndexPage: true,
         category: listing,
         heading: listing.name,
         current: uri + '/all-videos',
         parent: uri,
-        categories: listing.categories
+        categories: listing.categories,
+        currentCategory: uri + '/all-videos'
       });
     });
     listing.categories.forEach(function(category) {
+      category.menu = childCategoryMenu;
       registerChildCategory.call(this, category, uri);
     }, this);
   }, this);
@@ -149,14 +162,15 @@ function registerAllTopLevelCategories() {
   var dontHave = this.get('apps.content.dontHaveCategories');
   var menu = this.get('apps.content.menu');
   dontHave.forEach(function(category) {
-    registerCategoryMedia.call(this, category.media || [], route + category.uri, category.name);
+    registerCategoryMedia.call(this, category, route + category.uri);
     this.all(route + category.uri, function(req, res) {
       res.render('apps_category', {
         menu: menu,
         current: route + category.uri,
         parent: route,
         category: category,
-        notIndexPage: true
+        notIndexPage: true,
+        currentCategory: route + category.uri
       });
     });
   }, this);
@@ -165,28 +179,30 @@ function registerAllTopLevelCategories() {
 function registerChildCategory(category, parentUri) {
   var menu = this.get('apps.content.menu');
   var uri = parentUri + '/' + category.uri;
-  registerCategoryMedia.call(this, category.media || [], uri, category.name);
+  registerCategoryMedia.call(this, category, uri);
   this.all(uri, function(req, res) {
     res.render('apps_category', {
-      menu: menu,
+      menu: category.menu || menu,
       notIndexPage: true,
       current: uri,
       parent: parentUri,
-      category: category
+      category: category,
+      currentCategory: uri
     });
   });
 }
 
-function registerCategoryMedia(media, parentUri, categoryName) {
+function registerCategoryMedia(category, parentUri) {
   var menu = this.get('apps.content.menu');
-  media.forEach(function(medium, i) {
+  (category.media || []).forEach(function(medium, i) {
     this.all(parentUri + '/video/' + i, function(req, res) {
       res.render('apps_medium', {
-        menu: menu,
+        menu: category.menu || menu,
         parent: parentUri,
         medium: medium,
-        categoryName: categoryName,
-        notIndexPage: true
+        categoryName: category.name,
+        notIndexPage: true,
+        currentCategory: parentUri
       });
     });
   }, this);
@@ -197,13 +213,14 @@ function registerMediaListing() {
   var topLevelCategoriesWithMedia = this.get('apps.content.dontHaveCategories').filter(function(category) {
     return category.media && category.media.length;
   });
-  this.all('/all-videos', function(req, res) {
+  this.all(route + 'all-videos', function(req, res) {
     res.render('apps_allvideos', {
       menu: menu,
-      current: '/all-videos',
+      current: route + 'all-videos',
       categories: topLevelCategoriesWithMedia,
       parent: route,
-      notIndexPage: true
+      notIndexPage: true,
+      currentCategory: route + 'all-videos'
     });
   });
 }
@@ -222,7 +239,8 @@ function init(manifest) {
       current: route,
       notIndexPage: false,
       category: {name: 'mamaconnect', uri: route},
-      menu: this.get('apps.content.menu')
+      menu: this.get('apps.content.menu'),
+      currentCategory: route
     });
   }.bind(this));
 }
