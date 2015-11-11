@@ -13,9 +13,8 @@ block content
       video(
         id="medium-video",
         src="http://data.goddard.com/media/#{medium.uri}",
-        poster="/static/img/allthumbs/#{medium.thumbnail}.png",
-        preload="metadata",
-        controls, autobuffer
+        poster="http://data.goddard.com/media/#{medium.uri}.png",
+        preload="metadata", controls, autobuffer
       )
 
     section(class="medium-meta")
@@ -25,14 +24,21 @@ block content
       p(class="uppercase") Source: #[a(class="medium-source-link", href=medium.source) here]
       div(class="rounded-block")
         i(class="medium-download")
-        a(class="medium-download-link", href="http://data.goddard.com/media/#{medium.uri}", download) Save this video to my phone
+        a(
+          class="medium-download-link",
+          href="http://data.goddard.com/media/#{medium.uri}",
+          download
+        ) Save this video to my phone
 
     div(class="medium-watch-more")
       a(class="medium-watch-more-link", href=parent) Watch more videos about #{categoryName.toLowerCase()}&hellip;
 
     script.
+      var video = document.getElementById('medium-video');
+      video.onclick = function(e) {
+        return e.target.paused ? e.target.play() : e.target.pause();
+      };
       document.getElementById('play-video').onclick = function(e) {
-        var video = document.getElementById('medium-video');
         location.assign('#medium-video');
         return video.paused ? video.play() : undefined;
       };
