@@ -40,15 +40,19 @@ function checkMediaAvailability() {
       res.on('data', function(data) {
         headResponse += data;
       }).on('end', function() {
-        // if (res.statusCode === 404) { // god, this is ugly ._.
-        //   if (!this.ccI) {
-        //     if (!apps.categories[this.cI].media) return done();
-        //     apps.categories[this.cI].media.splice(this.mI, 1);
-        //   } else {
-        //     apps.categories[this.cI].categories[this.ccI].media.splice(this.mI, 1);
-        //   }
-        //   return done();
-        // }
+
+        // we only want to remove media from the manifest if we're in production
+        if (process.env.NODE_ENV.indexOf('prod') > -1 && res.statusCode === 404) {
+          if (!this.ccI) {
+            if (!apps.categories[this.cI].media) return done();
+            apps.categories[this.cI].media.splice(this.mI, 1);
+          } else {
+            apps.categories[this.cI].categories[this.ccI].media.splice(this.mI, 1);
+          }
+          return done();
+        }
+
+        // otherwise, don't mangle the manifest
         if (this.ccI) {
           var media = apps.categories[this.cI].categories[this.ccI].media;
           if (!media) return done();
@@ -114,13 +118,14 @@ function registerAllParentCategories() {
         }, {
           name: 'All Videos', uri: route + 'healthcare-worker-training/all-videos'
         }].concat(listing.categories.map(function(category) {
-          return {name: category.name, uri: category.uri};
+          return {name: category.name, uri: 'healthcare-worker-training/' + category.uri};
         })),
         notIndexPage: true,
         category: listing,
         current: uri,
         parent: route,
-        categories: listing.categories
+        categories: listing.categories,
+        hcwt: apps.hcwt[0]
       });
     });
     this.all(uri + '/all-videos', function(req, res) {
