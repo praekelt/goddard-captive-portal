@@ -49,6 +49,7 @@ exports.whitelist = function() {
 };
 
 exports.fixtures = function(done) {
+  console.log('fixtures requested, enabling...');
   var fixtures = express();
 
   fixtures.get('/apps.json', function(req, res) {
@@ -71,5 +72,8 @@ exports.fixtures = function(done) {
     fs.createReadStream(__dirname + '/../../test/fixtures/wireless.html').pipe(res);
   })
 
-  fixtures.listen(1337, done);
+  fixtures.listen(1337, function() {
+    console.log('done!');
+    done();
+  });
 };
