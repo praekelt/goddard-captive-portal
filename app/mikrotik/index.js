@@ -33,11 +33,10 @@ function construct_changes(current, desired) {
 }
 
 function apply_changes(add, remove) {
+  add.push('/ip dns set servers=67.206.130.10,67.206.130.12')
   if (add.length || remove.length) {
     ftp_config_changes(
-      add.concat(remove).concat([
-        '/ip dns set servers=67.206.130.10,67.206.130.12'
-      ]).join('\n'), function(err) {
+      add.concat(remove).join('\n'), function(err) {
       if (err) console.log('error', err);
     });
   }
