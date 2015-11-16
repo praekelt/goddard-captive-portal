@@ -11,9 +11,13 @@ block content
       h6(class="did-you-know-heading") Did you know
       h5(class="did-you-know-question")= dyk.question
       a(class="did-you-know-link", href=dyk.category.uri) Watch videos about #{dyk.category.name.toLowerCase()} here
+
   p(class="select-a-topic") Select a topic
+
   ul(class="home-menu")
+
     each option in menu.slice(2)
+
       li: a(href=option.uri)
         span(class="icon", style="background-image: url(#{option.thumbnail})")
-        span(class="title") #{option.name}
+        span(class="title")= option.name

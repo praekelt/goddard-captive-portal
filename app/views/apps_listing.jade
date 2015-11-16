@@ -12,14 +12,14 @@ block content
     each category, i in categories
       section(class="category")
         header(class="category-header")
-          h3(class="category-heading") #{category.name}
+          h3(class="category-heading")= category.name
         section(class="category-list")
           ul
 
             if (category.sites)
 
               each site in category.sites
-                li(class="category-list-item")
+                li(class="category-list-item", onclick="location.assign('#{site.uri}');")
                   img(
                     class="w-20 category-list-thumbnail",
                     src=site.thumbnail,
@@ -32,7 +32,7 @@ block content
                   div(class="w-20 right category-list-icon category-list-icon-arrow")
 
             each medium, k in category.media
-              li(class="category-list-item")
+              li(class="category-list-item", onclick="location.assign('#{parent}/#{category.uri}/video/#{k}');")
                 img(
                   class="w-20 category-list-thumbnail",
                   src="http://data.goddard.com/media/#{medium.uri}.png",
@@ -42,7 +42,7 @@ block content
                   if (medium.name.length >= 35)
                     h5(class="category-list-item-heading") #{medium.name.slice(0, 35)}&hellip;
                   else
-                    h5(class="category-list-item-heading") #{medium.name}
+                    h5(class="category-list-item-heading")= medium.name
                   p(class="category-subtext") #{medium.description.slice(0, 50)}&hellip;
-                  a(class="category-list-link", href=parent + '/#{category.uri}/video/#{k}') + Watch this video
+                  a(class="category-list-link", href="#{parent}/#{category.uri}/video/#{k}") + Watch this video
                 div(class="w-20 right category-list-icon category-list-icon-play")
