@@ -112,14 +112,7 @@ function registerAllParentCategories() {
   haveCategories.forEach(function(listing) {
     var uri = route + listing.uri;
     var childCategoryMenu = [
-
-
-
-      // do we want this to point to the home page or the top level of this category?
       {name: 'Start Page', uri: route /* <-- homepage, category --> `uri` */},
-
-
-
       {name: 'All Videos', uri: uri + '/all-videos'}
     ].concat(
       listing.categories.map(function(category) {
