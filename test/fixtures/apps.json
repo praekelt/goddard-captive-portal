@@ -75,13 +75,13 @@
           "name": "Learning about Living",
           "uri": "http://www.learningaboutliving.com/south/young_people/Human_Development/pregnancy_and_childbirth/_pid/content/_rp_content_activitytype/1_info?server=south",
           "description": "Learning about Living, the electronic version of FLHE, is based on the Nigerian Family Life and HIV/AIDS Education (FLHE) curriculum. FLHE Curriculum was developed by the NERDC as the National Agency for Curriculum development in the education sector in Nigeria in collaboration with the Universal Basic Education, Federal Ministry of Education and Action Health Incorporated. This product is used in schools across Nigeria. It is specifically designed to work on any regular computer plus the One Laptop per Child, Classmate PCs and Government computer programs.",
-          "thumbnail": "?"
+          "thumbnail": "/static/img/logo/learning-about-living.png"
         },
         {
           "name": "Breastfeeding: An Optimal Way to Space Babies",
           "uri": "http://www.lalecheleague.org/nb/nbsepoct08p4.html",
           "description": "Sheila Kippley explains more about the relationship between breastfeeding and fertility in her newest book, The Seven Standards of Ecological Breastfeeding. Not everyone will want to practice what Kippley calls \"ecological breastfeeding\" or to use breastfeeding to space their children, but her book explains what that means for mothers. The book is excerpted in this article. Ecological breastfeeding is the form of nursing in which the mother fulfills her baby's needs for frequent suckling and her full-time presence and in which the child's frequent suckling postpones the return of the mother's fertility.",
-          "thumbnail": "?"
+          "thumbnail": "/static/img/logo/la-leche-league-international.png"
         }
       ]
     },
@@ -270,7 +270,7 @@
         {
           "name": "Breastfeeding Tips & Guide",
           "uri": "http://babychangingstation.com/breastfeeding/",
-          "thumbnail": "?",
+          "thumbnail": "/static/img/logo/baby-changing-station.png",
           "description": "Comprehensive overview of breastfeeding, including: benefits of breastfeeding on mothers and babies, tips for your first breastfeeding experiences, answers to common questions about breastfeeding, etc."
         }
       ]
@@ -697,13 +697,13 @@
             {
               "name": "Primary Maternal Care",
               "uri": "http://ls.bettercare.co.za/primary-maternal-care/0-3-contents.html",
-              "thumbnail": "?",
+              "thumbnail": "/static/img/logo/primary-maternal-care.png",
               "description": "Primary Maternal Care is for midwives and doctors in level 1 hospitals and clinics who provide antenatal and postnatal care, but do not conduct deliveries. It is adapted from theory chapters and skills workshops from [*Maternal Care*](http://bettercare.co.za/books/maternal-care/], and complements the national protocol for antenatal care in South Africa. It covers antenatal care, assessment of fetal growth and condition during pregnancy, hypertensive disorders of pregnancy, antepartum haemorrhage, preterm labour and preterm rupture of the membrames, the puerperium and family planning, and medical problems during pregnancy and the puerperium."
             },
             {
               "name": "Global Health eLearning Centre",
               "uri": "http://www.globalhealthlearning.org/certificate-programs",
-              "thumbnail": "?",
+              "thumbnail": "/static/img/logo/global-health-learning-center.png",
               "description": "The Global Health eLearning Center courses are organized into Certificate Programs to help you focus your learning with a more comprehensive study of key topics of global health. You can earn a certificate in a variety of global health areas by successfully completing all courses within a program area. As always, specific course certificates are available on an individual course basis. Certificates Programs will be expanded as new courses are developed."
             }
           ]
