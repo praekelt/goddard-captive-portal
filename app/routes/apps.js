@@ -56,11 +56,11 @@ function checkMediaAvailability() {
         if (this.ccI) {
           var media = apps.categories[this.cI].categories[this.ccI].media;
           if (!media) return done();
-          media[this.mI].available = parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
+          media[this.mI].available = res.statusCode === 200 && parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
         } else {
           var media = apps.categories[this.cI].media;
           if (!media) return done();
-          media[this.mI].available = parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
+          media[this.mI].available = res.statusCode === 200 && parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
         }
         done();
       }.bind(this));
