@@ -70,7 +70,7 @@ exports.fixtures = function(done) {
 
   fixtures.get('/wireless.html', function(req, res) {
     fs.createReadStream(__dirname + '/../../test/fixtures/wireless.html').pipe(res);
-  })
+  });
 
   fixtures.listen(1337, function() {
     console.log('done!');
