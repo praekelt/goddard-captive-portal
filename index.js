@@ -34,7 +34,7 @@ app.use(require('body-parser').urlencoded({extended: true}));
 
 if (process.env.NODE_ENV.indexOf('prod') !== -1) {
   // set up the mikrotik configure functions to run every two hours
-  setInterval(boot.whitelist, 7200000);
+  setInterval(boot.whitelist, 1000 * 60 * 60 * 3);
   // but run it once, immediately
   boot.whitelist();
 }
