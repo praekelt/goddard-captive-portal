@@ -32,17 +32,18 @@ block content
                   div(class="w-20 right category-list-icon category-list-icon-arrow")
 
             each medium, k in category.media
-              li(class="category-list-item", onclick="location.assign('#{parent}/#{category.uri}/video/#{k}');")
-                img(
-                  class="w-20 category-list-thumbnail",
-                  src="http://data.goddard.com/media/#{medium.uri}.png",
-                  alt="media thumbnail"
-                )
-                div(class="w-50")
-                  if (medium.name.length >= 35)
-                    h5(class="category-list-item-heading") #{medium.name.slice(0, 35)}&hellip;
-                  else
-                    h5(class="category-list-item-heading")= medium.name
-                  p(class="category-subtext") #{medium.description.slice(0, 50)}&hellip;
-                  a(class="category-list-link", href="#{parent}/#{category.uri}/video/#{k}") + Watch this video
-                div(class="w-20 right category-list-icon category-list-icon-play")
+              if (medium.available)
+                li(class="category-list-item", onclick="location.assign('#{parent}/#{category.uri}/video/#{k}');")
+                  img(
+                    class="w-20 category-list-thumbnail",
+                    src="http://data.goddard.com/media/#{medium.uri}.png",
+                    alt="media thumbnail"
+                  )
+                  div(class="w-50")
+                    if (medium.name.length >= 35)
+                      h5(class="category-list-item-heading") #{medium.name.slice(0, 35)}&hellip;
+                    else
+                      h5(class="category-list-item-heading")= medium.name
+                    p(class="category-subtext") #{medium.description.slice(0, 50)}&hellip;
+                    a(class="category-list-link", href="#{parent}/#{category.uri}/video/#{k}") + Watch this video
+                  div(class="w-20 right category-list-icon category-list-icon-play")
