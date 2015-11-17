@@ -27,6 +27,7 @@ function rewriteManifest(init) {
 }
 
 function checkMediaAvailability() {
+  if (process.env.NODE_TRAVIS === 'yes') return rewriteManifest(true);
   process.emit('console:log', 'running head requests on media resources');
   function head(done) {
     return http.request({
