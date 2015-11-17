@@ -12,8 +12,8 @@ block content
     div(class="medium-video")
       video(
         id="medium-video",
-        src="http://data.goddard.com/media/#{medium.uri}",
-        poster="http://data.goddard.com/media/#{medium.uri}.png",
+        src="#{mediaHost}/#{medium.uri}",
+        poster="#{mediaHost}/#{medium.uri}.png",
         preload="metadata", controls, autobuffer
       )
 
