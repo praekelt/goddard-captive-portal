@@ -8,32 +8,6 @@ var chai = require('chai'),
     express = require('express'),
     app;
 
-// var fixtures = express();
-
-// fixtures.get('/apps.json', function(req, res) {
-//   fs.createReadStream(__dirname + '/fixtures/apps.json').pipe(res);
-// });
-
-// fixtures.get('/status.json', function(req, res) {
-//   fs.createReadStream(__dirname + '/fixtures/status.json').pipe(res);
-// });
-
-// fixtures.get('/build.json', function(req, res) {
-//   fs.createReadStream(__dirname + '/fixtures/build.json').pipe(res);
-// });
-
-// fixtures.get('/node.json', function(req, res) {
-//   fs.createReadStream(__dirname + '/fixtures/node.json').pipe(res);
-// });
-
-// fixtures.get('/wireless.html', function(req, res) {
-//   fs.createReadStream(__dirname + '/fixtures/wireless.html').pipe(res);
-// });
-
-// before(function(done) {
-//   fixtures.listen(8080, done);
-// });
-
 describe('app', function() {
 
   before(function(done) {
@@ -96,6 +70,14 @@ describe('app', function() {
     });
 
     describe('/', function() {
+
+      before(function(done) {
+        // the content system takes a while
+        // to initialise...this is really dirty
+        // but it's a temporary fix, for now.
+        setTimeout(done, 10000);
+      });
+
       describe('allowed methods', function() {
         it('should respond to get', function() {
           var request = chakram.get('http://localhost:3000/');
