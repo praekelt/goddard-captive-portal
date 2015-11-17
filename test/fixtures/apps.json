@@ -27,6 +27,12 @@
       "media": [],
       "sites": [
         {
+          "name": "",
+          "uri": "https://dhis2nigeria.org.ng/dhis/dhis-web-commons/security/login.action",
+          "thumbnail": "/static/img/logo/dhis.png",
+          "description": "The Nigerian National Health Management Information System"
+        },
+        {
           "name": "WIKI Schools",
           "uri": "http://data.goddard.com/apps/wikipedia-for-schools/index.html",
           "thumbnail": "/static/img/logo/wikipedia-for-schools.jpg",
@@ -49,24 +55,24 @@
           "name": "Growing Up",
           "source": "http://medicalaidfilms.org/our-films/sexual-reproductive-health/?v=129781422",
           "available": false,
-          "size": 22335209,
-          "uri": "gem/family_health/Growing%20up.mp4",
+          "size": 22502649,
+          "uri": "gem/family_health/Growing%20up.mp4.3gp",
           "description": "This film is about the physical and emotional changes that take place during puberty. Shot in Kibera, Kenya, the film follows Marci – a health worker and peer educator, who works with young adults in her community to share knowledge and education about sexual health."
         },
         {
           "name": "How Babies Are Made",
           "available": false,
           "source": "http://medicalaidfilms.org/our-films/sexual-reproductive-health/?v=28679194",
-          "size": 62011537,
-          "uri": "gem/family_health/How%20Babies%20Are%20Made.mp4",
+          "size": 45872501,
+          "uri": "gem/family_health/How%20Babies%20Are%20Made.mp4.3gp",
           "description": "This is a film aimed at early teens and young adults. It describes what puberty is and how babies are made using a mixture of animation and expert advice as well as from vox-pops from young men and women in Nairobi."
         },
         {
           "name": "How To Plan Pregnancy",
           "available": false,
           "source": "http://medicalaidfilms.org/our-films/sexual-reproductive-health/?v=28681656",
-          "size": 63448633,
-          "uri": "gem/family_health/How%20to%20Plan%20Pregnancy.mp4",
+          "size": 51473572,
+          "uri": "gem/family_health/How%20to%20Plan%20Pregnancy.mp4.3gp",
           "description": "This film is aimed at teenagers and young adults and presents the various methods available to plan a pregnancy."
         }
       ],
@@ -414,7 +420,41 @@
               "description": "This film shows the essential features of a referral process. It covers involving the family, arranging transport, preparing the baby for the journey, and writing the referral note. It also includes what to do if referral is not an option."
             }
           ],
-          "sites": []
+          "sites": [],
+          "menu": [
+            {
+              "name": "Start Page",
+              "uri": "/"
+            },
+            {
+              "name": "All Videos",
+              "uri": "/healthcare-worker-training/all-videos"
+            },
+            {
+              "name": "Newborn & Child Health",
+              "uri": "/healthcare-worker-training/newborn-and-child-health"
+            },
+            {
+              "name": "Labour & Delivery",
+              "uri": "/healthcare-worker-training/labour-and-delivery"
+            },
+            {
+              "name": "Medication & Dosage Delivery",
+              "uri": "/healthcare-worker-training/medication-and-dosage-delivery"
+            },
+            {
+              "name": "Diseases",
+              "uri": "/healthcare-worker-training/diseases"
+            },
+            {
+              "name": "Medical Procedures",
+              "uri": "/healthcare-worker-training/medical-procedures"
+            },
+            {
+              "name": "More Healthcare Training",
+              "uri": "/healthcare-worker-training/more-healthcare-training"
+            }
+          ]
         },
         {
           "name": "Labour & Delivery",
@@ -534,7 +574,41 @@
               "description": "This film shows how to evaluate the baby with an umbilical infection, how to differentiate a mild infection from a severe one, and how to treat the mild case and refer all severe cases to a higher-level facility."
             }
           ],
-          "sites": []
+          "sites": [],
+          "menu": [
+            {
+              "name": "Start Page",
+              "uri": "/"
+            },
+            {
+              "name": "All Videos",
+              "uri": "/healthcare-worker-training/all-videos"
+            },
+            {
+              "name": "Newborn & Child Health",
+              "uri": "/healthcare-worker-training/newborn-and-child-health"
+            },
+            {
+              "name": "Labour & Delivery",
+              "uri": "/healthcare-worker-training/labour-and-delivery"
+            },
+            {
+              "name": "Medication & Dosage Delivery",
+              "uri": "/healthcare-worker-training/medication-and-dosage-delivery"
+            },
+            {
+              "name": "Diseases",
+              "uri": "/healthcare-worker-training/diseases"
+            },
+            {
+              "name": "Medical Procedures",
+              "uri": "/healthcare-worker-training/medical-procedures"
+            },
+            {
+              "name": "More Healthcare Training",
+              "uri": "/healthcare-worker-training/more-healthcare-training"
+            }
+          ]
         },
         {
           "name": "Medication & Dosage Delivery",
@@ -582,7 +656,41 @@
               "description": "This is a film for health workers and communities providing safe newborn care. The film demonstrates how to effectively use chlorhexidine to provide safe umbilical cord care after birth. With thanks to the Chlorhexidine Working Group and GSK for their support."
             }
           ],
-          "sites": []
+          "sites": [],
+          "menu": [
+            {
+              "name": "Start Page",
+              "uri": "/"
+            },
+            {
+              "name": "All Videos",
+              "uri": "/healthcare-worker-training/all-videos"
+            },
+            {
+              "name": "Newborn & Child Health",
+              "uri": "/healthcare-worker-training/newborn-and-child-health"
+            },
+            {
+              "name": "Labour & Delivery",
+              "uri": "/healthcare-worker-training/labour-and-delivery"
+            },
+            {
+              "name": "Medication & Dosage Delivery",
+              "uri": "/healthcare-worker-training/medication-and-dosage-delivery"
+            },
+            {
+              "name": "Diseases",
+              "uri": "/healthcare-worker-training/diseases"
+            },
+            {
+              "name": "Medical Procedures",
+              "uri": "/healthcare-worker-training/medical-procedures"
+            },
+            {
+              "name": "More Healthcare Training",
+              "uri": "/healthcare-worker-training/more-healthcare-training"
+            }
+          ]
         },
         {
           "name": "Diseases",
@@ -606,7 +714,41 @@
               "description": "This film, made for a skilled healthworer audience, demonstrates how to perform the two visual inspection screening tests – Visual Inspection with Acetic Acid or VIA and Visual inspection with Lugol’s iodine or VILI."
             }
           ],
-          "sites": []
+          "sites": [],
+          "menu": [
+            {
+              "name": "Start Page",
+              "uri": "/"
+            },
+            {
+              "name": "All Videos",
+              "uri": "/healthcare-worker-training/all-videos"
+            },
+            {
+              "name": "Newborn & Child Health",
+              "uri": "/healthcare-worker-training/newborn-and-child-health"
+            },
+            {
+              "name": "Labour & Delivery",
+              "uri": "/healthcare-worker-training/labour-and-delivery"
+            },
+            {
+              "name": "Medication & Dosage Delivery",
+              "uri": "/healthcare-worker-training/medication-and-dosage-delivery"
+            },
+            {
+              "name": "Diseases",
+              "uri": "/healthcare-worker-training/diseases"
+            },
+            {
+              "name": "Medical Procedures",
+              "uri": "/healthcare-worker-training/medical-procedures"
+            },
+            {
+              "name": "More Healthcare Training",
+              "uri": "/healthcare-worker-training/more-healthcare-training"
+            }
+          ]
         },
         {
           "name": "Medical Procedures",
@@ -686,7 +828,41 @@
               "description": "This film shows how to take a small sample of blood for lab tests from the side of the heel of a baby."
             }
           ],
-          "sites": []
+          "sites": [],
+          "menu": [
+            {
+              "name": "Start Page",
+              "uri": "/"
+            },
+            {
+              "name": "All Videos",
+              "uri": "/healthcare-worker-training/all-videos"
+            },
+            {
+              "name": "Newborn & Child Health",
+              "uri": "/healthcare-worker-training/newborn-and-child-health"
+            },
+            {
+              "name": "Labour & Delivery",
+              "uri": "/healthcare-worker-training/labour-and-delivery"
+            },
+            {
+              "name": "Medication & Dosage Delivery",
+              "uri": "/healthcare-worker-training/medication-and-dosage-delivery"
+            },
+            {
+              "name": "Diseases",
+              "uri": "/healthcare-worker-training/diseases"
+            },
+            {
+              "name": "Medical Procedures",
+              "uri": "/healthcare-worker-training/medical-procedures"
+            },
+            {
+              "name": "More Healthcare Training",
+              "uri": "/healthcare-worker-training/more-healthcare-training"
+            }
+          ]
         },
         {
           "name": "More Healthcare Training",
@@ -705,6 +881,40 @@
               "uri": "http://www.globalhealthlearning.org/certificate-programs",
               "thumbnail": "/static/img/logo/global-health-learning-center.png",
               "description": "The Global Health eLearning Center courses are organized into Certificate Programs to help you focus your learning with a more comprehensive study of key topics of global health. You can earn a certificate in a variety of global health areas by successfully completing all courses within a program area. As always, specific course certificates are available on an individual course basis. Certificates Programs will be expanded as new courses are developed."
+            }
+          ],
+          "menu": [
+            {
+              "name": "Start Page",
+              "uri": "/"
+            },
+            {
+              "name": "All Videos",
+              "uri": "/healthcare-worker-training/all-videos"
+            },
+            {
+              "name": "Newborn & Child Health",
+              "uri": "/healthcare-worker-training/newborn-and-child-health"
+            },
+            {
+              "name": "Labour & Delivery",
+              "uri": "/healthcare-worker-training/labour-and-delivery"
+            },
+            {
+              "name": "Medication & Dosage Delivery",
+              "uri": "/healthcare-worker-training/medication-and-dosage-delivery"
+            },
+            {
+              "name": "Diseases",
+              "uri": "/healthcare-worker-training/diseases"
+            },
+            {
+              "name": "Medical Procedures",
+              "uri": "/healthcare-worker-training/medical-procedures"
+            },
+            {
+              "name": "More Healthcare Training",
+              "uri": "/healthcare-worker-training/more-healthcare-training"
             }
           ]
         }
