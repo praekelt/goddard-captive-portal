@@ -546,7 +546,7 @@
               "available": false,
               "source": "http://globalhealthmedia.org/portfolio-items/the-birth/?portfolioID=5623",
               "size": 100805077,
-              "uri": "gem/labour_and_delivery/The%20Birth%20-%20Labor%2c%20Delivery%20%26%20Early%20Postpartum-VHcej771Afg.mp4.3gp",
+                "uri": "gem/labour_and_delivery/The%20Birth%20-%20Labor%2c%20Delivery%20%26%20Early%20Postpartum-VHcej771Afg.mp4.3gp",
               "description": "This video shows current best practices for a solo birth attendant throughout a woman’s labor, birth, and immediate postpartum."
             },
             {
@@ -619,40 +619,40 @@
               "name": "Administration Of Parenteral Antibiotics",
               "source": "http://medicalaidfilms.org/our-films/obstetric-care/?v=72406691",
               "available": false,
-              "size": 32401128,
-              "uri": "gem/medical_dosage_and_delivery/Administration%20Of%20Parenteral%20Antibiotics.mp4",
+              "size": 50146070,
+              "uri": "gem/medical_dosage_and_delivery/Administration%20Of%20Parenteral%20Antibiotics.mp4.3gp",
               "description": "The film will demonstrates good practice of administration of the antibiotics for healthcare professionals."
             },
             {
               "name": "Giving an Intradermal Injection",
               "source": "http://health-orb.org/resource/view/giving-an-intradermal-injection",
               "available": false,
-              "size": 33432270,
-              "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20Series%20-%20Giving%20an%20Intradermal%20Injection-F2cvT7zbLLw.mkv",
+              "size": 20220196,
+              "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20Series%20-%20Giving%20an%20Intradermal%20Injection-F2cvT7zbLLw.mkv.3gp",
               "description": "This film shows how to draw up the BCG vaccine and the correct technique for giving an intradermal injection."
             },
             {
               "name": "Preparing Injectable Medicines",
               "available": false,
               "source": "http://globalhealthmedia.org/portfolio-items/newborn-care-preparing-injectable-medecines/?portfolioID=5623",
-              "size": 144671070,
-              "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20-%20Preparing%20Injectable%20Medicines-O6lGylNJz5c.mp4",
+              "size": 27897569,
+              "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20-%20Preparing%20Injectable%20Medicines-O6lGylNJz5c.mp4.3gp",
               "description": "This film shows how to use a dosing guideline and how to prepare and draw up two commonly used antibiotics, ampicillin, and gentamicin."
             },
             {
               "name": "Preparing oral medicines",
               "source": "http://globalhealthmedia.org/portfolio-items/newborn-care-preparing-oral-medecines/?portfolioID=5623",
               "available": false,
-              "size": 132260989,
-              "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20-%20Preparing%20Oral%20Medicines-TvFr3hqo76w.mp4",
+              "size": 36411002,
+              "uri": "gem/medical_dosage_and_delivery/Newborn%20Care%20-%20Preparing%20Oral%20Medicines-TvFr3hqo76w.mp4.3gp",
               "description": "This film shows how to use a dosing guideline and how to prepare an oral suspension, along with tips for giving medicine by mouth to a young baby."
             },
             {
               "name": "Chlorhexidine for Umbilical Cord Care",
               "source": "http://medicalaidfilms.org/our-films/newborn-child-health/?v=135684121",
               "available": false,
-              "size": 14914005,
-              "uri": "gem/medical_dosage_and_delivery/Chlorhexidine%20for%20Umbilical%20Cord%20Care.mp4",
+              "size": 14724922,
+              "uri": "gem/medical_dosage_and_delivery/Chlorhexidine%20for%20Umbilical%20Cord%20Care.mp4.3gp",
               "description": "This is a film for health workers and communities providing safe newborn care. The film demonstrates how to effectively use chlorhexidine to provide safe umbilical cord care after birth. With thanks to the Chlorhexidine Working Group and GSK for their support."
             }
           ],
