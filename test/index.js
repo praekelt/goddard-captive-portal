@@ -71,6 +71,8 @@ describe('app', function() {
 
     describe('/', function() {
 
+      this.timeout(20000);
+
       before(function(done) {
         // the content system takes a while
         // to initialise...this is really dirty
