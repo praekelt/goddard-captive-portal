@@ -12,18 +12,16 @@ var apps = require(path);
 var route = process.env.NODE_APPS_ROUTE || '/';
 
 function rewriteManifest(init) {
-  var now = Date.now()
-  fs.writeFile(
-    __dirname + '/../../test/fixtures/' + now + '.apps.json',
-    JSON.stringify(apps, null, '  '),
-    function(err) {
+  fs.unlink(path, function(err) {
+    if (err) console.log('unlink error', err);
+    fs.writeFile(path, JSON.stringify(apps, null, '  '), function(err) {
       if (err) process.emit('console:log', 'error', err);
       else {
         if (!init) return;
-        process.emit('init', __dirname + '/../../test/fixtures/' + now + '.apps.json');
+        process.emit('init', path);
       }
-    }
-  );
+    });
+  });
 }
 
 function checkMediaAvailability() {
