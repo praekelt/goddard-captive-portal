@@ -12,23 +12,21 @@ var apps = require(path);
 var route = process.env.NODE_APPS_ROUTE || '/';
 
 function rewriteManifest(init) {
-  fs.unlink(path, function(err) {
-    if (err) return process.emit('console:log', 'error', err);
-    fs.writeFile(path, JSON.stringify(apps, null, '  '), function(err) {
+  var now = Date.now()
+  fs.writeFile(
+    __dirname + '/../../test/fixtures/' + now + '.apps.json',
+    JSON.stringify(apps, null, '  '),
+    function(err) {
       if (err) process.emit('console:log', 'error', err);
       else {
         if (!init) return;
-        process.emit('init');
+        process.emit('init', __dirname + '/../../test/fixtures/' + now + '.apps.json');
       }
-    });
-  });
+    }
+  );
 }
 
 function checkMediaAvailability() {
-  if (process.env.NODE_ENV.indexOf('test') !== -1) {
-    process.emit('console:log', 'detected testing environment, skipping media availability check...');
-    return rewriteManifest(true);
-  }
   process.emit('console:log', 'running head requests on media resources');
   function head(done) {
     return http.request({
@@ -40,19 +38,6 @@ function checkMediaAvailability() {
       res.on('data', function(data) {
         headResponse += data;
       }).on('end', function() {
-
-        // we only want to remove media from the manifest if we're in production
-        if (process.env.NODE_ENV.indexOf('prod') > -1 && res.statusCode === 404) {
-          if (!this.ccI) {
-            if (!apps.categories[this.cI].media) return done();
-            apps.categories[this.cI].media.splice(this.mI, 1);
-          } else {
-            apps.categories[this.cI].categories[this.ccI].media.splice(this.mI, 1);
-          }
-          return done();
-        }
-
-        // otherwise, don't mangle the manifest
         if (this.ccI) {
           var media = apps.categories[this.cI].categories[this.ccI].media;
           if (!media) return done();
@@ -239,9 +224,9 @@ function init(manifest) {
 }
 
 module.exports = function(app) {
-  process.on('init', function() {
+  process.on('init', function(manifest) {
     process.emit('console:log', 'manifest was rewritten. reloading...');
-    apps = require(path);
+    apps = require(manifest);
     process.emit('console:log', 'reloaded...');
     init.call(app, apps);
     process.emit('console:log', 'mamaconnect content sytem initialised!');
