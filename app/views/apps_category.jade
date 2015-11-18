@@ -1,0 +1,33 @@
+extends ./apps_base.jade
+
+block title
+  title Mama Connect
+
+block content
+
+  section(class="category")
+    header(class="category-header")
+      h4(class="category-heading")= category.name
+    section(class="category-list")
+
+      ul
+
+        each site in category.sites
+
+          li(class="category-list-item", onclick="location.assign('#{site.uri}');")
+            img(class="w-20 category-list-thumbnail", src=site.thumbnail)
+            div(class="w-50")
+              h5(class="category-list-item-heading")= site.name
+              p(class="category-subtext") #{site.description.slice(0, 60)}&hellip;
+              a(class="category-list-link", href=site.uri) + Visit this site
+            img(style="width: 15%; margin-left: 2.5%;", src="/static/img/icons/icon_arrow.png")
+
+        each medium, i in category.media
+          if (medium.available)
+            li(class="category-list-item", onclick="location.assign('./#{category.uri}/video/#{i}');")
+              img(class="w-20 category-list-thumbnail", src="#{mediaHost}/#{medium.uri}.png")
+              div(class="w-50")
+                h5(class="category-list-item-heading")= medium.name
+                p(class="category-subtext") #{medium.description.slice(0, 60)}&hellip;
+                a(class="category-list-link", href="./#{category.uri}/video/#{i}") + Watch this video
+              img(style="width: 15%; margin-left: 2.5%;", src="/static/img/icons/icon_play.png")

@@ -1,11 +1,21 @@
 {
   "name": null,
-  "serial": "00002",
+  "serial": "00006",
   "port": {
-    "tunnel": 15001,
-    "monitor": 15002
+    "tunnel": 15009,
+    "monitor": 15010
   },
-  "uid": 2,
+  "uid": 6,
   "server": "goddard.io.co.za",
-  "publickey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaldXUZ4h7HiJWb/9YDzb93Soj4TFkEYj/B8W8DFkbS6Db3Uenji3N4VRypLecuW1whU5eZjEWP4GGLNPwwfimstB/6QEhQjcCtqfPHoVo4upME5cLcKZendWeezJnw1kUwDacrSOTiooAKjdxuz8bLnrHvjkMuDr3r1AYuc8IdUTDf8WyJKTqptq7sG4s/bzXfYMztWTA0dkBxZcpiVz9cCxOMrfOxwby4apJBwa4Zau8iMTwxHmGYE4TMp/jMamgSCLWH4uWxUjTdPjg0szH8Y29QT6vpcu2IbKAOy/h/OSjDq066USo/Y0WP1mUoLll4JZXyZXsSAhXxH+ELbUP goddard-hub\n"
+  "publickey": "",
+  "whitelist": [
+    {
+      "name": "TEST",
+      "domain": "*.ccn.com"
+    },
+    {
+      "name": "TEST 2",
+      "domain": "*.goddard.com"
+    }
+  ]
 }

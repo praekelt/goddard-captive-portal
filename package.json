@@ -5,17 +5,17 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "fixtures": "http-server test/fixtures -p 8080 -a 127.0.0.1 &",
-    "test": "NODE_ENV=testing istanbul test _mocha -- -R spec",
+    "test": "NODE_TEST_FIXTURES=1 NODE_PORT=3000 NODE_ENV=testing istanbul test _mocha -- -R spec",
     "start": "node index.js",
-    "nodemon": "npm run fixtures && nodemon index.js",
-    "coverage": "istanbul cover _mocha --report lcovonly -- test -R spec && cat ./coverage/lcov.info | coveralls && rm -rf ./coverage"
+    "nodemon": "nodemon index.js",
+    "coverage": "NODE_TEST_FIXTURES=1 NODE_PORT=3000 NODE_ENV=testing istanbul cover _mocha --report lcovonly -- test -R spec && coveralls < coverage/lcov.info && rm -rf coverage"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/praekelt/goddard-captive-portal"
   },
   "author": "Ant Cosentino <ant@io.co.za>",
+  "contributors": ["Johann du Toit <johann@io.co.za>"],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/praekelt/goddard-captive-portal/issues"

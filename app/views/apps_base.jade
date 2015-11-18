@@ -1,0 +1,79 @@
+doctype html
+
+html(lang="en")
+
+  head
+
+    link(rel="stylesheet", href="/static/css/bootstrap.min.css")
+    link(rel="stylesheet", href="/static/css/bootstrap-theme.min.css")
+    link(rel="stylesheet", href="/static/css/raleway.css")
+    link(rel="stylesheet", href="/static/css/apps.css")
+    link(rel="shortcut icon", href="/static/img/favicon.ico")
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.min.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="description", content="MAMA Connect Health Service")
+
+    block title
+      title MAMA Connect
+
+  body
+
+    //- for some reason, creating a container with elements lined up one after another
+    //- is ludicrously difficult in jade and requires all sorts of weird escaping and
+    //- interpolation, go figure...
+    - var topSwatch = "<div class=\"swatch-green w-33\"></div><div class=\"swatch-teal w-26\"></div><div class=\"swatch-purple w-5\"></div><div class=\"swatch-yellow w-26\"></div><div class=\"swatch-teal w-10\"></div>";
+    - var bottomSwatch = "<div class=\"swatch-green w-33\"></div><div class=\"swatch-teal w-26\"></div><div class=\"swatch-purple w-5\"></div><div class=\"swatch-yellow w-26\"></div><div class=\"swatch-orange w-10\"></div>";
+
+    section(class="swatch") !{topSwatch}
+    nav(class="navbar navbar-default")
+      div(class="container-fluid")
+        div(class="navbar-header")
+          button(class="navbar-toggle", data-toggle="collapse", data-target="#bs-collapse-menu")
+            span(class="sr-only") Toggle navigation
+            div(class="hamburger")
+              span(class="icon-bar")
+              span(class="icon-bar")
+              span(class="icon-bar")
+            span(class="menu-text") menu
+          a(class="navbar-brand", href="/", id="top") MAMA Connect
+
+        div(class="collapse navbar-collapse", id="bs-collapse-menu")
+          ul(class="nav navbar-nav")
+            each item in menu
+              li(class=currentCategory === item.uri ? 'active' : '')
+                a(href=item.uri)= item.name
+
+    if (notIndexPage)
+      div(class="back-to-start")
+        a(href="/"): span ← Back to start page
+
+    block content
+
+    div(class="back-to-top")
+      a(href="#top") ↑ Back to top of page
+
+    div(class="bottom-menu")
+      p(class="menu-title") Menu
+      ul(class="nav nav-pills nav-stacked")
+        each item in menu
+          li(class=currentCategory === item.uri ? 'active' : '')
+            a(href=item.uri)= item.name
+
+    section(class="swatch") !{bottomSwatch}
+
+    div(class="copyright")
+        p &copy; Copyright #{new Date().getFullYear()} MAMA Connect
+        p All rights reserved
+
+    script(src="/static/js/jquery-2.1.3.min.js")
+    script(src="/static/js/bootstrap.min.js")
+
+    block scripts

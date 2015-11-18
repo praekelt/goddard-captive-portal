@@ -8,7 +8,9 @@ To begin the development server, run `npm run nodemon`. Otherwise for production
 
 ##### configuration
 
-- `NODE_PORT` the port to which we will bind the http server
+- `NODE_ENV` execution environment (`prod`, `dev`, etc...)
+- `NODE_HOST_MEDIA` endpoint to query for media availability
+- `NODE_PORT` the port to which the http server will be bound
 - `NODE_APPS_JSON` path to the apps json file (defaults to `http://data.goddard.com/apps.json`)
 - `NODE_STATUS_JSON` path to the status json file (defaults to `http://data.goddard.com/status.json`)
 - `NODE_BUILD_JSON` path to the build json file (defaults to `http://data.goddard.com/build.json`)
