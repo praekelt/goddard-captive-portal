@@ -1,0 +1,3 @@
+name: goddard-captive-portal
+buildscript: scripts/deploy.sh
+postinstall: scripts/postinstall.sh
