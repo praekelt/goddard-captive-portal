@@ -1,5 +1,4 @@
 #!/bin/bash
 
-cd /var/praekelt/
+cd /var/praekelt/goddard-captive-portal
 npm install
-
