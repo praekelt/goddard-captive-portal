@@ -32,12 +32,12 @@ app.set('view engine', 'jade');
 app.use('/static', express.static(paths.static));
 app.use(require('body-parser').urlencoded({extended: true}));
 
-if (process.env.NODE_ENV.indexOf('prod') !== -1) {
-  // set up the mikrotik configure functions to run every two hours
-  setInterval(boot.whitelist, 1000 * 60 * 60 * 3);
-  // but run it once, immediately
-  boot.whitelist();
-}
+// if (process.env.NODE_ENV.indexOf('prod') !== -1) {
+//   // set up the mikrotik configure functions to run every two hours
+//   setInterval(boot.whitelist, 1000 * 60 * 60 * 3);
+//   // but run it once, immediately
+//   boot.whitelist();
+// }
 
 if (process.env.NODE_TEST_FIXTURES) {
   boot.fixtures(function() {
