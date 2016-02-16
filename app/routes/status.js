@@ -6,7 +6,8 @@ var http = require('http'),
     statusPath = process.env.NODE_STATUS_JSON || 'http://127.0.0.1:8080/status.json',
     nodePath = process.env.NODE_NODE_JSON || 'http://127.0.0.1:8080/node.json',
     buildPath = process.env.NODE_BUILD_JSON || 'http://127.0.0.1:8080/build.json',
-    wifiStatusPath = process.env.NODE_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html';
+    wifiStatusPath = process.env.NODE_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html',
+    mediaSyncLog = process.env.NODE_MEDIA_SYNC_LOG || 'http://127.0.0.1:8080/media_sync.log';
 
 var blank = {
   build: {
@@ -68,80 +69,89 @@ var blank = {
 module.exports = function(app) {
   app.get(process.env.NODE_STATUS_ROUTE || '/status', function(req, res) {
     async.parallel({
-      wificheck: function(callback) {
+      mediaSync: function(mediaSyncCallback) {
+        http.get(mediaSyncLog, function(httpres) {
+          var response = '';
+          httpres.on('data', function(data) {
+            response += data;
+          }).on('end', function() {
+            mediaSyncCallback(null, response);
+          });
+        }).on('error', function(err) {
+          mediaSyncCallback(err);
+        });
+      },
+      wificheck: function(wificheckCallback) {
         http.get(wifiStatusPath, function(httpres) {
           httpres.on('data', function(data) {
           }).on('end', function() {
-            callback(null, httpres.statusCode >= 200 && httpres.statusCode < 400);
-          });
-
-          httpres.on('socket', function (socket) {
+            wificheckCallback(null, httpres.statusCode >= 200 && httpres.statusCode < 400);
+          }).on('socket', function (socket) {
             socket.setTimeout(1500);
             socket.on('timeout', function() {
               httpres.abort();
             });
           });
         }).on('error', function(err) {
-          callback(null, false);
+          wificheckCallback(null, false);
         });
-
       },
-      status: function(callback) {
+      status: function(statusCallback) {
         http.get(statusPath, function(httpres) {
           var response = '';
           httpres.on('data', function(data) {
             response += data;
           }).on('end', function() {
             if (httpres.statusCode > 200) {
-              callback(null, blank.status);
+              statusCallback(null, blank.status);
             } else if (response === '' || response === '{}') {
-              callback(null, blank.status);
+              statusCallback(null, blank.status);
             } else {
-              callback(null, JSON.parse(response));
+              statusCallback(null, JSON.parse(response));
             }
           });
         }).on('error', function(err) {
-          callback(err, null);
+          statusCallback(err, null);
         });
       },
-      node: function(callback) {
+      node: function(nodeCallback) {
         http.get(nodePath, function(httpres) {
           var response = '';
           httpres.on('data', function(data) {
             response += data;
           }).on('end', function() {
             if (httpres.statusCode > 200) {
-              callback(null, blank.node);
+              nodeCallback(null, blank.node);
             } else if (response === '' || response === '{}') {
-              callback(null, blank.node);
+              nodeCallback(null, blank.node);
             } else {
-              callback(null, JSON.parse(response));
+              nodeCallback(null, JSON.parse(response));
             }
           });
         }).on('error', function(err) {
-          callback(err, null);
+          nodeCallback(err, null);
         });
       },
-      build: function(callback) {
+      build: function(buildCallback) {
         http.get(buildPath, function(httpres) {
           var response = '';
           httpres.on('data', function(data) {
             response += data;
           }).on('end', function() {
             if (httpres.statusCode > 200) {
-              callback(null, blank.build);
+              buildCallback(null, blank.build);
             } else if (response === '' || response === '{}') {
-              callback(null, blank.build);
+              buildCallback(null, blank.build);
             } else {
               try {
-                callback(null, JSON.parse(response));
+                buildCallback(null, JSON.parse(response));
               } catch(err) {
-                callback(null, blank.build);
+                buildCallback(null, blank.build);
               }
             }
           });
         }).on('error', function(err) {
-          callback(err, null);
+          buildCallback(err, null);
         });
       }
     }, function(err, results) {
@@ -151,12 +161,14 @@ module.exports = function(app) {
           node: blank.node,
           build: blank.build,
           wifiavailable: false,
+          mediaSync: false,
           error: err
         });
       } else {
         return res.render('status', {
           status: JSON.stringify(results.status) == '{}' ? blank.status : results.status,
           node: results.node,
+          mediaSync: results.mediaSync,
           wifiavailable: results.wificheck,
           build: results.build
         });
