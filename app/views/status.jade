@@ -51,9 +51,22 @@ block content
     else
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") BUILD DONE
+          h3(class="panel-title") No long running process in progress
         div(class="panel-body")
           div: strong Last updated at #{new Date().toISOString()}
+
+    if (mediaSync)
+      div(class="panel panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") MEDIA RSYNC LOG
+        div(class="panel-body")
+          pre= mediaSync
+    else
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") MEDIA RSYNC LOG
+        div(class="panel-body")
+          pre No Rsync log was found
 
     if (wifiavailable == true)
       div(class="panel panel-success panel-status")
