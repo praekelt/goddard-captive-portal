@@ -157,7 +157,8 @@ module.exports = function(app) {
           }).on('end', function() {
             if (response === '') {
               status.errors.mediaDuHuman.push(
-                'no disk usage data was found in the media disk usage log!'
+                'No disk usage data was found ' +
+                'in the media disk usage log!'
               );
               return mediaDuHumanCallback();
             }
@@ -174,19 +175,15 @@ module.exports = function(app) {
           httpres.on('data', function(data) {
             response += data;
           }).on('end', function() {
-            if (response === '') {
-              status.errors.mediaRsync.push(
-                'The media sync log is empty. ' +
-                'This either means a sync is about to happen, ' +
-                'or a sync has never happened.'
-              );
+            if (httpres.statusCode > 399 || response === '') {
+              status.errors.mediaRsync.push('The media sync log is empty.');
               return mediaRsyncCallback();
             }
             mediaRsyncCallback(null, (
-              'Total files: '       + /.* (\d+) files to consider/igm.exec(response)[1] + '\n' +
-              'Bytes transmitted: ' + /.* sent (\d+) bytes/igm.exec(response)[1]        + '\n' +
-              'Bytes received: '    + /.* received (\d+) bytes/igm.exec(response)[1]    + '\n' +
-              'Bytes total: '       + /.* total size is (\d+)/igm.exec(response)[1]
+              'Total files: ' + /.* (\d+) files to consider/igm.exec(response)[1] || 'unknown' + '\n' +
+              'Bytes transmitted: ' + /.* sent (\d+) bytes/igm.exec(response)[1] || 'unknown' + '\n' +
+              'Bytes received: '    + /.* received (\d+) bytes/igm.exec(response)[1] || 'unknown' + '\n' +
+              'Bytes total: '       + /.* total size is (\d+)/igm.exec(response)[1] || 'unknown'
             ));
           });
         }).on('error', function(err) {
