@@ -98,7 +98,7 @@ manifest.categories.forEach(function(category, idx, arr) {
     manifestTotal += category.media.map(function(medium) {
       return medium.size;
     }).reduce(function(prev, curr) {
-      return prev + current;
+      return prev + curr;
     });
   }
 });
