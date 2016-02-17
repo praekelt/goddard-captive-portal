@@ -8,7 +8,8 @@ var http = require('http'),
     buildPath = process.env.NODE_BUILD_JSON || 'http://127.0.0.1:8080/build.json',
     wifiStatusPath = process.env.NODE_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html',
     mediaSyncLog = process.env.NODE_MEDIA_SYNC_LOG || 'http://127.0.0.1:8080/media_sync.log',
-    mediaSizesLog = process.env.NODE_MEDIA_SIZES_LOG || 'http://127.0.0.1:8080/media_sizes.log';
+    mediaSizesLog = process.env.NODE_MEDIA_SIZES_LOG || 'http://127.0.0.1:8080/media_sizes.log',
+    whitelistPath = process.env.NODE_WHITELIST_PATH || 'http://127.0.0.1:8080/whitelist';
 
 var blank = {
   build: {
@@ -72,6 +73,7 @@ var blank = {
     mediaSizes: [],
     mediaSync: [],
     wificheck: [],
+    whitelist: []
   }
 };
 
@@ -85,8 +87,26 @@ module.exports = function(app) {
     blank.errors.mediaSizes = [];
     blank.errors.mediaSync = [];
     blank.errors.wificheck = [];
+    blank.errors.whitelist = [];
 
     async.parallel({
+      whitelist: function(whitelistCallback) {
+        http.get(whitelistPath, function(httpres) {
+          var response = '';
+          httpres.on('data', function(data) {
+            response += data;
+          }).on('end', function() {
+            if (response === '') {
+              blank.errors.whitelist.push('no whitelist was found!');
+              return whitelistCallback();
+            }
+            whitelistCallback(null, response);
+          });
+        }).on('error', function(err) {
+          blank.errors.whitelist.push(err);
+          whitelistCallback();
+        });
+      },
       mediaSizes: function(mediaSizesCallback) {
         http.get(mediaSizesLog, function(httpres) {
           var response = '';
@@ -234,7 +254,8 @@ module.exports = function(app) {
         mediaSync: results.mediaSync,
         mediaSizes: results.mediaSizes,
         wificheck: results.wificheck,
-        build: results.build
+        build: results.build,
+        whitelist: results.whitelist
       });
     });
   });
