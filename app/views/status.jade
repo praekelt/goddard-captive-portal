@@ -32,14 +32,21 @@ block content
 
   div(class="status-page wrapper container-fluid")
 
-    .top-header-spacing
+    div(class="top-header-spacing")
 
-    //- if (error)
-    //-   div(class="panel panel-danger panel-status")
-    //-     div(class="panel-heading")
-    //-       h3(class="panel-title") JSON Error
-    //-     div(class="panel-body")
-    //-       p= error.message
+    if (errors.whitelist.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") Whitelist error
+        div(class="panel-body")
+          each whitelistError in errors.whitelist
+            div= whitelistError
+    else
+      div(class="panel panel-success panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") Whitelist
+        div(class="panel-body")
+          pre= whitelist
 
     if (errors.build.length)
       div(class="panel panel-danger panel-status")
@@ -48,7 +55,6 @@ block content
         div(class="panel-body")
           each buildError in errors.build
             div= buildError
-          div: strong Last updated at #{new Date(build.timestamp).toISOString()}
     else if (build.build == "busy")
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
@@ -78,6 +84,12 @@ block content
           pre= mediaSync || 'No log found!'
 
     if (errors.mediaSizes.length)
+      div(class="panel panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") MEDIA DISK USAGE
+        div(class="panel-body")
+          each mediaSizesError in errors.mediaSizes
+            div= mediaSizesError
     else
       div(class="panel panel-status")
         div(class="panel-heading")
@@ -85,8 +97,7 @@ block content
         div(class="panel-body")
           pre= mediaSizes || 'Media disk usage data not found!'
 
-    if (errors.wificheck.length)
-    else if (wificheck)
+    if (wificheck)
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
           h3(class="panel-title") WIFI ENABLED
@@ -95,9 +106,10 @@ block content
     else
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") PROBLEMS WITH WIFI
+          h3(class="panel-title") WIFI ERRORS
         div(class="panel-body")
-          div Problems occured when checking if WIFI is configured
+          each wificheckError in errors.wificheck
+            div= wificheckError
 
     if (errors.status.length)
       div(class="panel panel-danger panel-status")
