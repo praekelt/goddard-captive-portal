@@ -8,12 +8,12 @@ var async = require('async');
 var manifest = require('../../test/fixtures/apps.json');
 
 var GODDARD_STATUS_ROUTE = process.env.GODDARD_STATUS_ROUTE || '/status';
-var GODDARD_STATUS_JSON = process.env.GODDARD_STATUS_JSON || 'http://127.0.0.1:8080/status.json',
-var GODDARD_NODE_JSON = process.env.GODDARD_NODE_JSON || 'http://127.0.0.1:8080/node.json',
-var GODDARD_BUILD_JSON = process.env.GODDARD_BUILD_JSON || 'http://127.0.0.1:8080/build.json',
-var GODDARD_WIFI_PAGE = process.env.GODDARD_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html',
-var GODDARD_MEDIA_RSYNC = process.env.GODDARD_MEDIA_RSYNC || 'http://127.0.0.1:8080/media_rsync.log',
-var GODDARD_MEDIA_DU_HUMAN = process.env.GODDARD_MEDIA_DU_HUMAN || 'http://127.0.0.1:8080/media_du_human.log',
+var GODDARD_STATUS_JSON = process.env.GODDARD_STATUS_JSON || 'http://127.0.0.1:8080/status.json';
+var GODDARD_NODE_JSON = process.env.GODDARD_NODE_JSON || 'http://127.0.0.1:8080/node.json';
+var GODDARD_BUILD_JSON = process.env.GODDARD_BUILD_JSON || 'http://127.0.0.1:8080/build.json';
+var GODDARD_WIFI_PAGE = process.env.GODDARD_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html';
+var GODDARD_MEDIA_RSYNC = process.env.GODDARD_MEDIA_RSYNC || 'http://127.0.0.1:8080/media_rsync.log';
+var GODDARD_MEDIA_DU_HUMAN = process.env.GODDARD_MEDIA_DU_HUMAN || 'http://127.0.0.1:8080/media_du_human.log';
 var GODDARD_MEDIA_DU_MACHINE = process.env.GODDARD_MEDIA_DU_MACHINE || 'http://127.0.0.1:8080/media_du_machine.log';
 var GODDARD_WHITELIST_PATH = process.env.GODDARD_WHITELIST_PATH || 'http://127.0.0.1:8080/whitelist';
 
