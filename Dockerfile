@@ -9,6 +9,7 @@ ENV NODE_APPS_JSON http://data.goddard.com/apps.json
 ENV NODE_MEDIA_SYNC_LOG http://data.goddard.com/media_sync.log
 ENV NODE_MEDIA_SIZES_LOG http://data.goddard.com/media_sizes.log
 ENV NODE_WIFI_PAGE http://192.168.88.10
+ENV NODE_WHITELIST_PATH http://data.goddard.com/whitelist
 ENV NODE_ENV production
 
 VOLUME ['/var/goddard']
