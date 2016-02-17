@@ -8,18 +8,24 @@ To begin the development server, run `npm run nodemon`. Otherwise for production
 
 ##### configuration
 
-- `NODE_ENV` execution environment (`prod`, `dev`, etc...)
-- `NODE_HOST_MEDIA` endpoint to query for media availability
-- `NODE_PORT` the port to which the http server will be bound
-- `NODE_APPS_JSON` path to the apps json file (defaults to `http://data.goddard.com/apps.json`)
-- `NODE_STATUS_JSON` path to the status json file (defaults to `http://data.goddard.com/status.json`)
-- `NODE_BUILD_JSON` path to the build json file (defaults to `http://data.goddard.com/build.json`)
-- `NODE_NODE_JSON` path to the node json file (defaults to `http://data.goddard.com/node.json`)
-- `NODE_APPS_ROUTE` the path to attach the applications page
-- `NODE_STATUS_ROUTE` the path to attach the status page
-
-##### routes
-
-- `NODE_STATUS_ROUTE` **or** `/status` status page (responds to GET)
-- `NODE_APPS_ROUTE` **or** `/` applications page (responds to all methods)
-- `/log` access logs (responds to GET and DELETE)
+environment variable | default value
+---- | -------
+`NODE_ENV` | `dev`
+`NODE_PORT` | `3000`
+`NODE_TRAVIS` | `undefined`
+`NODE_TEST_FIXTURES` | `undefined`
+`NODE_TEST_FIXTURES_PORT` | `3333`
+`GODDARD_HOST_MEDIA` | `http://data.goddard.com/media`
+`GODDARD_APPS_JSON` | `http://data.goddard.com/apps.json`
+`GODDARD_STATUS_JSON` | `http://data.goddard.com/status.json`
+`GODDARD_BUILD_JSON` | `http://data.goddard.com/build.json`
+`GODDARD_NODE_JSON` | `http://data.goddard.com/node.json`
+`GODDARD_MEDIA_RSYNC` | `http://data.goddard.com/media_rsync.log`
+`GODDARD_MEDIA_DU_HUMAN` | `http://data.goddard.com/media_du_human.log`
+`GODDARD_MEDIA_DU_MACHINE` | `http://data.goddard.com/media_du_machine.log`
+`GODDARD_WHITELIST_PATH` | `http://data.goddard.com/whitelist`
+`GODDARD_WIFI_PAGE` | `http://192.168.88.10`
+`GODDARD_ACCESS_LOG_PATH` | `./access.log`
+`GODDARD_APPS_ROUTE` | `/`
+`GODDARD_LOG_ROUTE` | `/log`
+`GODDARD_STATUS_ROUTE` | `/status`
