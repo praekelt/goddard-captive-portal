@@ -9,7 +9,7 @@ exports.apps = function(done) {
   fs.exists(__dirname + '/../../test/fixtures/apps.json', function(exists) {
     if (!exists) {
       console.log('apps.json not found. fetching from host and writing to disk...');
-      http.get(process.env.NODE_APPS_JSON || 'http://localhost:1337/apps.json', function(res) {
+      http.get(process.env.GODDARD_APPS_JSON || 'http://localhost:1337/apps.json', function(res) {
         var apps = '';
         res.on('data', function(data) {
           apps += data;
@@ -27,7 +27,7 @@ exports.apps = function(done) {
 };
 
 exports.whitelist = function() {
-  http.get(process.env.NODE_NODE_JSON, function(res) {
+  http.get(process.env.GODDARD_NODE_JSON, function(res) {
     var json = '';
     res.on('data', function(data) {
       json += data;
