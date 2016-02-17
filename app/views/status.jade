@@ -69,33 +69,51 @@ block content
         div(class="panel-body")
           div: strong Last updated at #{new Date().toISOString()}
 
-    if (errors.mediaSync.length)
+    if (errors.mediaRsync.length)
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
           h3(class="panel-title") MEDIA RSYNC LOG
         div(class="panel-body")
-          each mediaSyncError in errors.mediaSync
-            pre= mediaSyncError
+          each mediaRsyncError in errors.mediaRsync
+            pre= mediaRsyncError
     else
       div(class="panel panel-status")
         div(class="panel-heading")
           h3(class="panel-title") MEDIA RSYNC LOG
         div(class="panel-body")
-          pre= mediaSync || 'No log found!'
+          pre= mediaRsync || 'No log found!'
 
-    if (errors.mediaSizes.length)
+    if (errors.mediaDuHuman.length)
       div(class="panel panel-status")
         div(class="panel-heading")
           h3(class="panel-title") MEDIA DISK USAGE
         div(class="panel-body")
-          each mediaSizesError in errors.mediaSizes
-            div= mediaSizesError
+          each mediaDuHumanError in errors.mediaDuHuman
+            div= mediaDuHumanError
     else
       div(class="panel panel-status")
         div(class="panel-heading")
           h3(class="panel-title") MEDIA DISK USAGE
         div(class="panel-body")
-          pre= mediaSizes || 'Media disk usage data not found!'
+          pre= mediaDuHuman || 'Media disk usage data not found!'
+
+    if (errors.mediaDuMachine.length)
+      div(class="panel panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") MEDIA DISK USAGE
+        div(class="panel-body")
+          each mediaDuMachineError in errors.mediaDuMachine
+            div= mediaDuMachineError
+    else
+      div(class="panel panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") MEDIA DISK USAGE
+        div(class="panel-body")
+          each folder in mediaDuMachine.duPerFolder
+            div= folder
+          div.
+            Missing: #{mediaDuMachine.missingPercentage}% (#{mediaDuMachine.missingMegabytes}MB)
+            Total disk usage: #{mediaDuMachine.duTotal}
 
     if (wificheck)
       div(class="panel panel-success panel-status")
