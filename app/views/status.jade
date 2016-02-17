@@ -111,7 +111,12 @@ block content
         div(class="panel-body")
           div(class="progress")
             div(
-              class="progress-bar",
+              class=
+                mediaDuMachine.missingPercentage <= 25 ? 'progress-bar progress-bar-danger' :
+                mediaDuMachine.missingPercentage <= 75 ? 'progress-bar progress-bar-warning' :
+                mediaDuMachine.missingPercentage <= 100 ? 'progress-bar progress-bar-success' :
+                'progress-bar',
+              progress-bar-success
               role="progressbar",
               aria-valuenow=mediaDuMachine.missingPercentage,
               aria-valuemin="0",
