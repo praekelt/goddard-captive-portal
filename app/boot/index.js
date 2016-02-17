@@ -3,31 +3,27 @@
 
 var fs = require('fs');
 var http = require('http');
-var express = require('express');
+
+var NODE_TEST_FIXTURES_PORT = process.env.NODE_TEST_FIXTURES_PORT || 1337;
+var GODDARD_APPS_JSON = process.env.GODDARD_APPS_JSON || 'http://localhost:1337/apps.json';
+var GODDARD_NODE_JSON = process.env.GODDARD_NODE_JSON || 'http://127.0.0.1:8080/node.json';
 
 exports.apps = function(done) {
   fs.exists(__dirname + '/../../test/fixtures/apps.json', function(exists) {
-    if (!exists) {
-      console.log('apps.json not found. fetching from host and writing to disk...');
-      http.get(process.env.GODDARD_APPS_JSON || 'http://localhost:1337/apps.json', function(res) {
-        var apps = '';
-        res.on('data', function(data) {
-          apps += data;
-        }).on('end', function() {
-          fs.writeFile(__dirname + '/../../test/fixtures/apps.json', apps, function(err) {
-            return done(err);
-          });
-        });
-      }).on('error', function(err) {
-        return done(err);
-      });
-    }
-    return done();
+    if (exists) return done();
+    console.log('apps.json not found. fetching from host and writing to disk...');
+    http.get(GODDARD_APPS_JSON, function(res) {
+      res.pipe(
+        fs.createWriteStream(
+          __dirname + '/../../test/fixtures/apps.json'
+        ).on('end', done).on('error', done)
+      );
+    }).on('error', done);
   });
 };
 
 exports.whitelist = function() {
-  http.get(process.env.GODDARD_NODE_JSON, function(res) {
+  http.get(GODDARD_NODE_JSON, function(res) {
     var json = '';
     res.on('data', function(data) {
       json += data;
@@ -49,31 +45,41 @@ exports.whitelist = function() {
 };
 
 exports.fixtures = function(done) {
+
   console.log('fixtures requested, enabling...');
+
+  var express = require('express');
   var fixtures = express();
 
   fixtures.get('/apps.json', function(req, res) {
-    fs.createReadStream(__dirname + '/../../test/fixtures/apps.json').pipe(res);
+    fs.createReadStream(
+      __dirname + '/../../test/fixtures/apps.json'
+    ).pipe(res);
   });
 
   fixtures.get('/status.json', function(req, res) {
-    fs.createReadStream(__dirname + '/../../test/fixtures/status.json').pipe(res);
+    fs.createReadStream(
+      __dirname + '/../../test/fixtures/status.json'
+    ).pipe(res);
   });
 
   fixtures.get('/build.json', function(req, res) {
-    fs.createReadStream(__dirname + '/../../test/fixtures/build.json').pipe(res);
+    fs.createReadStream(
+      __dirname + '/../../test/fixtures/build.json'
+    ).pipe(res);
   });
 
   fixtures.get('/node.json', function(req, res) {
-    fs.createReadStream(__dirname + '/../../test/fixtures/node.json').pipe(res);
+    fs.createReadStream(
+      __dirname + '/../../test/fixtures/node.json'
+    ).pipe(res);
   });
 
   fixtures.get('/wireless.html', function(req, res) {
-    fs.createReadStream(__dirname + '/../../test/fixtures/wireless.html').pipe(res);
+    fs.createReadStream(
+      __dirname + '/../../test/fixtures/wireless.html'
+    ).pipe(res);
   });
 
-  fixtures.listen(1337, function() {
-    console.log('done!');
-    done();
-  });
+  fixtures.listen(NODE_TEST_FIXTURES_PORT, done);
 };
