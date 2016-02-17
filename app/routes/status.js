@@ -90,7 +90,7 @@ var manifestTotal = 0;
 var subCategories = [];
 
 manifest.categories.forEach(function(category, idx, arr) {
-  if (category.categories && !category.media.length) {
+  if (category.categories && (!category.media || !category.media.length)) {
     return subCategories.push(idx);
   } else if (!category.media.length) {
     return;
