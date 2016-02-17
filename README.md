@@ -4,7 +4,11 @@
 [![Build Status](https://travis-ci.org/praekelt/goddard-captive-portal.svg)](https://travis-ci.org/praekelt/goddard-captive-portal)
 [![Coverage Status](https://coveralls.io/repos/praekelt/goddard-captive-portal/badge.svg?branch=develop)](https://coveralls.io/r/praekelt/goddard-captive-portal?branch=develop)
 
-To begin the development server, run `npm run nodemon`. Otherwise for production, set env vars and then `npm start`.
+##### development
+
+```
+npm run nodemon
+```
 
 ##### configuration
 
