@@ -6,10 +6,10 @@ var fs = require('fs'),
     http = require('http'),
     async = require('async');
 
-var media = url.parse(process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media');
+var media = url.parse(process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media');
 var path = __dirname + '/../../test/fixtures/apps.json';
 var apps = require(path);
-var route = process.env.NODE_APPS_ROUTE || '/';
+var route = process.env.GODDARD_APPS_ROUTE || '/';
 
 function rewriteManifest(init) {
   fs.unlink(path, function(err) {
@@ -106,7 +106,7 @@ function registerAllParentCategories() {
 
     this.all(uri, function(req, res) {
       res.render('apps_parenthome', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media',
         menu: childCategoryMenu,
         notIndexPage: true,
         category: listing,
@@ -119,7 +119,7 @@ function registerAllParentCategories() {
     });
     this.all(uri + '/all-videos', function(req, res) {
       res.render('apps_listing', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media',
         menu: childCategoryMenu,
         notIndexPage: true,
         category: listing,
@@ -144,7 +144,7 @@ function registerAllTopLevelCategories() {
     registerCategoryMedia.call(this, category, route + category.uri);
     this.all(route + category.uri, function(req, res) {
       res.render('apps_category', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media',
         menu: menu,
         current: route + category.uri,
         parent: route,
@@ -162,7 +162,7 @@ function registerChildCategory(category, parentUri) {
   registerCategoryMedia.call(this, category, uri);
   this.all(uri, function(req, res) {
     res.render('apps_category', {
-      mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+      mediaHost: process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media',
       menu: category.menu || menu,
       notIndexPage: true,
       current: uri,
@@ -178,7 +178,7 @@ function registerCategoryMedia(category, parentUri) {
   (category.media || []).forEach(function(medium, i) {
     this.all(parentUri + '/video/' + i, function(req, res) {
       res.render('apps_medium', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media',
         menu: category.menu || menu,
         parent: parentUri,
         medium: medium,
@@ -197,7 +197,7 @@ function registerMediaListing() {
   });
   this.all(route + 'all-videos', function(req, res) {
     res.render('apps_allvideos', {
-      mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+      mediaHost: process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media',
       menu: menu,
       current: route + 'all-videos',
       categories: topLevelCategoriesWithMedia,
@@ -218,7 +218,7 @@ function init(manifest) {
       return res.redirect('http://mamawifi.com');
     }
     res.render('apps_home', {
-      mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+      mediaHost: process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media',
       dyk: manifest.dyk[0],
       current: route,
       notIndexPage: false,
