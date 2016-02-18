@@ -180,9 +180,7 @@ module.exports = function(app) {
             });
           }
 
-          console.log('the manifest total', manifestTotal, manifestTotal / 1024 / 1024);
-
-          manifestTotal = manifestTotal / 1024 / 1024;
+          manifestTotal = manifestTotal / 1024 / 1024 / 1024;
 
           var response = '';
           httpres.on('data', function(data) {
@@ -214,13 +212,13 @@ module.exports = function(app) {
               return kilobytes;
             }).reduce(function(prev, curr, idx, arr) {
               return prev + curr;
-            }) / 1024);
+            }) / 1024).toFixed(2);
 
             mediaDuMachineCallback(null, {
-              missingMegabytes: (manifestTotal - duTotalMinusIrrelevant).toFixed(2),
+              missingMegabytes: manifestTotal - duTotalMinusIrrelevant,
               missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toFixed(2),
-              duTotal: duTotalMinusIrrelevant.toFixed(2),
-              manifestTotal: manifestTotal.toFixed(2),
+              duTotal: duTotalMinusIrrelevant,
+              manifestTotal: manifestTotal,
               duPerFolder: (function(folders) {
                 return Object.keys(folders).map(function(name, idx, arr) {
                   return name + ': ' + (folders[name] / 1024).toFixed(2)  + ' MB';
