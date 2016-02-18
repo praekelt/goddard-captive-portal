@@ -29,7 +29,7 @@ var status = {
     build: {
       "build": "READY",
       "process": "",
-      "timestamp": 10
+      "timestamp": 0
     },
     node: {
       "name": "unnamed",
@@ -132,7 +132,6 @@ module.exports = function(app) {
     status.errors.build = [];
     status.errors.node = [];
     status.errors.status = [];
-    // status.errors.mediaDuHuman = [];
     status.errors.mediaDuMachine = [];
     status.errors.mediaRsync = [];
     status.errors.wificheck = [];
@@ -156,26 +155,6 @@ module.exports = function(app) {
           whitelistCallback();
         });
       },
-      // mediaDuHuman: function(mediaDuHumanCallback) {
-      //   http.get(GODDARD_MEDIA_DU_HUMAN, function(httpres) {
-      //     var response = '';
-      //     httpres.on('data', function(data) {
-      //       response += data;
-      //     }).on('end', function() {
-      //       if (response === '') {
-      //         status.errors.mediaDuHuman.push(
-      //           'No disk usage data was found ' +
-      //           'in the media disk usage log!'
-      //         );
-      //         return mediaDuHumanCallback();
-      //       }
-      //       mediaDuHumanCallback(null, response);
-      //     });
-      //   }).on('error', function(err) {
-      //     status.errors.mediaDuHuman.push(err);
-      //     mediaDuHumanCallback();
-      //   });
-      // },
       mediaRsync: function(mediaRsyncCallback) {
         http.get(GODDARD_MEDIA_RSYNC, function(httpres) {
           var response = '';
@@ -227,19 +206,17 @@ module.exports = function(app) {
               ]);
             }).map(function(folder, idx, arr) {
               var bytes = parseInt(bytesPattern.exec(folder)[1], 10);
-              foldersToBytes[
-                folderPattern.exec(folder)[1].split('/').pop()
-              ] = (bytes / 1024 / 1024).toPrecision(2);
+              foldersToBytes[folderPattern.exec(folder)[1].split('/').pop()] = bytes;
               return bytes;
             }).reduce(function(prev, curr, idx, arr) {
               return prev + curr;
             });
 
             mediaDuMachineCallback(null, {
-              missingMegabytes: ((manifestTotal - duTotalMinusIrrelevant) / 1024 / 1024).toPrecision(2),
-              missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toPrecision(1),
-              duTotal: (duTotalMinusIrrelevant / 1024 / 1024).toPrecision(2),
-              manifestTotal: (manifestTotal / 1024 / 1024).toPrecision(2),
+              missingMegabytes: (manifestTotal - duTotalMinusIrrelevant),
+              missingPercentage: (duTotalMinusIrrelevant / manifestTotal),
+              duTotal: duTotalMinusIrrelevant,
+              manifestTotal: manifestTotal,
               duPerFolder: (function(folders) {
                 return [
                   Object.keys(folders).map(function(name, idx, arr) {
@@ -353,7 +330,6 @@ module.exports = function(app) {
         status: results.status,
         node: results.node,
         mediaRsync: results.mediaRsync,
-        // mediaDuHuman: results.mediaDuHuman,
         mediaDuMachine: results.mediaDuMachine,
         wificheck: results.wificheck,
         build: results.build,

@@ -84,31 +84,17 @@ block content
         div(class="panel-body")
           pre= mediaRsync || 'No log found!'
 
-    //- if (errors.mediaDuHuman.length)
-    //-   div(class="panel panel-status")
-    //-     div(class="panel-heading")
-    //-       h3(class="panel-title") MEDIA DISK USAGE
-    //-     div(class="panel-body")
-    //-       each mediaDuHumanError in errors.mediaDuHuman
-    //-         div= mediaDuHumanError
-    //- else
-    //-   div(class="panel panel-status")
-    //-     div(class="panel-heading")
-    //-       h3(class="panel-title") MEDIA DISK USAGE
-    //-     div(class="panel-body")
-    //-       pre= mediaDuHuman || 'Media disk usage data not found!'
-
     if (errors.mediaDuMachine.length)
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") MEDIA DISK USAGE
+          h3(class="panel-title") MEDIA DOWNLOAD PROGRESS
         div(class="panel-body")
           each mediaDuMachineError in errors.mediaDuMachine
             pre= mediaDuMachineError
     else
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") MEDIA DISK USAGE
+          h3(class="panel-title") MEDIA DOWNLOAD PROGRESS
         div(class="panel-body")
           div(class="progress")
             div(
@@ -126,7 +112,7 @@ block content
             ) #{mediaDuMachine.missingPercentage}%
           ul
             each folder in mediaDuMachine.duPerFolder
-              li: pre= folder
+              li= folder
           div Total disk usage: #[pre #{mediaDuMachine.duTotal} (#{mediaDuMachine.missingMegabytes}MB missing)]
 
     if (wificheck)
