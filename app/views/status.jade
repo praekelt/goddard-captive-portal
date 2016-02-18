@@ -112,7 +112,7 @@ block content
           ul
             each folder in mediaDuMachine.duPerFolder
               li: code= folder
-          div Total disk usage: #[code #{mediaDuMachine.duTotal} (#{mediaDuMachine.missingGigabytes} GB missing)]
+          div Total disk usage: #[code #{mediaDuMachine.duTotal} GB (#{mediaDuMachine.missingGigabytes} GB missing)]
 
     if (wificheck)
       div(class="panel panel-success panel-status")
