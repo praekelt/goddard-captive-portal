@@ -208,14 +208,24 @@ module.exports = function(app) {
 
             var lines = response.trim().split('\n');
 
+            function contains(substring) {
+              return this.indexOf(substring) > -1;
+            }
+
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
               return (
-                line.indexOf('.DS_Store') !== -1 &&
-                line.indexOf('.sh') !== -1 &&
-                line.indexOf('mp4.3gp') !== -1 &&
-                line.indexOf('mp4.3gp.png') !== -1 &&
-                line.indexOf('mov.3gp') !== -1 &&
-                line.indexOf('mov.3gp.png') !== -1
+                contains.call(line, '.DS_Store') ||
+                contains.call(line, '.sh') ||
+                contains.call(line, 'mp4.3gp') ||
+                contains.call(line, 'mp4.3gp.png') ||
+                contains.call(line, 'mov.3gp') ||
+                contains.call(line, 'mov.3gp.png');
+                // line.indexOf('.DS_Store') !== -1 &&
+                // line.indexOf('.sh') !== -1 &&
+                // line.indexOf('mp4.3gp') !== -1 &&
+                // line.indexOf('mp4.3gp.png') !== -1 &&
+                // line.indexOf('mov.3gp') !== -1 &&
+                // line.indexOf('mov.3gp.png') !== -1
               );
             }).map(function(folder, idx, arr) {
               var execd = bytesPattern.exec(folder);
