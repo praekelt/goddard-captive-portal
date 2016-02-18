@@ -214,13 +214,13 @@ module.exports = function(app) {
 
             mediaDuMachineCallback(null, {
               missingMegabytes: (manifestTotal - duTotalMinusIrrelevant),
-              missingPercentage: (duTotalMinusIrrelevant / manifestTotal),
+              missingPercentage: (duTotalMinusIrrelevant / manifestTotal) * 100,
               duTotal: duTotalMinusIrrelevant,
               manifestTotal: manifestTotal,
               duPerFolder: (function(folders) {
                 return [
                   Object.keys(folders).map(function(name, idx, arr) {
-                    return name + ': ' + folders[name] + 'MB';
+                    return name + ': ' + folders[name] + ' bytes';
                   })
                 ];
               })(foldersToBytes)
