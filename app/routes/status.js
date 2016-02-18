@@ -200,6 +200,12 @@ module.exports = function(app) {
             var foldersToBytes = {};
             var folderPattern = /\d+\s+(.*)/ig;
             var bytesPattern = /(\d+)\s+.*/ig;
+
+            if (!response) {
+              status.errors.mediaDuMachine.push('DU log not found!');
+              return mediaDuMachineCallback();
+            }
+
             var lines = response.split('\n').trim();
 
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
