@@ -215,8 +215,8 @@ module.exports = function(app) {
             }) / 1024 / 1024).toFixed(2);
 
             mediaDuMachineCallback(null, {
-              missingMegabytes: manifestTotal - duTotalMinusIrrelevant,
-              missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toFixed(2),
+              missingGigabytes: duTotalMinusIrrelevant - manifestTotal,
+              missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toFixed(0),
               duTotal: duTotalMinusIrrelevant,
               manifestTotal: manifestTotal,
               duPerFolder: (function(folders) {
