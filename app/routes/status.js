@@ -21,6 +21,7 @@ function contains(substrings) {
   for (var substring in substrings) {
     if (this.indexOf(substring) > -1) return true;
   }
+  return false;
 }
 
 var status = {
@@ -215,15 +216,9 @@ module.exports = function(app) {
             var lines = response.trim().split('\n');
 
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
-              if (contains.call(line, [
-                '.DS_Store',
-                '.sh',
-                'mp4.3gp',
-                'mp4.3gp.png',
-                'mov.3gp',
-                'mov.3gp.png'
-              ])) return false;
-              else return true;
+              return !contains.call(line, [
+                '.DS_Store', '.sh', 'mp4.3gp', 'mp4.3gp.png', 'mov.3gp', 'mov.3gp.png'
+              ]);
             }).map(function(folder, idx, arr) {
               var execd = bytesPattern.exec(folder);
               console.log(folder, execd);
