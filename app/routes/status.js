@@ -216,7 +216,9 @@ module.exports = function(app) {
                 line.indexOf('mov.3gp') === -1
               );
             }).map(function(folder, idx, arr) {
-              var bytes = parseInt(bytesPattern.exec(folder)[1], 10);
+              var execd = bytesPattern.exec(folder)[1];
+              console.log(folder, execd);
+              var bytes = parseInt(execd, 10);
               foldersToBytes[
                 folderPattern.exec(folder)[1].split('/').pop()
               ] = (bytes / 1024 / 1024).toPrecision(2);
