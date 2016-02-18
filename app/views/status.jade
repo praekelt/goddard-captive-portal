@@ -55,13 +55,14 @@ block content
         div(class="panel-body")
           each buildError in errors.build
             div= buildError
+
     else if (build.build == "busy")
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
           h3(class="panel-title")= (build.process)
         div(class="panel-body")
           div Do not power down the node until the build process has completed.
-          div: strong Last updated at #{new Date(build.timestamp).toISOString()}
+          div: strong Last updated at #{new Date().toISOString()}
     else
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
