@@ -214,15 +214,13 @@ module.exports = function(app) {
 
             mediaDuMachineCallback(null, {
               missingMegabytes: (manifestTotal - duTotalMinusIrrelevant),
-              missingPercentage: (duTotalMinusIrrelevant / manifestTotal) * 100,
+              missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toPrecision(2),
               duTotal: duTotalMinusIrrelevant,
               manifestTotal: manifestTotal,
               duPerFolder: (function(folders) {
-                return [
-                  Object.keys(folders).map(function(name, idx, arr) {
-                    return name + ': ' + folders[name] + ' bytes';
-                  })
-                ];
+                return Object.keys(folders).map(function(name, idx, arr) {
+                  return name + ': ' + folders[name] + ' bytes';
+                });
               })(foldersToBytes)
             });
           });
