@@ -180,6 +180,8 @@ module.exports = function(app) {
             });
           }
 
+          console.log('the manifest total', manifestTotal, manifestTotal / 1024 / 1024);
+
           manifestTotal = manifestTotal / 1024 / 1024;
 
           var response = '';
@@ -215,13 +217,13 @@ module.exports = function(app) {
             }) / 1024);
 
             mediaDuMachineCallback(null, {
-              missingMegabytes: (manifestTotal - duTotalMinusIrrelevant),
+              missingMegabytes: (manifestTotal - duTotalMinusIrrelevant).toPrecision(2),
               missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toPrecision(2),
-              duTotal: duTotalMinusIrrelevant,
-              manifestTotal: manifestTotal,
+              duTotal: duTotalMinusIrrelevant.toPrecision(2),
+              manifestTotal: manifestTotal.toPrecision(2),
               duPerFolder: (function(folders) {
                 return Object.keys(folders).map(function(name, idx, arr) {
-                  return name + ': ' + (folders[name] / 1024)  + ' MB';
+                  return name + ': ' + (folders[name] / 1024).toPrecision(2)  + ' MB';
                 });
               })(foldersToKilobytes)
             });
