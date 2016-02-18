@@ -19,7 +19,7 @@ var GODDARD_WHITELIST_PATH = process.env.GODDARD_WHITELIST_PATH || 'http://127.0
 
 function contains(substrings) {
   for (var substring in substrings) {
-    if (this.indexOf(substring) > -1) return true;
+    if (this.indexOf(substrings[substring]) > -1) return true;
   }
   return false;
 }
@@ -216,9 +216,9 @@ module.exports = function(app) {
             var lines = response.trim().split('\n');
 
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
-              return contains.call(line, [
+              return !contains.call(line, [
                 '.DS_Store', '.sh', 'mp4.3gp', 'mp4.3gp.png', 'mov.3gp', 'mov.3gp.png'
-              ]) === false;
+              ]);
             }).map(function(folder, idx, arr) {
               var execd = bytesPattern.exec(folder);
               console.log(folder, execd);
