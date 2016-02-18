@@ -98,6 +98,7 @@ block content
         div(class="panel-body")
           div(class="progress")
             div(
+              style="width: #{mediaDuMachine.missingPercentage}%;",
               class=
                 mediaDuMachine.missingPercentage <= 25 ? 'progress-bar progress-bar-danger' :
                 mediaDuMachine.missingPercentage <= 75 ? 'progress-bar progress-bar-warning' :
@@ -106,7 +107,7 @@ block content
               role="progressbar",
               aria-valuenow=mediaDuMachine.missingPercentage,
               aria-valuemin="0",
-              aria-valuemax="107"
+              aria-valuemax="100"
             ) #{mediaDuMachine.missingPercentage}%
           ul
             each folder in mediaDuMachine.duPerFolder
