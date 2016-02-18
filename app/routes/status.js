@@ -93,38 +93,6 @@ var status = {
   }
 };
 
-var manifestTotal = 0;
-var subCategories = [];
-
-manifest.categories.forEach(function(category, idx, arr) {
-  if (category.categories && (!category.media || !category.media.length)) {
-    return subCategories.push(idx);
-  } else if (!category.media.length) {
-    return;
-  } else {
-    manifestTotal += category.media.map(function(medium) {
-      return medium.size;
-    }).reduce(function(prev, curr) {
-      return prev + curr;
-    });
-  }
-});
-
-if (subCategories.length) {
-  subCategories.forEach(function(categoryIdx, idx, arr) {
-    manifest.categories[
-      categoryIdx
-    ].categories.forEach(function(category, idx, arr) {
-      if (!category.media.length) return;
-      manifestTotal += category.media.map(function(medium) {
-        return medium.size;
-      }).reduce(function(prev, curr) {
-        return prev + curr;
-      });
-    });
-  });
-}
-
 module.exports = function(app) {
 
   app.get(GODDARD_STATUS_ROUTE, function(req, res) {
@@ -179,13 +147,48 @@ module.exports = function(app) {
       },
       mediaDuMachine: function(mediaDuMachineCallback) {
         http.get(GODDARD_MEDIA_DU_MACHINE, function(httpres) {
+
+          var manifestTotal = 0;
+          var subCategories = [];
+
+          manifest.categories.forEach(function(category, idx, arr) {
+            if (category.categories && (!category.media || !category.media.length)) {
+              return subCategories.push(idx);
+            } else if (!category.media.length) {
+              return;
+            } else {
+              manifestTotal += category.media.map(function(medium) {
+                return medium.size;
+              }).reduce(function(prev, curr) {
+                return prev + curr;
+              });
+            }
+          });
+
+          if (subCategories.length) {
+            subCategories.forEach(function(categoryIdx, idx, arr) {
+              manifest.categories[
+                categoryIdx
+              ].categories.forEach(function(category, idx, arr) {
+                if (!category.media.length) return;
+                manifestTotal += category.media.map(function(medium) {
+                  return medium.size;
+                }).reduce(function(prev, curr) {
+                  return prev + curr;
+                });
+              });
+            });
+          }
+
+          manifestTotal /= 1024;
+
           var response = '';
           httpres.on('data', function(data) {
             response += data;
           }).on('end', function() {
-            var foldersToBytes = {};
+            var foldersToKilobytes = {};
             var folderPattern = /^\d+\s+(.*)/;
-            var bytesPattern = /^(\d+)\s+.*/;
+            var kilobytesPattern = /^(\d+)\s+.*/;
             var parentGemFolderPattern = /^\d+\s+\/var\/goddard\/media\/gem$/;
             var parentFolderPattern = /^\d+\s+\/var\/goddard\/media$/;
 
@@ -195,22 +198,21 @@ module.exports = function(app) {
             }
 
             var lines = response.trim().split('\n');
+            lines.pop(); // remove the 'total' line
 
-            var duTotal = lines.pop();
-
-            var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
+            var duTotalMinusIrrelevant = (lines.filter(function(line, idx, arr) {
               var isParentGemFolder = parentGemFolderPattern.test(line);
               var isParentFolder = parentFolderPattern.test(line);
               return !isParentFolder && !isParentGemFolder && !contains.call(line, [
                 '.DS_Store', '.sh', 'mp4.3gp', 'mp4.3gp.png', 'mov.3gp', 'mov.3gp.png', '.mkv.3gp', '.mkv.3gp.png'
               ]);
             }).map(function(folder, idx, arr) {
-              var bytes = parseInt(bytesPattern.exec(folder)[1], 10);
-              foldersToBytes[folderPattern.exec(folder)[1].split('/').pop()] = bytes;
-              return bytes;
+              var kilobytes = parseInt(kilobytesPattern.exec(folder)[1], 10);
+              foldersToKilobytes[folderPattern.exec(folder)[1].split('/').pop()] = kilobytes;
+              return kilobytes;
             }).reduce(function(prev, curr, idx, arr) {
               return prev + curr;
-            });
+            }) / 1024);
 
             mediaDuMachineCallback(null, {
               missingMegabytes: (manifestTotal - duTotalMinusIrrelevant),
@@ -219,9 +221,9 @@ module.exports = function(app) {
               manifestTotal: manifestTotal,
               duPerFolder: (function(folders) {
                 return Object.keys(folders).map(function(name, idx, arr) {
-                  return name + ': ' + folders[name] + ' bytes';
+                  return name + ': ' + (folders[name] / 1024)  + ' MB';
                 });
-              })(foldersToBytes)
+              })(foldersToKilobytes)
             });
           });
         }).on('error', function(err) {
