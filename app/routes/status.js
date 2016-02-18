@@ -180,7 +180,7 @@ module.exports = function(app) {
             });
           }
 
-          manifestTotal /= 1024;
+          manifestTotal = manifestTotal / 1024 / 1024;
 
           var response = '';
           httpres.on('data', function(data) {
