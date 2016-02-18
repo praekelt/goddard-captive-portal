@@ -99,14 +99,14 @@ block content
     //-       pre= mediaDuHuman || 'Media disk usage data not found!'
 
     if (errors.mediaDuMachine.length)
-      div(class="panel panel-status")
+      div(class="panel panel-danger panel-status")
         div(class="panel-heading")
           h3(class="panel-title") MEDIA DISK USAGE
         div(class="panel-body")
           each mediaDuMachineError in errors.mediaDuMachine
-            div= mediaDuMachineError
+            pre= mediaDuMachineError
     else
-      div(class="panel panel-status")
+      div(class="panel panel-success panel-status")
         div(class="panel-heading")
           h3(class="panel-title") MEDIA DISK USAGE
         div(class="panel-body")
@@ -124,8 +124,9 @@ block content
               aria-valuemax="100",
               style="min-width: 2em;"
             ) #{mediaDuMachine.missingPercentage}%
-          each folder in mediaDuMachine.duPerFolder
-            pre= folder
+          ul
+            each folder in mediaDuMachine.duPerFolder
+              li: pre= folder
           div Total disk usage: #[pre #{mediaDuMachine.duTotal} (#{mediaDuMachine.missingMegabytes}MB missing)]
 
     if (wificheck)
