@@ -216,9 +216,9 @@ module.exports = function(app) {
             var lines = response.trim().split('\n');
 
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
-              return !contains.call(line, [
+              return contains.call(line, [
                 '.DS_Store', '.sh', 'mp4.3gp', 'mp4.3gp.png', 'mov.3gp', 'mov.3gp.png'
-              ]);
+              ]) === false;
             }).map(function(folder, idx, arr) {
               var execd = bytesPattern.exec(folder);
               console.log(folder, execd);
