@@ -198,8 +198,8 @@ module.exports = function(app) {
             response += data;
           }).on('end', function() {
             var foldersToBytes = {};
-            var folderPattern = /\d+\s+(.*)/ig;
-            var bytesPattern = /(\d+)\s+.*/ig;
+            var folderPattern = /\d+\s+(.*)/;
+            var bytesPattern = /(\d+)\s+.*/;
 
             if (!response) {
               status.errors.mediaDuMachine.push('DU log not found!');
@@ -210,10 +210,12 @@ module.exports = function(app) {
 
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
               return (
-                line.indexOf('.DS_Store') !== -1 ||
-                line.indexOf('.sh') !== -1 ||
-                line.indexOf('mp4.3gp') !== -1 ||
-                line.indexOf('mov.3gp') !== -1
+                line.indexOf('.DS_Store') === -1 &&
+                line.indexOf('.sh') === -1 &&
+                line.indexOf('mp4.3gp') === -1 &&
+                line.indexOf('mp4.3gp.png') === -1 &&
+                line.indexOf('mov.3gp') === -1 &&
+                line.indexOf('mov.3gp.png') === -1
               );
             }).map(function(folder, idx, arr) {
               var execd = bytesPattern.exec(folder);
