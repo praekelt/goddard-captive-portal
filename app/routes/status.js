@@ -17,6 +17,12 @@ var GODDARD_MEDIA_DU_HUMAN = process.env.GODDARD_MEDIA_DU_HUMAN || 'http://127.0
 var GODDARD_MEDIA_DU_MACHINE = process.env.GODDARD_MEDIA_DU_MACHINE || 'http://127.0.0.1:8080/media_du_machine.log';
 var GODDARD_WHITELIST_PATH = process.env.GODDARD_WHITELIST_PATH || 'http://127.0.0.1:8080/whitelist';
 
+function contains(substrings) {
+  for (var substring in substrings) {
+    if (this.indexOf(substring) > -1) return true;
+  }
+}
+
 var status = {
   default: {
     build: {
@@ -208,25 +214,16 @@ module.exports = function(app) {
 
             var lines = response.trim().split('\n');
 
-            function contains(substring) {
-              return this.indexOf(substring) > -1;
-            }
-
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
-              return (
-                !contains.call(line, '.DS_Store') ||
-                !contains.call(line, '.sh') ||
-                !contains.call(line, 'mp4.3gp') ||
-                !contains.call(line, 'mp4.3gp.png') ||
-                !contains.call(line, 'mov.3gp') ||
-                !contains.call(line, 'mov.3gp.png')
-                // line.indexOf('.DS_Store') !== -1 &&
-                // line.indexOf('.sh') !== -1 &&
-                // line.indexOf('mp4.3gp') !== -1 &&
-                // line.indexOf('mp4.3gp.png') !== -1 &&
-                // line.indexOf('mov.3gp') !== -1 &&
-                // line.indexOf('mov.3gp.png') !== -1
-              );
+              if (contains.call(line, [
+                '.DS_Store',
+                '.sh',
+                'mp4.3gp',
+                'mp4.3gp.png',
+                'mov.3gp',
+                'mov.3gp.png'
+              ])) return false;
+              else return true;
             }).map(function(folder, idx, arr) {
               var execd = bytesPattern.exec(folder);
               console.log(folder, execd);
