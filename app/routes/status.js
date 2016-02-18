@@ -180,7 +180,7 @@ module.exports = function(app) {
             });
           }
 
-          manifestTotal = (manifestTotal / 1024 / 1024).toFixed(2);
+          manifestTotal = (manifestTotal / 1024 / 1024 / 1024).toFixed(2);
 
           var response = '';
           httpres.on('data', function(data) {
@@ -212,7 +212,7 @@ module.exports = function(app) {
               return kilobytes;
             }).reduce(function(prev, curr, idx, arr) {
               return prev + curr;
-            }) / 1024).toFixed(2);
+            }) / 1024 / 1024).toFixed(2);
 
             mediaDuMachineCallback(null, {
               missingMegabytes: manifestTotal - duTotalMinusIrrelevant,
