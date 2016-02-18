@@ -215,6 +215,8 @@ module.exports = function(app) {
 
             var lines = response.trim().split('\n');
 
+            var duTotal = lines.pop();
+
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
               return !contains.call(line, [
                 '.DS_Store', '.sh', 'mp4.3gp', 'mp4.3gp.png', 'mov.3gp', 'mov.3gp.png', '.mkv.3gp', '.mkv.3gp.png'
