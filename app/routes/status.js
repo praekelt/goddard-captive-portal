@@ -210,10 +210,10 @@ module.exports = function(app) {
 
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
               return (
-                line.indexOf('.DS_Store') === -1 ||
-                line.indexOf('.sh') === -1 ||
-                line.indexOf('mp4.3gp') === -1 ||
-                line.indexOf('mov.3gp') === -1
+                line.indexOf('.DS_Store') !== -1 ||
+                line.indexOf('.sh') !== -1 ||
+                line.indexOf('mp4.3gp') !== -1 ||
+                line.indexOf('mov.3gp') !== -1
               );
             }).map(function(folder, idx, arr) {
               var execd = bytesPattern.exec(folder);
