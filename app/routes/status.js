@@ -217,13 +217,13 @@ module.exports = function(app) {
             }) / 1024);
 
             mediaDuMachineCallback(null, {
-              missingMegabytes: (manifestTotal - duTotalMinusIrrelevant).toPrecision(2),
-              missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toPrecision(2),
-              duTotal: duTotalMinusIrrelevant.toPrecision(2),
-              manifestTotal: manifestTotal.toPrecision(2),
+              missingMegabytes: (manifestTotal - duTotalMinusIrrelevant).toFixed(2),
+              missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toFixed(2),
+              duTotal: duTotalMinusIrrelevant.toFixed(2),
+              manifestTotal: manifestTotal.toFixed(2),
               duPerFolder: (function(folders) {
                 return Object.keys(folders).map(function(name, idx, arr) {
-                  return name + ': ' + (folders[name] / 1024).toPrecision(2)  + ' MB';
+                  return name + ': ' + (folders[name] / 1024).toFixed(2)  + ' MB';
                 });
               })(foldersToKilobytes)
             });
