@@ -226,9 +226,7 @@ module.exports = function(app) {
                 '.DS_Store', '.sh', 'mp4.3gp', 'mp4.3gp.png', 'mov.3gp', 'mov.3gp.png', '.mkv.3gp', '.mkv.3gp.png'
               ]);
             }).map(function(folder, idx, arr) {
-              var execd = bytesPattern.exec(folder);
-              console.log(folder, execd);
-              var bytes = parseInt(execd[1], 10);
+              var bytes = parseInt(bytesPattern.exec(folder)[1], 10);
               foldersToBytes[
                 folderPattern.exec(folder)[1].split('/').pop()
               ] = (bytes / 1024 / 1024).toPrecision(2);
