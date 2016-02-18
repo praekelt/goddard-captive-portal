@@ -48,26 +48,26 @@ block content
         div(class="panel-body")
           pre= whitelist
 
-    //- if (errors.build.length)
-    //-   div(class="panel panel-danger panel-status")
-    //-     div(class="panel-heading")
-    //-       h3(class="panel-title") Build Error
-    //-     div(class="panel-body")
-    //-       each buildError in errors.build
-    //-         div= buildError
-    //- else if (build.build == "busy")
-    //-   div(class="panel panel-danger panel-status")
-    //-     div(class="panel-heading")
-    //-       h3(class="panel-title")= (build.process)
-    //-     div(class="panel-body")
-    //-       div Do not power down the node until the build process has completed.
-    //-       div: strong Last updated at #{new Date(build.timestamp).toISOString()}
-    //- else
-    //-   div(class="panel panel-success panel-status")
-    //-     div(class="panel-heading")
-    //-       h3(class="panel-title") No build process in progress
-    //-     div(class="panel-body")
-    //-       div: strong Last updated at #{new Date().toISOString()}
+    if (errors.build.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") Build Error
+        div(class="panel-body")
+          each buildError in errors.build
+            div= buildError
+    else if (build.build == "busy")
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title")= (build.process)
+        div(class="panel-body")
+          div Do not power down the node until the build process has completed.
+          div: strong Last updated at #{new Date(build.timestamp).toISOString()}
+    else
+      div(class="panel panel-success panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") No build process in progress
+        div(class="panel-body")
+          div: strong Last updated at #{new Date().toISOString()}
 
     if (errors.mediaRsync.length)
       div(class="panel panel-danger panel-status")
@@ -83,19 +83,19 @@ block content
         div(class="panel-body")
           pre= mediaRsync || 'No log found!'
 
-    if (errors.mediaDuHuman.length)
-      div(class="panel panel-status")
-        div(class="panel-heading")
-          h3(class="panel-title") MEDIA DISK USAGE
-        div(class="panel-body")
-          each mediaDuHumanError in errors.mediaDuHuman
-            div= mediaDuHumanError
-    else
-      div(class="panel panel-status")
-        div(class="panel-heading")
-          h3(class="panel-title") MEDIA DISK USAGE
-        div(class="panel-body")
-          pre= mediaDuHuman || 'Media disk usage data not found!'
+    //- if (errors.mediaDuHuman.length)
+    //-   div(class="panel panel-status")
+    //-     div(class="panel-heading")
+    //-       h3(class="panel-title") MEDIA DISK USAGE
+    //-     div(class="panel-body")
+    //-       each mediaDuHumanError in errors.mediaDuHuman
+    //-         div= mediaDuHumanError
+    //- else
+    //-   div(class="panel panel-status")
+    //-     div(class="panel-heading")
+    //-       h3(class="panel-title") MEDIA DISK USAGE
+    //-     div(class="panel-body")
+    //-       pre= mediaDuHuman || 'Media disk usage data not found!'
 
     if (errors.mediaDuMachine.length)
       div(class="panel panel-status")
@@ -124,8 +124,8 @@ block content
               style="min-width: 2em;"
             ) #{mediaDuMachine.missingPercentage}%
           each folder in mediaDuMachine.duPerFolder
-            div= folder
-          div Total disk usage: #{mediaDuMachine.duTotal} (#{mediaDuMachine.missingMegabytes}MB missing)
+            pre= folder
+          div Total disk usage: #[pre #{mediaDuMachine.duTotal} (#{mediaDuMachine.missingMegabytes}MB missing)]
 
     if (wificheck)
       div(class="panel panel-success panel-status")
