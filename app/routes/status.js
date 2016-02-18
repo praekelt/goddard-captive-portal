@@ -13,7 +13,7 @@ var GODDARD_NODE_JSON = process.env.GODDARD_NODE_JSON || 'http://127.0.0.1:8080/
 var GODDARD_BUILD_JSON = process.env.GODDARD_BUILD_JSON || 'http://127.0.0.1:8080/build.json';
 var GODDARD_WIFI_PAGE = process.env.GODDARD_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html';
 var GODDARD_MEDIA_RSYNC = process.env.GODDARD_MEDIA_RSYNC || 'http://127.0.0.1:8080/media_rsync.log';
-var GODDARD_MEDIA_DU_HUMAN = process.env.GODDARD_MEDIA_DU_HUMAN || 'http://127.0.0.1:8080/media_du_human.log';
+// var GODDARD_MEDIA_DU_HUMAN = process.env.GODDARD_MEDIA_DU_HUMAN || 'http://127.0.0.1:8080/media_du_human.log';
 var GODDARD_MEDIA_DU_MACHINE = process.env.GODDARD_MEDIA_DU_MACHINE || 'http://127.0.0.1:8080/media_du_machine.log';
 var GODDARD_WHITELIST_PATH = process.env.GODDARD_WHITELIST_PATH || 'http://127.0.0.1:8080/whitelist';
 
@@ -85,7 +85,7 @@ var status = {
     build: [],
     node: [],
     status: [],
-    mediaDuHuman: [],
+    // mediaDuHuman: [],
     mediaDuMachine: [],
     mediaRsync: [],
     wificheck: [],
@@ -132,7 +132,7 @@ module.exports = function(app) {
     status.errors.build = [];
     status.errors.node = [];
     status.errors.status = [];
-    status.errors.mediaDuHuman = [];
+    // status.errors.mediaDuHuman = [];
     status.errors.mediaDuMachine = [];
     status.errors.mediaRsync = [];
     status.errors.wificheck = [];
@@ -156,26 +156,26 @@ module.exports = function(app) {
           whitelistCallback();
         });
       },
-      mediaDuHuman: function(mediaDuHumanCallback) {
-        http.get(GODDARD_MEDIA_DU_HUMAN, function(httpres) {
-          var response = '';
-          httpres.on('data', function(data) {
-            response += data;
-          }).on('end', function() {
-            if (response === '') {
-              status.errors.mediaDuHuman.push(
-                'No disk usage data was found ' +
-                'in the media disk usage log!'
-              );
-              return mediaDuHumanCallback();
-            }
-            mediaDuHumanCallback(null, response);
-          });
-        }).on('error', function(err) {
-          status.errors.mediaDuHuman.push(err);
-          mediaDuHumanCallback();
-        });
-      },
+      // mediaDuHuman: function(mediaDuHumanCallback) {
+      //   http.get(GODDARD_MEDIA_DU_HUMAN, function(httpres) {
+      //     var response = '';
+      //     httpres.on('data', function(data) {
+      //       response += data;
+      //     }).on('end', function() {
+      //       if (response === '') {
+      //         status.errors.mediaDuHuman.push(
+      //           'No disk usage data was found ' +
+      //           'in the media disk usage log!'
+      //         );
+      //         return mediaDuHumanCallback();
+      //       }
+      //       mediaDuHumanCallback(null, response);
+      //     });
+      //   }).on('error', function(err) {
+      //     status.errors.mediaDuHuman.push(err);
+      //     mediaDuHumanCallback();
+      //   });
+      // },
       mediaRsync: function(mediaRsyncCallback) {
         http.get(GODDARD_MEDIA_RSYNC, function(httpres) {
           var response = '';
@@ -238,8 +238,8 @@ module.exports = function(app) {
             mediaDuMachineCallback(null, {
               missingMegabytes: ((manifestTotal - duTotalMinusIrrelevant) / 1024 / 1024).toPrecision(2),
               missingPercentage: ((duTotalMinusIrrelevant / manifestTotal) * 100).toPrecision(1),
-              duTotal: (duTotalMinusIrrelevant / 1024 / 1024 / 1024).toPrecision(2),
-              manifestTotal: (manifestTotal / 1024 / 1024 / 1024).toPrecision(2),
+              duTotal: (duTotalMinusIrrelevant / 1024 / 1024).toPrecision(2),
+              manifestTotal: (manifestTotal / 1024 / 1024).toPrecision(2),
               duPerFolder: (function(folders) {
                 return [
                   Object.keys(folders).map(function(name, idx, arr) {
@@ -353,7 +353,7 @@ module.exports = function(app) {
         status: results.status,
         node: results.node,
         mediaRsync: results.mediaRsync,
-        mediaDuHuman: results.mediaDuHuman,
+        // mediaDuHuman: results.mediaDuHuman,
         mediaDuMachine: results.mediaDuMachine,
         wificheck: results.wificheck,
         build: results.build,
