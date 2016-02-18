@@ -205,8 +205,9 @@ module.exports = function(app) {
             response += data;
           }).on('end', function() {
             var foldersToBytes = {};
-            var folderPattern = /\d+\s+(.*)/;
-            var bytesPattern = /(\d+)\s+.*/;
+            var folderPattern = /^\d+\s+(.*)/;
+            var bytesPattern = /^(\d+)\s+.*/;
+            var parentFolderPattern = /^\d+\s+\/var\/goddard\/media\/gem$/;
 
             if (!response) {
               status.errors.mediaDuMachine.push('DU log not found!');
@@ -218,7 +219,8 @@ module.exports = function(app) {
             var duTotal = lines.pop();
 
             var duTotalMinusIrrelevant = lines.filter(function(line, idx, arr) {
-              return !contains.call(line, [
+              var isParentFolder = parentFolderPattern.test(line);
+              return !isParentFolder && !contains.call(line, [
                 '.DS_Store', '.sh', 'mp4.3gp', 'mp4.3gp.png', 'mov.3gp', 'mov.3gp.png', '.mkv.3gp', '.mkv.3gp.png'
               ]);
             }).map(function(folder, idx, arr) {
