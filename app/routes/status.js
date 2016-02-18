@@ -201,6 +201,8 @@ module.exports = function(app) {
             var folderPattern = /\d+\s+(.*)/ig;
             var bytesPattern = /(\d+)\s+.*/ig;
 
+            console.log(typeof response, response);
+
             if (!response) {
               status.errors.mediaDuMachine.push('DU log not found!');
               return mediaDuMachineCallback();
