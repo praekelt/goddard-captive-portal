@@ -219,7 +219,7 @@ module.exports = function(app) {
                 contains.call(line, 'mp4.3gp') ||
                 contains.call(line, 'mp4.3gp.png') ||
                 contains.call(line, 'mov.3gp') ||
-                contains.call(line, 'mov.3gp.png');
+                contains.call(line, 'mov.3gp.png')
                 // line.indexOf('.DS_Store') !== -1 &&
                 // line.indexOf('.sh') !== -1 &&
                 // line.indexOf('mp4.3gp') !== -1 &&
