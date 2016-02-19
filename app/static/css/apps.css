@@ -506,5 +506,8 @@ font-size: 95%;
 @media (min-width: 768px) {
   .navbar-toggle {
     display: initial;
+    top: 0;
+    right: 0;
+    position: absolute;
   }
 }
