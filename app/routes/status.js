@@ -12,8 +12,6 @@ var GODDARD_STATUS_JSON = process.env.GODDARD_STATUS_JSON || 'http://127.0.0.1:8
 var GODDARD_NODE_JSON = process.env.GODDARD_NODE_JSON || 'http://127.0.0.1:8080/node.json';
 var GODDARD_BUILD_JSON = process.env.GODDARD_BUILD_JSON || 'http://127.0.0.1:8080/build.json';
 var GODDARD_WIFI_PAGE = process.env.GODDARD_WIFI_PAGE || 'http://127.0.0.1:8080/wireless.html';
-var GODDARD_MEDIA_RSYNC = process.env.GODDARD_MEDIA_RSYNC || 'http://127.0.0.1:8080/media_rsync.log';
-// var GODDARD_MEDIA_DU_HUMAN = process.env.GODDARD_MEDIA_DU_HUMAN || 'http://127.0.0.1:8080/media_du_human.log';
 var GODDARD_MEDIA_DU_MACHINE = process.env.GODDARD_MEDIA_DU_MACHINE || 'http://127.0.0.1:8080/media_du_machine.log';
 var GODDARD_WHITELIST_PATH = process.env.GODDARD_WHITELIST_PATH || 'http://127.0.0.1:8080/whitelist';
 
@@ -85,9 +83,7 @@ var status = {
     build: [],
     node: [],
     status: [],
-    // mediaDuHuman: [],
     mediaDuMachine: [],
-    mediaRsync: [],
     wificheck: [],
     whitelist: []
   }
@@ -101,7 +97,6 @@ module.exports = function(app) {
     status.errors.node = [];
     status.errors.status = [];
     status.errors.mediaDuMachine = [];
-    status.errors.mediaRsync = [];
     status.errors.wificheck = [];
     status.errors.whitelist = [];
 
@@ -121,28 +116,6 @@ module.exports = function(app) {
         }).on('error', function(err) {
           status.errors.whitelist.push(err);
           whitelistCallback();
-        });
-      },
-      mediaRsync: function(mediaRsyncCallback) {
-        http.get(GODDARD_MEDIA_RSYNC, function(httpres) {
-          var response = '';
-          httpres.on('data', function(data) {
-            response += data;
-          }).on('end', function() {
-            if (httpres.statusCode > 399 || response === '') {
-              status.errors.mediaRsync.push('The media sync log is empty.');
-              return mediaRsyncCallback();
-            }
-            mediaRsyncCallback(null, (
-              'Total files: ' + /.* (\d+) files to consider/igm.exec(response)[1] || 'unknown' + '\n' +
-              'Bytes transmitted: ' + /.* sent (\d+) bytes/igm.exec(response)[1] || 'unknown' + '\n' +
-              'Bytes received: '    + /.* received (\d+) bytes/igm.exec(response)[1] || 'unknown' + '\n' +
-              'Bytes total: '       + /.* total size is (\d+)/igm.exec(response)[1] || 'unknown'
-            ));
-          });
-        }).on('error', function(err) {
-          status.errors.mediaRsync.push(err);
-          mediaRsyncCallback();
         });
       },
       mediaDuMachine: function(mediaDuMachineCallback) {
@@ -328,7 +301,6 @@ module.exports = function(app) {
         errors: status.errors,
         status: results.status,
         node: results.node,
-        mediaRsync: results.mediaRsync,
         mediaDuMachine: results.mediaDuMachine,
         wificheck: results.wificheck,
         build: results.build,

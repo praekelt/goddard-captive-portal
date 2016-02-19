@@ -70,20 +70,6 @@ block content
         div(class="panel-body")
           div: strong Last updated at #{new Date().toISOString()}
 
-    if (errors.mediaRsync.length)
-      div(class="panel panel-danger panel-status")
-        div(class="panel-heading")
-          h3(class="panel-title") MEDIA RSYNC LOG
-        div(class="panel-body")
-          each mediaRsyncError in errors.mediaRsync
-            pre= mediaRsyncError
-    else
-      div(class="panel panel-status")
-        div(class="panel-heading")
-          h3(class="panel-title") MEDIA RSYNC LOG
-        div(class="panel-body")
-          pre= mediaRsync || 'No log found!'
-
     if (errors.mediaDuMachine.length)
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
