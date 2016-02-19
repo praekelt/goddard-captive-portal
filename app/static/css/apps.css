@@ -346,8 +346,9 @@ main {}
 }
 
 .home-menu li:nth-child(7) a span.icon {
+  height: 260px;
   background-color: #9E98EE;
-  background-size: 100% 75px;
+  background-size: 100%;
   width: 100%;
   border-radius: 0;
   margin: 0;
