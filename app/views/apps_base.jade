@@ -59,7 +59,7 @@ html(lang="en")
       ul(class="nav nav-pills nav-stacked")
         each item in menu
           li(class=currentCategory === item.uri ? 'active' : '')
-            a(href=item.uri)= item.name
+            a(href=item.uri)= item.uri === '/healthcare-worker-training' ? '' : item.name
 
     section(class="swatch") !{bottomSwatch}
 
