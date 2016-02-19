@@ -40,7 +40,7 @@
         },
         {
           "name": "MAMA",
-          "uri": "http://data.goddard.com/apps/mama",
+          "uri": "http://mama.mamawifi.com",
           "thumbnail": "/static/img/logo/mama.png",
           "description": "Our mission is to engage an innovative global community to deliver vital health information to new and expectant mothers through mobile phones. Our guiding principles are scale, sustainability, and impact."
         }
