@@ -85,7 +85,8 @@ var status = {
     status: [],
     mediaDuMachine: [],
     wificheck: [],
-    whitelist: []
+    whitelist: [],
+    ping: []
   }
 };
 
@@ -99,8 +100,18 @@ module.exports = function(app) {
     status.errors.mediaDuMachine = [];
     status.errors.wificheck = [];
     status.errors.whitelist = [];
+    status.errors.ping = [];
 
     async.parallel({
+      ping: function(pingCallback) {
+        child_process.exec('ping -c 1 8.8.8.8', function(err, stdout, stderr) {
+          if (err) {
+            status.errors.ping.push(err);
+            return pingCallback();
+          }
+          return pingCallback();
+        });
+      },
       whitelist: function(whitelistCallback) {
         http.get(GODDARD_WHITELIST_PATH, function(httpres) {
           var response = '';
@@ -304,7 +315,8 @@ module.exports = function(app) {
         mediaDuMachine: results.mediaDuMachine,
         wificheck: results.wificheck,
         build: results.build,
-        whitelist: results.whitelist
+        whitelist: results.whitelist,
+        ping: results.ping
       });
     });
   });

@@ -34,6 +34,20 @@ block content
 
     div(class="top-header-spacing")
 
+    if (errors.ping.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") INTERNET CONNECTIVITY
+        div(class="panel-body")
+          each pingError in errors.ping
+            div= pingError
+    else
+      div(class="panel panel-success panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") INTERNET CONNECTIVITY
+        div(class="panel-body")
+          div Succeeded in pinging #[code 8.8.8.8]
+
     if (errors.whitelist.length)
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
