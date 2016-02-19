@@ -22,5 +22,5 @@ block content
         span(class="icon", style="background-image: url(#{option.thumbnail})")
         span(class="title")= option.name
 
-    li: a(href=menu[menu.length - 1].uri)
+    li(style="padding: 0;"): a(href=menu[menu.length - 1].uri)
       img(src=menu[menu.length - 1].thumbnail, width="400")
