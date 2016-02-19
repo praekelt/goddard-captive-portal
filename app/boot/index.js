@@ -7,8 +7,6 @@ var http = require('http');
 var NODE_TEST_FIXTURES_PORT = process.env.NODE_TEST_FIXTURES_PORT || 1337;
 var GODDARD_APPS_JSON = process.env.GODDARD_APPS_JSON ||
   'http://localhost:' + NODE_TEST_FIXTURES_PORT + '/apps.json';
-var GODDARD_NODE_JSON = process.env.GODDARD_NODE_JSON ||
-  'http://localhost' + NODE_TEST_FIXTURES_PORT + ':8080/node.json';
 
 exports.apps = function(done) {
   fs.exists(__dirname + '/../../test/fixtures/apps.json', function(exists) {
