@@ -502,3 +502,9 @@ font-size: 95%;
 .category .category-heading {
   color: #2f2f2f;
 }
+
+@media (min-width: 768px) {
+  .navbar-toggle {
+    display: initial;
+  }
+}
