@@ -24,28 +24,6 @@ exports.apps = function(done) {
   });
 };
 
-exports.whitelist = function() {
-  http.get(GODDARD_NODE_JSON, function(res) {
-    var json = '';
-    res.on('data', function(data) {
-      json += data;
-    }).on('end', function() {
-      var node = JSON.parse(json);
-      if (!node.whitelist) {
-        console.log('did not find a whitelist in node.json, continuing...');
-        return;
-      }
-      require('../mikrotik')(
-        node.whitelist.map(function(host) {
-          return host.domain;
-        })
-      );
-    });
-  }).on('error', function(err) {
-    console.log('failed to set up whitelist on mikrotik', err);
-  });
-};
-
 exports.fixtures = function(done) {
 
   console.log('fixtures requested, enabling...');
