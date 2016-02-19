@@ -51,21 +51,21 @@ block content
     if (errors.whitelist.length)
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") Whitelist error
+          h3(class="panel-title") WHITELIST ERROR
         div(class="panel-body")
           each whitelistError in errors.whitelist
             div= whitelistError
     else
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") Whitelist
+          h3(class="panel-title") WHITELIST
         div(class="panel-body")
           pre= whitelist
 
     if (errors.build.length)
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") Build Error
+          h3(class="panel-title") BUILD ERROR
         div(class="panel-body")
           each buildError in errors.build
             div= buildError
@@ -80,7 +80,7 @@ block content
     else
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") No build process in progress
+          h3(class="panel-title") NO BUILD PROCESS IN PROGRESS
         div(class="panel-body")
           div: strong Last updated at #{new Date().toISOString()}
 
