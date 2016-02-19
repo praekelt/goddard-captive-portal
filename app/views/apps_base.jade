@@ -44,12 +44,7 @@ html(lang="en")
               span(class="icon-bar")
             span(class="menu-text") menu
           a(class="navbar-brand", href="/", id="top") MAMA Connect
-
-        div(class="collapse navbar-collapse", id="bs-collapse-menu")
-          ul(class="nav navbar-nav")
-            each item in menu
-              li(class=currentCategory === item.uri ? 'active' : '')
-                a(href=item.uri)= item.name
+        a(class="collapse navbar-collapse", href="#bottom")
 
     if (notIndexPage)
       div(class="back-to-start")
@@ -60,7 +55,7 @@ html(lang="en")
     div(class="back-to-top")
       a(href="#top") ↑ Back to top of page
 
-    div(class="bottom-menu")
+    div(class="bottom-menu", id="bottom")
       p(class="menu-title") Menu
       ul(class="nav nav-pills nav-stacked")
         each item in menu
