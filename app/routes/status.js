@@ -105,7 +105,7 @@ module.exports = function(app) {
 
     async.parallel({
       ping: function(pingCallback) {
-        child_process.exec('ping -c 1 8.8.8.8', function(err, stdout, stderr) {
+        child_process.exec('ping -i 0.25 -c 4 8.8.8.8', function(err, stdout, stderr) {
           if (err) {
             status.errors.ping.push(err);
             return pingCallback();
