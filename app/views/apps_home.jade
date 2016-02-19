@@ -16,8 +16,11 @@ block content
 
   ul(class="home-menu")
 
-    each option in menu.slice(2)
+    each option in menu.slice(2, -1)
 
       li: a(href=option.uri)
         span(class="icon", style="background-image: url(#{option.thumbnail})")
-        span(class="title")= option.uri === '/healthcare-worker-training' ? '' : option.name
+        span(class="title")= option.name
+
+    li: a(href=menu[menu.length - 1].uri)
+      img(src=menu[menu.length - 1].thumbnail)
