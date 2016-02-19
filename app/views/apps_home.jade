@@ -20,4 +20,4 @@ block content
 
       li: a(href=option.uri)
         span(class="icon", style="background-image: url(#{option.thumbnail})")
-        span(class="title")= option.name
+        span(class="title")= option.uri === '/healthcare-worker-training' ? '' : option.name
