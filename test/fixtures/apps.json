@@ -23,7 +23,7 @@
     {
       "name": "General Information",
       "uri": "general-information",
-      "thumbnail": "/static/img/icons/icon_information.gif",
+      "thumbnail": "/static/img/icons/general-information-100x100.png",
       "media": [],
       "sites": [
         {
@@ -49,7 +49,7 @@
     {
       "name": "Family Health",
       "uri": "family-health",
-      "thumbnail": "/static/img/icons/icon_family.gif",
+      "thumbnail": "/static/img/icons/family-health-100x100.png",
       "media": [
         {
           "name": "Growing Up",
@@ -94,7 +94,7 @@
     {
       "name": "Maternal Health & Pregnancy",
       "uri": "maternal-health-and-pregnancy",
-      "thumbnail": "/static/img/icons/icon_pregnancy.gif",
+      "thumbnail": "/static/img/icons/maternal-health-and-pregnancy-100x100.png",
       "media": [
         {
           "name": "Focused Antenatal Care",
@@ -141,7 +141,7 @@
     {
       "name": "Newborn Health",
       "uri": "newborn-health",
-      "thumbnail": "/static/img/icons/icon_newborn.gif",
+      "thumbnail": "/static/img/icons/newborn-health-100x100.png",
       "media": [
         {
           "name": "Food for Life: What And When To Feed Your Child",
@@ -197,7 +197,7 @@
     {
       "name": "Breastfeeding",
       "uri": "breastfeeding",
-      "thumbnail": "/static/img/icons/icon_breastfeeding.gif",
+      "thumbnail": "/static/img/icons/breastfeeding-100x100.png",
       "media": [
         {
           "name": "Attaching Your Baby at the Breast",
@@ -284,7 +284,7 @@
     {
       "name": "Diseases & Warning Signs",
       "uri": "diseases-and-warning-signs",
-      "thumbnail": "/static/img/icons/icon_disease.gif",
+      "thumbnail": "/static/img/icons/diseases-and-warning-signs-100x100.png",
       "media": [
         {
           "name": "Is Your Child Sick? – Full Length Version",
@@ -348,12 +348,12 @@
     {
       "name": "Healthcare Worker Training",
       "uri": "healthcare-worker-training",
-      "thumbnail": "/static/img/icons/healthcare_bg.jpg",
+      "thumbnail": "/static/img/icons/healthcare_bg.png",
       "categories": [
         {
           "name": "Newborn & Child Health",
           "uri": "newborn-and-child-health",
-          "thumbnail": "/static/img/icons/icon_newborn.gif",
+          "thumbnail": "/static/img/icons/newborn-and-child-health-100x100.png",
           "media": [
             {
               "name": "Basic skills",
@@ -459,7 +459,7 @@
         {
           "name": "Labour & Delivery",
           "uri": "labour-and-delivery",
-          "thumbnail": "/static/img/icons/icon_pregnancy.gif",
+          "thumbnail": "/static/img/icons/labour-and-delivery-100x100.png",
           "media": [
             {
               "name": "Breathing problems",
@@ -613,7 +613,7 @@
         {
           "name": "Medication & Dosage Delivery",
           "uri": "medication-and-dosage-delivery",
-          "thumbnail": "/static/img/icons/icon_family.gif",
+          "thumbnail": "/static/img/icons/medication-dosage-and-delivery-100x100.png",
           "media": [
             {
               "name": "Administration Of Parenteral Antibiotics",
@@ -695,7 +695,7 @@
         {
           "name": "Diseases",
           "uri": "diseases",
-          "thumbnail": "/static/img/icons/icon_disease.gif",
+          "thumbnail": "/static/img/icons/diseases-100x100.png",
           "media": [
             {
               "name": "Ebola Contact Tracing",
@@ -753,7 +753,7 @@
         {
           "name": "Medical Procedures",
           "uri": "medical-procedures",
-          "thumbnail": "/static/img/icons/icon_information.gif",
+          "thumbnail": "/static/img/icons/medical-procedures-100x100.png",
           "media": [
             {
               "name": "How To Use A Partograph",
@@ -867,7 +867,7 @@
         {
           "name": "More Healthcare Training",
           "uri": "more-healthcare-training",
-          "thumbnail": "/static/img/icons/icon_breastfeeding.gif",
+          "thumbnail": "/static/img/icons/more-healthcare-training-100x100.png",
           "media": [],
           "sites": [
             {
