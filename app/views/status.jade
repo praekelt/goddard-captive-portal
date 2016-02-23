@@ -32,30 +32,89 @@ block content
 
   div(class="status-page wrapper container-fluid")
 
-    .top-header-spacing
+    div(class="top-header-spacing")
 
-    if (error)
+    if (errors.ping.length)
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") JSON Error
+          h3(class="panel-title") INTERNET CONNECTIVITY
         div(class="panel-body")
-          p= error.message
+          each pingError in errors.ping
+            div= pingError
+    else
+      div(class="panel panel-success panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") INTERNET CONNECTIVITY
+        div(class="panel-body")
+          div Succeeded in pinging #[code 8.8.8.8]
 
-    if (build.build) == "busy"
+    if (errors.whitelist.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") WHITELIST ERROR
+        div(class="panel-body")
+          each whitelistError in errors.whitelist
+            div= whitelistError
+    else
+      div(class="panel panel-success panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") WHITELIST
+        div(class="panel-body")
+          pre= whitelist
+
+    if (errors.build.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") BUILD ERROR
+        div(class="panel-body")
+          each buildError in errors.build
+            div= buildError
+
+    else if (build.build == "busy")
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
           h3(class="panel-title")= (build.process)
         div(class="panel-body")
           div Do not power down the node until the build process has completed.
-          div: strong Last updated at #{new Date(build.timestamp).toISOString()}
+          div: strong Last updated at #{new Date().toISOString()}
     else
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") BUILD DONE
+          h3(class="panel-title") NO BUILD PROCESS IN PROGRESS
         div(class="panel-body")
           div: strong Last updated at #{new Date().toISOString()}
 
-    if (wifiavailable == true)
+    if (errors.mediaDuMachine.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") MEDIA DOWNLOAD PROGRESS
+        div(class="panel-body")
+          each mediaDuMachineError in errors.mediaDuMachine
+            pre= mediaDuMachineError
+    else
+      div(class="panel panel-success panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") MEDIA DOWNLOAD PROGRESS
+        div(class="panel-body")
+          div(class="progress")
+            div(
+              style="width: #{mediaDuMachine.missingPercentage}%;",
+              class=
+                mediaDuMachine.missingPercentage <= 25 ? 'progress-bar progress-bar-danger' :
+                mediaDuMachine.missingPercentage <= 75 ? 'progress-bar progress-bar-warning' :
+                mediaDuMachine.missingPercentage <= 100 ? 'progress-bar progress-bar-success' :
+                'progress-bar',
+              role="progressbar",
+              aria-valuenow=mediaDuMachine.missingPercentage,
+              aria-valuemin="0",
+              aria-valuemax="100"
+            ) #{mediaDuMachine.missingPercentage}%
+          ul
+            each folder in mediaDuMachine.duPerFolder
+              li: code= folder
+          div Total disk usage: #[code #{mediaDuMachine.duTotal} GB (#{mediaDuMachine.missingGigabytes} GB missing)]
+
+    if (wificheck)
       div(class="panel panel-success panel-status")
         div(class="panel-heading")
           h3(class="panel-title") WIFI ENABLED
@@ -64,9 +123,26 @@ block content
     else
       div(class="panel panel-danger panel-status")
         div(class="panel-heading")
-          h3(class="panel-title") PROBLEMS WITH WIFI
+          h3(class="panel-title") WIFI ERRORS
         div(class="panel-body")
-          div Problems occured when checking if WIFI is configured
+          each wificheckError in errors.wificheck
+            div= wificheckError
+
+    if (errors.status.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") STATUS ERRORS
+        div(class="panel-body")
+          each statusError in errors.status
+            div= statusError
+
+    if (errors.node.length)
+      div(class="panel panel-danger panel-status")
+        div(class="panel-heading")
+          h3(class="panel-title") NODE ERRORS
+        div(class="panel-body")
+          each nodeError in errors.node
+            div= nodeError
 
     div(class="table-responsive")
 

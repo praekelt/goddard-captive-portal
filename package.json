@@ -5,10 +5,10 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "test": "NODE_TEST_FIXTURES=1 NODE_PORT=3000 NODE_ENV=testing istanbul test _mocha -- -R spec",
+    "test": "NODE_TEST_FIXTURES=1 NODE_TEST_FIXTURES_PORT=3333 NODE_PORT=3000 NODE_ENV=testing istanbul test _mocha -- -R spec",
     "start": "node index.js",
     "nodemon": "nodemon index.js",
-    "coverage": "NODE_TEST_FIXTURES=1 NODE_PORT=3000 NODE_ENV=testing istanbul cover _mocha --report lcovonly -- test -R spec && coveralls < coverage/lcov.info && rm -rf coverage"
+    "coverage": "NODE_TEST_FIXTURES=1 NODE_TEST_FIXTURES_PORT=3333 NODE_PORT=3000 NODE_ENV=testing istanbul cover _mocha --report lcovonly -- test -R spec && coveralls < coverage/lcov.info && rm -rf coverage"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,7 @@
     "async": "^0.9.2",
     "body-parser": "^1.12.3",
     "express": "^4.12.3",
-    "ftp": "^0.3.10",
     "jade": "^1.9.2",
-    "mikronode": "^0.3.3",
     "morgan": "^1.5.2"
   },
   "devDependencies": {

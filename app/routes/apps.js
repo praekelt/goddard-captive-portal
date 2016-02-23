@@ -1,63 +1,76 @@
 
 'use strict';
 
-var fs = require('fs'),
-    url = require('url'),
-    http = require('http'),
-    async = require('async');
+var fs = require('fs');
+var url = require('url');
+var http = require('http');
+var async = require('async');
 
-var media = url.parse(process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media');
-var path = __dirname + '/../../test/fixtures/apps.json';
-var apps = require(path);
-var route = process.env.NODE_APPS_ROUTE || '/';
+var NODE_TRAVIS = process.env.NODE_TRAVIS || false;
+var GODDARD_HOST_MEDIA = process.env.GODDARD_HOST_MEDIA || 'http://data.goddard.com/media';
+var GODDARD_APPS_ROUTE = process.env.GODDARD_APPS_ROUTE || '/';
+
+var media = url.parse(GODDARD_HOST_MEDIA);
+var APPS_FIXTURE_PATH = __dirname + '/../../test/fixtures/apps.json';
+var APPS = require(APPS_FIXTURE_PATH);
 
 function rewriteManifest(init) {
-  fs.unlink(path, function(err) {
+  fs.unlink(APPS_FIXTURE_PATH, function(err) {
     if (err) console.log('unlink error', err);
-    fs.writeFile(path, JSON.stringify(apps, null, '  '), function(err) {
+    fs.writeFile(APPS_FIXTURE_PATH, JSON.stringify(APPS, null, '  '), function(err) {
       if (err) process.emit('console:log', 'error', err);
       else {
         if (!init) return;
-        process.emit('init', path);
+        process.emit('init', APPS_FIXTURE_PATH);
       }
     });
   });
 }
 
 function checkMediaAvailability() {
-  if (process.env.NODE_TRAVIS === 'yes') return rewriteManifest(true);
+  if (NODE_TRAVIS) return rewriteManifest(true);
   process.emit('console:log', 'running head requests on media resources');
-  function head(done) {
+  function head(medium, cidx, ccidx, midx, done) {
     return http.request({
       hostname: media.hostname,
-      path: [media.path, this.medium.uri].join('/'),
+      path: [media.path, medium.uri].join('/'),
       method: 'head'
     }, function(res) {
       var headResponse = '';
       res.on('data', function(data) {
         headResponse += data;
       }).on('end', function() {
-        if (this.ccI) {
-          var media = apps.categories[this.cI].categories[this.ccI].media;
+        if (ccidx) {
+          var media = APPS.categories[cidx].categories[ccidx].media;
           if (!media) return done();
-          media[this.mI].available = res.statusCode === 200 && parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
+          media[midx].available = (
+            res.statusCode === 200 &&
+            parseInt(
+              res.headers['content-length'], 10
+            ) >= media[midx].size
+          );
         } else {
-          var media = apps.categories[this.cI].media;
+          var media = APPS.categories[cidx].media;
           if (!media) return done();
-          media[this.mI].available = res.statusCode === 200 && parseInt(res.headers['content-length'], 10) >= media[this.mI].size;
+          media[midx].available = (
+            res.statusCode === 200 &&
+            parseInt(
+              res.headers['content-length'], 10
+            ) >= media[midx].size
+          );
         }
         done();
-      }.bind(this));
-    }.bind(this)).on('error', done.bind(done)).end();
+      });
+    }).on('error', done).end();
   }
   var headRequests = [];
-  apps.categories.forEach(function(category, cI) {
-    (category.media || []).forEach(function(medium, mI) {
-      headRequests.push(head.bind({medium: medium, cI: cI, ccI: null, mI: mI}));
+  APPS.categories.forEach(function(category, cidx) {
+    (category.media || []).forEach(function(medium, midx) {
+      headRequests.push(head.bind(head, medium, cidx, null, midx));
     });
-    (category.categories || []).forEach(function(category, ccI) {
-      category.media.forEach(function(medium, mI) {
-        headRequests.push(head.bind({medium: medium, cI: cI, ccI: ccI, mI: mI}));
+    (category.categories || []).forEach(function(category, ccidx) {
+      category.media.forEach(function(medium, midx) {
+        headRequests.push(head.bind(head, medium, cidx, ccidx, midx));
       });
     });
   });
@@ -68,35 +81,45 @@ function checkMediaAvailability() {
 }
 
 function collate(manifest) {
-  this.set('apps.content.menu', [{
-    name: 'Start Page',
-    uri: route
-  }, {
-    name: 'All Videos',
-    uri: route + 'all-videos'
-  }].concat(manifest.categories.map(function(category) {
-    return {
-      name: category.name,
-      uri: route + category.uri,
-      thumbnail: category.thumbnail
-    };
-  })));
-
-  this.set('apps.content.haveCategories', manifest.categories.filter(function(category) {
-    return !!category.categories;
-  }));
-  this.set('apps.content.dontHaveCategories', manifest.categories.filter(function(category) {
-    return !category.categories;
-  }));
+  this.set(
+    'apps.content.haveCategories',
+    manifest.categories.filter(function(category) {
+      return !!category.categories;
+    })
+  );
+  this.set(
+    'apps.content.dontHaveCategories',
+    manifest.categories.filter(function(category) {
+      return !category.categories;
+    })
+  );
+  this.set(
+    'apps.content.menu',
+    [{
+      name: 'Start Page',
+      uri: GODDARD_APPS_ROUTE
+    }, {
+      name: 'All Videos',
+      uri: GODDARD_APPS_ROUTE + 'all-videos'
+    }].concat(
+      manifest.categories.map(function(category) {
+        return {
+          name: category.name,
+          uri: GODDARD_APPS_ROUTE + category.uri,
+          thumbnail: category.thumbnail
+        };
+      })
+    )
+  );
 }
 
 function registerAllParentCategories() {
   var haveCategories = this.get('apps.content.haveCategories');
   var menu = this.get('apps.content.menu');
   haveCategories.forEach(function(listing) {
-    var uri = route + listing.uri;
+    var uri = GODDARD_APPS_ROUTE + listing.uri;
     var childCategoryMenu = [
-      {name: 'Start Page', uri: route /* <-- homepage, category --> `uri` */},
+      {name: 'Start Page', uri: GODDARD_APPS_ROUTE /* <-- homepage, category --> `uri` */},
       {name: 'All Videos', uri: uri + '/all-videos'}
     ].concat(
       listing.categories.map(function(category) {
@@ -106,20 +129,20 @@ function registerAllParentCategories() {
 
     this.all(uri, function(req, res) {
       res.render('apps_parenthome', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: GODDARD_HOST_MEDIA,
         menu: childCategoryMenu,
         notIndexPage: true,
         category: listing,
         current: uri,
-        parent: route,
+        parent: GODDARD_APPS_ROUTE,
         categories: listing.categories,
-        hcwt: apps.hcwt[0],
+        hcwt: APPS.hcwt[0],
         currentCategory: uri
       });
     });
     this.all(uri + '/all-videos', function(req, res) {
       res.render('apps_listing', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: GODDARD_HOST_MEDIA,
         menu: childCategoryMenu,
         notIndexPage: true,
         category: listing,
@@ -141,16 +164,16 @@ function registerAllTopLevelCategories() {
   var dontHave = this.get('apps.content.dontHaveCategories');
   var menu = this.get('apps.content.menu');
   dontHave.forEach(function(category) {
-    registerCategoryMedia.call(this, category, route + category.uri);
-    this.all(route + category.uri, function(req, res) {
+    registerCategoryMedia.call(this, category, GODDARD_APPS_ROUTE + category.uri);
+    this.all(GODDARD_APPS_ROUTE + category.uri, function(req, res) {
       res.render('apps_category', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: GODDARD_HOST_MEDIA,
         menu: menu,
-        current: route + category.uri,
-        parent: route,
+        current: GODDARD_APPS_ROUTE + category.uri,
+        parent: GODDARD_APPS_ROUTE,
         category: category,
         notIndexPage: true,
-        currentCategory: route + category.uri
+        currentCategory: GODDARD_APPS_ROUTE + category.uri
       });
     });
   }, this);
@@ -162,7 +185,7 @@ function registerChildCategory(category, parentUri) {
   registerCategoryMedia.call(this, category, uri);
   this.all(uri, function(req, res) {
     res.render('apps_category', {
-      mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+      mediaHost: GODDARD_HOST_MEDIA,
       menu: category.menu || menu,
       notIndexPage: true,
       current: uri,
@@ -178,7 +201,7 @@ function registerCategoryMedia(category, parentUri) {
   (category.media || []).forEach(function(medium, i) {
     this.all(parentUri + '/video/' + i, function(req, res) {
       res.render('apps_medium', {
-        mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+        mediaHost: GODDARD_HOST_MEDIA,
         menu: category.menu || menu,
         parent: parentUri,
         medium: medium,
@@ -195,55 +218,59 @@ function registerMediaListing() {
   var topLevelCategoriesWithMedia = this.get('apps.content.dontHaveCategories').filter(function(category) {
     return category.media && category.media.length;
   });
-  this.all(route + 'all-videos', function(req, res) {
+  this.all(GODDARD_APPS_ROUTE + 'all-videos', function(req, res) {
     res.render('apps_allvideos', {
-      mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+      mediaHost: GODDARD_HOST_MEDIA,
       menu: menu,
-      current: route + 'all-videos',
+      current: GODDARD_APPS_ROUTE + 'all-videos',
       categories: topLevelCategoriesWithMedia,
-      parent: route,
+      parent: GODDARD_APPS_ROUTE,
       notIndexPage: true,
-      currentCategory: route + 'all-videos'
+      currentCategory: GODDARD_APPS_ROUTE + 'all-videos'
     });
   });
 }
 
-function init(manifest) {
+function init(manifest, done) {
   collate.call(this, manifest);
   registerAllParentCategories.call(this);
   registerAllTopLevelCategories.call(this);
   registerMediaListing.call(this);
-  this.all(route, function(req, res) {
+  this.all(GODDARD_APPS_ROUTE, function(req, res) {
     if (req.hostname.indexOf('goddard') !== -1) {
       return res.redirect('http://mamawifi.com');
     }
     res.render('apps_home', {
-      mediaHost: process.env.NODE_HOST_MEDIA || 'http://data.goddard.com/media',
+      mediaHost: GODDARD_HOST_MEDIA,
       dyk: manifest.dyk[0],
-      current: route,
+      current: GODDARD_APPS_ROUTE,
       notIndexPage: false,
-      category: {name: 'mamaconnect', uri: route},
+      category: {name: 'mamaconnect', uri: GODDARD_APPS_ROUTE},
       menu: this.get('apps.content.menu'),
-      currentCategory: route
+      currentCategory: GODDARD_APPS_ROUTE
     });
   }.bind(this));
+  return typeof done === 'function' ? done : undefined;
 }
 
 module.exports = function(app) {
   process.on('init', function(manifest) {
     process.emit('console:log', 'manifest was rewritten. reloading...');
-    apps = require(manifest);
+    APPS = require(manifest);
     process.emit('console:log', 'reloaded...');
-    init.call(app, apps);
-    process.emit('console:log', 'mamaconnect content sytem initialised!');
+    init.call(app, APPS, process.emit.bind(
+      process,
+      'console:log',
+      'mamaconnect content sytem initialised!'
+    ));
   });
 
-  // run the media availability check every fifteen minutes
+  // run the media availability
+  // check every fifteen minutes.
   setInterval(
     checkMediaAvailability.bind(app),
     (1000 * 60) * 15
   );
-
-  // run it once, immediately
+  // and run it once, immediately.
   checkMediaAvailability.call(app);
 };

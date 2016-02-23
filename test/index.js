@@ -1,12 +1,15 @@
 
 'use strict';
 
-var chai = require('chai'),
-    chakram = require('chakram'),
-    fs = require('fs'),
-    logPath = require('path').join(__dirname, '../access.log'),
-    express = require('express'),
-    app;
+var fs = require('fs');
+
+var GODDARD_ACCESS_LOG_PATH = require('path').join(__dirname, '../access.log');
+
+var chai = require('chai');
+var chakram = require('chakram');
+var express = require('express');
+
+var app;
 
 describe('app', function() {
 
@@ -15,15 +18,15 @@ describe('app', function() {
     // delete `access.log` if it exists
     // before we bootstrap the app
 
-    fs.exists(logPath, function(exists) {
+    fs.exists(GODDARD_ACCESS_LOG_PATH, function(exists) {
       if (exists) {
-        fs.unlink(logPath, function(err) {
+        fs.unlink(GODDARD_ACCESS_LOG_PATH, function(err) {
           if (err) throw err;
-          app = require('../');
+          app = require('../index');
           done();
         });
       } else {
-        app = require('../');
+        app = require('../index');
         done();
       }
     });
