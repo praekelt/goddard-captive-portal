@@ -266,34 +266,45 @@ main {}
   text-align: center;
   margin: 0;
 }
+
 .home-menu li {
-  width: 100%;
+  width: 50%;
   display: inline-block;
   vertical-align: top;
   margin-bottom: 20px;
 }
+
 @media (min-width: 320px) {
-  .home-menu li {
-    width: 50%;
-    padding: 0 10px;
+  .home-menu {
+    padding: 0 15px;
   }
 }
+
 @media (min-width: 640px) {
-  .home-menu li {
-    width: 50%;
+  .home-menu {
+    padding: 0 30px;
   }
 }
+
+.home-menu a {
+  display: block;
+}
+
 .home-menu .icon {
   border: none;
-  margin: 10px auto;
   content: '';
-  display: block;
-  width: 75px;
-  height: 75px;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background-size: 75px;
+  background-size: 100px;
   background-position: center;
   background-repeat: no-repeat;
+  margin-bottom: 10px;
+}
+
+.home-menu .title {
+  display: block;
 }
 
 #hcwt-banner {
@@ -307,12 +318,11 @@ main {}
 }
 
 #hcwt-banner img {
-  /*display: block;*/
   width: 100%;
 }
 
 .select-a-topic {
-  margin-top: 25px;
+  margin: 25px 0;
   text-align: center;
   text-transform: uppercase;
 }
