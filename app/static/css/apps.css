@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -279,10 +280,10 @@ main {}
 }
 @media (min-width: 640px) {
   .home-menu li {
-    width: 33%;
+    width: 50%;
   }
 }
-.home-menu li a span.icon {
+.home-menu .icon {
   border: none;
   margin: 10px auto;
   content: '';
@@ -293,6 +294,21 @@ main {}
   background-size: 75px;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+#hcwt-banner {
+  padding: 0;
+  width: 100%;
+}
+
+#hcwt-banner a {
+  display: block;
+  width: 100%;
+}
+
+#hcwt-banner img {
+  /*display: block;*/
+  width: 100%;
 }
 
 .select-a-topic {
