@@ -537,3 +537,25 @@ font-size: 95%;
     position: absolute;
   }
 }
+
+.notfound-icon {
+  border: none;
+  content: '';
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-size: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.notfound-meta {
+  color: #2f2f2f;
+  padding: 15px 20px;
+}
+.notfound-heading {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  padding: 1.5em 1em;
+}
