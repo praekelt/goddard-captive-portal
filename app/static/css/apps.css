@@ -552,6 +552,8 @@ font-size: 95%;
 .notfound-meta {
   color: #2f2f2f;
   padding: 15px 20px;
+  margin: 0 auto;
+  text-align: center;
 }
 .notfound-heading {
   display: inline-block;
