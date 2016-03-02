@@ -250,6 +250,19 @@ function init(manifest, done) {
       currentCategory: GODDARD_APPS_ROUTE
     });
   }.bind(this));
+  this.use(function(req, res) {
+    res.status(404);
+    if (req.accepts('html')) return res.render('apps_notfound', {
+      mediaHost: GODDARD_HOST_MEDIA,
+      menu: this.get('apps.content.menu'),
+      current: GODDARD_APPS_ROUTE + 'not-found',
+      parent: GODDARD_APPS_ROUTE,
+      notIndexPage: true,
+      currentCategory: GODDARD_APPS_ROUTE + 'not-found'
+    });
+    else if (req.accepts('json')) return res.send({status: 404, error: true, message: 'not found'});
+    else return res.type('txt').send('Not found');
+  }.bind(this));
   return typeof done === 'function' ? done : undefined;
 }
 
